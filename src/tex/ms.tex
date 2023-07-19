@@ -1,58 +1,162 @@
-% Define document class
-\documentclass[twocolumn]{aastex631}
+\documentclass[letterpaper]{ar-1col}
 \usepackage{showyourwork}
+\usepackage[letterpaper]{geometry}
 
-% Begin!
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+
+\usepackage{graphbox}
+\newcommand{\suz}[1]{\textcolor{magenta}{#1}}
+\newcommand{\dan}[1]{\textcolor{green}{#1}}
+
+\setcounter{secnumdepth}{4}
+\usepackage{url}
+
+
+\usepackage{lipsum}  
+
+
+% Metadata Information
+\jname{Annu. Rev. Astron. Astrophys.}
+\jvol{AA}
+\jyear{2024}
+\doi{10.1146/TBD}
+
+% autoref formatting
+\def\sectionautorefname{Section}
+\let\subsectionautorefname\sectionautorefname
+\let\subsubsectionautorefname\sectionautorefname
+
+% macros
+\newcommand{\apjl}{Astrophysical Journal Letters}
+\newcommand{\aj}{Astronomical Journal}
+\newcommand{\apj}{Astrophysical Journal}
+\newcommand{\apjs}{Astrophysical Journal Supplement}
+\newcommand{\pasp}{Publications of the Astronomical Society of the Pacific}
+\newcommand{\jgr}{Journal of Geophysical Research}
+\newcommand{\aap}{Astronomy and Astrophysics}
+\newcommand{\mnras}{Monthly Notices of the Royal Astronomical Society}
+\newcommand{\actaa}{Acta Astronomica}
+\newcommand{\nat}{Nature}
+\newcommand{\prl}{Physical Review Letters}
+\newcommand{\prd}{Physical Review D}
+\newcommand{\ssr}{Space Science Reviews}
+
+% Symbols
+\newcommand{\ydata}{\ensuremath{\boldsymbol{y}}}
+\newcommand{\hyperparams}{\ensuremath{\boldsymbol{\phi}}}
+\newcommand{\meanparams}{\ensuremath{\boldsymbol{\theta}}}
+\newcommand{\dt}{\ensuremath{\tau}}
+\newcommand{\amplitude}{\ensuremath{\alpha}}
+\newcommand{\lengthscale}{\ensuremath{\lambda}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\project}[1]{\textsf{#1}}
+
+% Document starts
 \begin{document}
 
+% Page header
+\markboth{Kenworthy \& others}{HCI}
+
 % Title
-\title{An open source scientific article}
+\title{Hich Contrast Imaging for the next decade}
 
-% Author list
-\author{@mkenworthy}
+%Authors, affiliations address.
+\author{Matthew Kenworthy,$^1$ Sebastiaan Haffert$^2$ and Emiel Por$^3$
+  \affil{$^1$Leiden Observatory, Niels Bohrweg 2, Leiden 2300RA, The Netherlands; email: kenworthy@strw.leidenuniv.nl}
+  \affil{$^2$Steward Observatory; email: haffert@astronomy.arizona.edu}
+  \affil{$^3$STScI; email: por@stsci.edu}}
 
-% Abstract with filler text
+%Abstract
 \begin{abstract}
-well here we are!
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-    Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.
-    Curabitur dictum gravida mauris, consectetuer id, vulputate a, magna.
-    Donec vehicula augue eu neque, morbi tristique senectus et netus et.
-    Mauris ut leo, cras viverra metus rhoncus sem, nulla et lectus vestibulum.
-    Phasellus eu tellus sit amet tortor gravida placerat.
-    Integer sapien est, iaculis in, pretium quis, viverra ac, nunc.
-    Praesent eget sem vel leo ultrices bibendum.
-    Aenean faucibus, morbi dolor nulla, malesuada eu, pulvinar at, mollis ac.
-    Curabitur auctor semper nulla donec varius orci eget risus.
-    Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam.
-    Duis eget orci sit amet orci dignissim rutrum.
+High Contrast Imaging will enable the direct detection of photons from rocky terrestrial worlds.
 \end{abstract}
 
-% Main body with filler text
-\section{Introduction}
+%Keywords, etc.
+\begin{keywords}
+ Optics, coronagraphs, exoplanets, computational methods
+
+\end{keywords}
+\maketitle
+
+%Table of Contents
+\tableofcontents
+
+\section{INTRODUCTION}
 \label{sec:intro}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.
-Curabitur dictum gravida mauris, consectetuer id, vulputate a, magna.
-Donec vehicula augue eu neque, morbi tristique senectus et netus et.
-Mauris ut leo, cras viverra metus rhoncus sem, nulla et lectus vestibulum.
-Phasellus eu tellus sit amet tortor gravida placerat.
-Integer sapien est, iaculis in, pretium quis, viverra ac, nunc.
-Praesent eget sem vel leo ultrices bibendum.
-Aenean faucibus, morbi dolor nulla, malesuada eu, pulvinar at, mollis ac.
-Curabitur auctor semper nulla donec varius orci eget risus.
-Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam.
-Duis eget orci sit amet orci dignissim rutrum.
+High contrast imaging, Lyot corongraph, 2000's development
 
-Nam dui ligula, fringilla a, euismod sodales, sollici- tudin vel, wisi.
-Morbi auctor lorem non justo, nam lacus libero, pretium at, lobortis vitae.
-Donec aliquet, tortor sed accumsan bibendum, erat ligula aliquet magna.
-Morbi ac orci et nisl hendrerit mollis, suspendisse ut massa, cras nec ante.
-Pellentesque a nulla cum sociis natoque penatibus et magnis dis parturient.
-Aliquam tincidunt urna, nulla ullamcorper vestibulum turpis.
-Pellentesque cursus luctus mauris \citep{Luger2021}.
 
+In this review, we provide interactive notebooks that enable the reader to build up their intuitition on how coronagraphs work along with wavefront sensing both in the pupil and the focal planes, and how we will tackle the challenges in reaching the contrasts of $10^{-10}$ at angular separations of less than one arcsecond that are required.
+
+
+\begin{armarginnote}[]
+  \entry{HCI}{High Contrast Imaging}
+  \entry{FP}{Focal Plane}
+  \entry{PP}{Pupil Plane}
+  \entry{FPWFS}{Focal Plane Wavefront Sensing}
+  \entry{WFS}{Wavefront Sensor}
+\end{armarginnote}
+
+% text below from DFM
+This manuscript was prepared using the \project{showyourwork} package\footnote{\url{https://show-your.work}} and the source code used to generate each figure is available in a public \project{GitHub} repository\footnote{\url{https://github.com/mkenworthy/ARAA_HCI}}.
+
+To see the specific version of the \project{Jupyter} notebook, that was executed to generate each figure, click on the icon next to the figure caption.
+
+\subsection{Brief history}
+
+\lipsum[2-4]
+
+\subsection{Motivating examples}
+\label{sec:sim_examples}
+\lipsum[2-4]
+
+
+\section{CONCLUSIONS}
+\label{sec:concl}
+\lipsum[2-4]
+
+\lipsum[2-4]
+
+
+\subsection{Future perspectives}
+
+\lipsum[2-4]
+
+%Disclosure
+\section*{DISCLOSURE STATEMENT}
+The authors are not aware of any affiliations, memberships, funding, or financial holdings that
+might be perceived as affecting the objectivity of this review.
+
+% Acknowledgements
+\section*{ACKNOWLEDGMENTS}
+M.\ A.\ K.\ acknowledges useful conversations with
+Phil Hinz.
+% Eric Agol,
+% Will Farr,
+% Alex Gagliano,
+% Tyler Gordon,
+% and Maximiliano Isi.
+
+% The authors would like to thank the community members who sent feedback on the public draft of this review:
+
+To achieve the scientific results presented in this article we made use of the \emph{Python} programming language\footnote{Python Software Foundation, \url{https://www.python.org/}}, especially the \emph{SciPy} \citep{virtanen2020}, \emph{NumPy} \citep{numpy}, \emph{Matplotlib} \citep{Matplotlib}, \emph{emcee} \citep{foreman-mackey2013}, and \emph{astropy} \citep{astropy_1,astropy_2} packages.
+%
+
+This research has made use of NASA's Astrophysics Data System Bibliographic Services.
+
+% References
+
+\bibliographystyle{ar-style2}
 \bibliography{bib}
 
+% \section*{RELATED RESOURCES}
+
 \end{document}
+
