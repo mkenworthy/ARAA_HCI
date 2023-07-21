@@ -66,11 +66,12 @@ run_cache_rules_on_ci: false
 # Mapping of script file extensions to instructions for executing them
 scripts:
   py: python {script}
+  ipynb: jupyter execute {script}
 
 # Display of the `showyourwork` stamp on first page
 stamp:
   # Show the stamp?
-  enabled: true
+  enabled: false
   # Stamp angle in degrees
   angle: -20.0
   # Stamp size in inches
