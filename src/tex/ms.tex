@@ -90,10 +90,10 @@ High Contrast Imaging will enable the direct detection of photons from rocky ter
 \section{INTRODUCTION}
 \label{sec:intro}
 
-High contrast imaging, Lyot corongraph, 2000's development
+% High contrast imaging, Lyot corongraph, 2000's development
 
 
-In this review, we provide interactive notebooks that enable the reader to build up their intuitition on how coronagraphs work along with wavefront sensing both in the pupil and the focal planes, and how we will tackle the challenges in reaching the contrasts of $10^{-10}$ at angular separations of less than one arcsecond that are required.
+In this review, we provide interactive notebooks that enable the reader to build up their intuition on how coronagraphs work along with wavefront sensing both in the pupil and the focal planes, and how we will tackle the challenges in reaching the contrasts of $10^{-10}$ at angular separations of less than one arcsecond that are required.
 
 
 \begin{armarginnote}[]
@@ -120,6 +120,70 @@ To see the specific version of the \project{Jupyter} notebook, that was executed
   \label{fig:simplepsf}
 \end{figure}
 
+The scientific goal is to image an exoplanet (a planet orbiting a star other than our Sun) and to characterise its orbit and atmosphere.
+%
+For an Earth analogue with similar radius, albedo and effective temperature orbiting around a solar-type star 10 parsecs away, the typical amount of reflected light in the optical is $10^{-10}$ of the central star at a separation of 0.1 arcseconds at maximum elongation.
+%
+The technical challenge is in separating the  light of the parent star from the light of the planet.
+
+\subsubsection{From Maxwell's Equations to Wavefronts}
+
+When a star is imaged with a large ground based telescope the detector does not see a point source with all flux concentrated into one pixel, but instead the stellar flux is distributed across a finite area.
+%
+This is due to the wave-like nature of electromagnetic radiation.
+
+The vast majority of energy from astrophysical objects arrives at our telescopes in the form of electromagnetic radiation.
+%
+Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
+% ENERGY PROPAGATION
+Energy is stored in both the electric and magnetic fields.
+% WAVE SOLUTIONS
+One solution to these equations are second-order differential wave equations, which describe a periodic change in the electric and magnetic field strength throughout a given volume.
+%
+In the absence of any free electrical charges, these show that, energy is propagated in a direction along their direction of motion. BLAH NOT TRUE FOR CALCITE...
+% ENERGY IN E FIELDS
+The majority of energy is stored in the electric field, and since the magnetic field strength follows the electric field strength we only talk about the time and space evolution of the electric field.
+
+The time-varying electric field strength of an electromagnetic plane wave at time $t$ is described by:
+
+$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
+
+where $\mathbf{r}$ is a point in three-dimensional space, $\mathbf{k}$ is a unit vector pointing in the direction of the wave propagation, and $\omega$ is the angular frequency of the wave.
+%
+The angular frequency and wavelength of the wave is related by $\omega = 2\pi c/\lambda$ where $c$ is the propagation speed in free space.
+%
+% PHASE only applies to a periodic wave!
+
+Waves are periodic functions, so we introduce the concept of phase: the distance (in space or time) from a reference point in the amplitude of wave, usually defined so that a phase of zero is the place/time where the amplitude of the field is the largest. UGH NOT QUITE RIGHT. 
+
+A wavefront is a surface with constant phase.
+%
+For an electromagnetic wave propagating through free space, it is a flat two dimensional plane.
+%
+This plane moves in the direction of propagation $k$.
+
+Optical elements bring separate spatial regions of the wave to the same spatial point.
+%
+Since the wave is coherent, the resultant electric field is a linear addition of the electric field propagated along the optical path length difference.
+% Maxwell's equations are linear and so superposition of different k vectors and different omegas are possible
+%
+% The wave propagation has k = E x B, so all three quantities are perpendicular to each other.
+
+There are two orthogonal solutions, corresponding to two independent polarizations for electromagnetic waves.
+
+Ultimately, if we know the electric field distribution at the telescope aperture then we can propagate the resultant electromagnetic waves through our telescope and instrument to subsequent focal and pupil planes.
+
+The coherent superposition of electric fields from different parts of the telescope aperture and the associated phase offset gives rise to \textbf{interference}, where the sum of all these electric amplitudes can give very different results from an incoherent addition of the fluxes.
+
+\subsubsection{The Point Spread Function}
+
+A square aperture with a side length of $D$ illuminated by light of wavelength $\lambda$ will produce the illumination seen in Figure XXXX.
+%
+The focal plane is divided by a rectilinear dark grid
+%
+The angular distance from the optical axis to the first dark minimum is $\lambda/D$ in units of radians.
+
+For a circular unobstructed telescope aperture, this pattern is referred to as the Airy function, first calculated 
 
 \lipsum[2-4]
 
