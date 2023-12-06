@@ -137,19 +137,29 @@ The vast majority of energy from astrophysical objects arrives at our telescopes
 \nabla\cdot\mathcal{D}                 \quad & = \quad 0.                         & \quad \text{(Coulomb's law)}
 \end{aligned}
 \end{equation}
-This form of Maxwell's equations is in the material form without any charge and current sources. The material form is used to describe the propagation of electromagnetic fields inside matter. This set of equations is completed by describing the particular matter of the medium with the constitutive relations, $D=\epsilon E$ and $B=\mu H$. Here $\epsilon$ and $\mu$ are the permittivity and magnetic permeability, respectively. The wave equation can be derived by taking the curl of Ampere's law,
+This form of Maxwell's equations is in the material form without any charge and current sources. The material form is used to describe the propagation of electromagnetic fields inside matter. This set of equations is completed by describing the particular matter of the medium with the constitutive relations, $D=\epsilon E$ and $B=\mu H$. Here $\epsilon$ and $\mu$ are the permittivity and magnetic permeability, respectively. The wave equation for electromagnetic waves can be derived by taking the curl of Ampere's law. This gives us the classic wave equation if we assume that the EM wave propagates in isotropic and homogeneous materials,
 \begin{equation}
+\label{eq:wave_eq}
 \begin{aligned}
-\nabla\times\frac{\partial\mathcal{B}}{\partial t} \quad  =& \quad -\nabla\times\nabla\times\mathcal{E} \\
-\frac{\partial\nabla\times\mathcal{B}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
-\frac{\partial\nabla\times\mathcal{\mu H}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
-\mu\frac{\partial^2 \mathcal{D}}{\partial t^2} \quad  =& \quad -\nabla^2\mathcal{E} \\
-\frac{\partial^2 \mathcal{E}}{\partial t^2} \quad  =& -(\mu \epsilon)^{-1} \nabla^2\mathcal{E}
+%\nabla\times\frac{\partial\mathcal{B}}{\partial t} \quad  =& \quad -\nabla\times\nabla\times\mathcal{E} \\
+%\frac{\partial\nabla\times\mathcal{B}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
+%\frac{\partial\nabla\times\mathcal{\mu H}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
+%\mu\frac{\partial^2 \mathcal{D}}{\partial t^2} \quad  =& \quad -\nabla^2\mathcal{E} \\
+\mu \epsilon \frac{\partial^2 \mathcal{E}}{\partial t^2} - \nabla^2\mathcal{E} = 0 .
 \end{aligned}
 \end{equation}
+Let's now consider a purely monochromatic EM wave with frequency $\omega$. The wave function is then $\mathcal{E}=\psi(r) e^{iwt}$ with $\psi(r)$ describing the spatial distribution. Substituting this relation into Equation \ref{eq:wave_eq},
+\begin{equation}
+\nabla^2\mathcal{E} +\mu \epsilon \omega^2 \mathcal{E} = 0.
+\end{equation}
+The usual definition of the permittivity and permeability are $\epsilon=\epsilon_r \epsilon_0$ and $\mu=\mu_r \mu_0$ with $\epsilon_r$ and $\mu_r$ the relative permittivity and permeability compared to that of vacuum, $\epsilon_0$ and $\mu_0$. In optics most glasses and materials are defined by their refractive index $n$ which is related to permittivity as $\epsilon_r = n^2$ and many of these are also non-magnetic which means that $\mu_r=1$. Substituting this will give us the classic Helmholtz equation
+\begin{equation}
+\nabla^2\mathcal{E} + n^2k^2 \mathcal{E} = 0,
+\end{equation}
+We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number. The propagation through an optical system has a preferential direction that is usually defined along the z-axis. The goal of our exercises is to find how this propagation 
+%$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
 
-
-Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
+%Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
 
 
 When a star is imaged with a large ground based telescope the detector does not see a point source with all flux concentrated into one pixel, but instead the stellar flux is distributed across a finite area.%actually an infinite area because band-limited signals have an infinite support. There is no end to the Airy pattern.
