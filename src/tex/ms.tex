@@ -168,66 +168,67 @@ The usual definition of the permittivity and permeability are $\epsilon=\epsilon
 \begin{equation}
 \nabla^2\mathcal{E} + n^2k^2 \mathcal{E} = 0,
 \end{equation}
-We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number. The propagation through an optical system has a preferential direction that is usually defined along the z-axis. The goal of our exercises is to find how this propagation happens. 
+We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number. The propagation through an optical system has a preferential direction that is usually defined along the z-axis. The z-axis evolution can be derived by separating the spatial components into the z component and the perpendicular components (x,y),
 \begin{equation}
 \frac{\partial^2\mathcal{E}}{\partial z^2} = -\nabla_{\perp}^2\mathcal{E}-n^2k^2 \mathcal{E},
 \end{equation}
-
+This differential equation can be solved by assuming a plane wave expansion $\mathcal{E}(x,y,z)=e^{i(k_x x + k_y y)}f(z)$ which results in
 \begin{equation}
 \frac{\partial^2\mathcal{E}}{\partial z^2} = -(n^2k^2 - k_{\perp}^2)\mathcal{E}.
 \end{equation}
-Solving this differential equation for z results in the Angular Spectrum Propagation equation that relates the electric field at one plane to the electric field at another,
+The solution to this equation is the Angular Spectrum Propagator that relates the electric field at any one plane to the electric field at any other,
 \begin{equation}
-\mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-i(n^2k^2 - k_{\perp}^2)(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
+\label{eq:angular_spectrum}
+\mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
 \end{equation}
+Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates. While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight. For many optical systems the paraxial approximation is sufficient. The paraxial approximation means that the plane waves make small angles with respect to the z-axis, $k_x,k_y<<1$. 
 %$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
 
 %Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
 
 
-When a star is imaged with a large ground based telescope the detector does not see a point source with all flux concentrated into one pixel, but instead the stellar flux is distributed across a finite area.%actually an infinite area because band-limited signals have an infinite support. There is no end to the Airy pattern.
+%When a star is imaged with a large ground based telescope the detector does not see a point source with all flux concentrated into one pixel, but instead the stellar flux is distributed across a finite area.%actually an infinite area because band-limited signals have an infinite support. There is no end to the Airy pattern.
 
 %
-This is due to the wave-like nature of electromagnetic radiation.
+%This is due to the wave-like nature of electromagnetic radiation.
 
 
 % ENERGY PROPAGATION
-Energy is stored in both the electric and magnetic fields.
+%Energy is stored in both the electric and magnetic fields.
 % WAVE SOLUTIONS
-One solution to these equations are second-order differential wave equations, which describe a periodic change in the electric and magnetic field strength throughout a given volume.
+%One solution to these equations are second-order differential wave equations, which describe a periodic change in the electric and magnetic field strength throughout a given volume.
 %
-In the absence of any free electrical charges, these show that, energy is propagated in a direction along their direction of motion. BLAH NOT TRUE FOR CALCITE...
+%In the absence of any free electrical charges, these show that, energy is propagated in a direction along their direction of motion. BLAH NOT TRUE FOR CALCITE...
 % ENERGY IN E FIELDS
-The majority of energy is stored in the electric field, and since the magnetic field strength follows the electric field strength we only talk about the time and space evolution of the electric field.
+%The majority of energy is stored in the electric field, and since the magnetic field strength follows the electric field strength we only talk about the time and space evolution of the electric field.
 
-The time-varying electric field strength of an electromagnetic plane wave at time $t$ is described by:
+%The time-varying electric field strength of an electromagnetic plane wave at time $t$ is described by:
 
-$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
-
-where $\mathbf{r}$ is a point in three-dimensional space, $\mathbf{k}$ is a unit vector pointing in the direction of the wave propagation, and $\omega$ is the angular frequency of the wave.
+%$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
+%where $\mathbf{r}$ is a point in three-dimensional space, $\mathbf{k}$ is a unit vector pointing in the direction of the wave propagation, and $\omega$ is the angular frequency of the wave.
 %
-The angular frequency and wavelength of the wave is related by $\omega = 2\pi c/\lambda$ where $c$ is the propagation speed in free space.
+%The angular frequency and wavelength of the wave is related by $\omega = 2\pi c/\lambda$ where $c$ is the propagation speed in free space.
 %
 % PHASE only applies to a periodic wave!
 
-Waves are periodic functions, so we introduce the concept of phase: the distance (in space or time) from a reference point in the amplitude of wave, usually defined so that a phase of zero is the place/time where the amplitude of the field is the largest. UGH NOT QUITE RIGHT. 
+%Waves are periodic functions, so we introduce the concept of phase: the distance (in space or time) from a reference point in the amplitude of wave, usually defined so that a phase of zero is the place/time where the amplitude of the field is the largest. UGH NOT QUITE RIGHT. 
 
-A wavefront is a surface with constant phase.
+%A wavefront is a surface with constant phase.
 %
-For an electromagnetic wave propagating through free space, it is a flat two dimensional plane.
+%For an electromagnetic wave propagating through free space, it is a flat two dimensional plane.
 %
-This plane moves in the direction of propagation $k$.
+%This plane moves in the direction of propagation $k$.
 
-Optical elements bring separate spatial regions of the wave to the same spatial point.
+%Optical elements bring separate spatial regions of the wave to the same spatial point.
 %
-Since the wave is coherent, the resultant electric field is a linear addition of the electric field propagated along the optical path length difference.
+%Since the wave is coherent, the resultant electric field is a linear addition of the electric field propagated along the optical path length difference.
 % Maxwell's equations are linear and so superposition of different k vectors and different omegas are possible
 %
 % The wave propagation has k = E x B, so all three quantities are perpendicular to each other.
 
-There are two orthogonal solutions, corresponding to two independent polarizations for electromagnetic waves.
+%There are two orthogonal solutions, corresponding to two independent polarizations for electromagnetic waves.
 
-Ultimately, if we know the electric field distribution at the telescope aperture then we can propagate the resultant electromagnetic waves through our telescope and instrument to subsequent focal and pupil planes.
+%Ultimately, if we know the electric field distribution at the telescope aperture then we can propagate the resultant electromagnetic waves through our telescope and instrument to subsequent focal and pupil planes.
 
 The coherent superposition of electric fields from different parts of the telescope aperture and the associated phase offset gives rise to \textbf{interference}, where the sum of all these electric amplitudes can give very different results from an incoherent addition of the fluxes.
 
