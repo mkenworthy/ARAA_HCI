@@ -120,6 +120,18 @@ To see the specific version of the \project{Jupyter} notebook, that was executed
   \label{fig:simplepsf}
 \end{figure}
 
+
+
+\begin{figure}[ht]
+  \centering
+  \script{interactive_fresnel.ipynb}
+  \includegraphics[width=1.0\linewidth]{figures/test.pdf}
+  \caption{Figure run from a Jupyter notebook.}
+  \label{fig:fresnel}
+\end{figure}
+
+
+
 The scientific goal is to image an exoplanet (a planet orbiting a star other than our Sun) and to characterise its orbit and atmosphere.
 %
 For an Earth analogue with similar radius, albedo and effective temperature orbiting around a solar-type star 10 parsecs away, the typical amount of reflected light in the optical is $10^{-10}$ of the central star at a separation of 0.1 arcseconds at maximum elongation.
@@ -156,7 +168,18 @@ The usual definition of the permittivity and permeability are $\epsilon=\epsilon
 \begin{equation}
 \nabla^2\mathcal{E} + n^2k^2 \mathcal{E} = 0,
 \end{equation}
-We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number. The propagation through an optical system has a preferential direction that is usually defined along the z-axis. The goal of our exercises is to find how this propagation 
+We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number. The propagation through an optical system has a preferential direction that is usually defined along the z-axis. The goal of our exercises is to find how this propagation happens. 
+\begin{equation}
+\frac{\partial^2\mathcal{E}}{\partial z^2} = -\nabla_{\perp}^2\mathcal{E}-n^2k^2 \mathcal{E},
+\end{equation}
+
+\begin{equation}
+\frac{\partial^2\mathcal{E}}{\partial z^2} = -(n^2k^2 - k_{\perp}^2)\mathcal{E}.
+\end{equation}
+Solving this differential equation for z results in the Angular Spectrum Propagation equation that relates the electric field at one plane to the electric field at another,
+\begin{equation}
+\mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-i(n^2k^2 - k_{\perp}^2)(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
+\end{equation}
 %$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
 
 %Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
