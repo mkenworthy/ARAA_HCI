@@ -70,7 +70,7 @@
 \author{Matthew Kenworthy,$^1$ Sebastiaan Haffert$^2$ and Emiel Por$^3$
   \affil{$^1$Leiden Observatory, Niels Bohrweg 2, Leiden 2300RA, The Netherlands; email: kenworthy@strw.leidenuniv.nl}
   \affil{$^2$Steward Observatory; email: haffert@astronomy.arizona.edu}
-  \affil{$^3$STScI; email: por@stsci.edu}}
+  \affil{$^3$STScI; email: epor@stsci.edu}}
 
 %Abstract
 \begin{abstract}
@@ -90,10 +90,10 @@ High Contrast Imaging will enable the direct detection of photons from rocky ter
 \section{INTRODUCTION}
 \label{sec:intro}
 
-High contrast imaging, Lyot corongraph, 2000's development
+% High contrast imaging, Lyot corongraph, 2000's development
 
 
-In this review, we provide interactive notebooks that enable the reader to build up their intuitition on how coronagraphs work along with wavefront sensing both in the pupil and the focal planes, and how we will tackle the challenges in reaching the contrasts of $10^{-10}$ at angular separations of less than one arcsecond that are required.
+In this review, we provide interactive notebooks that enable the reader to build up their intuition on how coronagraphs work along with wavefront sensing both in the pupil and the focal planes, and how we will tackle the challenges in reaching the contrasts of $10^{-10}$ at angular separations of less than one arcsecond that are required.
 
 
 \begin{armarginnote}[]
@@ -109,7 +109,7 @@ This manuscript was prepared using the \project{showyourwork} package\footnote{\
 
 To see the specific version of the \project{Jupyter} notebook, that was executed to generate each figure, click on the icon next to the figure caption.
 
-\subsection{Brief history}
+\section{Brief history}
 
 
 \begin{figure}[ht]
@@ -120,22 +120,187 @@ To see the specific version of the \project{Jupyter} notebook, that was executed
   \label{fig:simplepsf}
 \end{figure}
 
+The scientific goal is to image an exoplanet (a planet orbiting a star other than our Sun) and to characterise its orbit and atmosphere.
+%
+For an Earth analogue with similar radius, albedo and effective temperature orbiting around a solar-type star 10 parsecs away, the typical amount of reflected light in the optical is $10^{-10}$ of the central star at a separation of 0.1 arcseconds at maximum elongation.
+%
+The technical challenge is in separating the  light of the parent star from the light of the planet.
+
+\subsubsection{From Maxwell's Equations to Wavefronts}
+The vast majority of energy from astrophysical objects arrives at our telescopes in the form of electromagnetic radiation. The electromagnetic waves propagate through space by exchanges between the electric and magnetic fields because a changing electric field induces a magnetic field and vice-versa. This time-dependent interaction is described by Maxwell's equations,
+
+\begin{equation}
+\begin{aligned}
+\frac{\partial\mathcal{D}}{\partial t} \quad & = \quad \nabla\times\mathcal{H},   & \quad \text{(Faraday's law)} \\[5pt]
+\frac{\partial\mathcal{B}}{\partial t} \quad & = \quad -\nabla\times\mathcal{E},  & \quad \text{(Ampere's Law)}   \\[5pt]
+\nabla\cdot\mathcal{B}                 \quad & = \quad 0,                         & \quad \text{(Gauss's law)}   \\[5pt]
+\nabla\cdot\mathcal{D}                 \quad & = \quad 0.                         & \quad \text{(Coulomb's law)}
+\end{aligned}
+\end{equation}
+This form of Maxwell's equations is in the material form without any charge and current sources. The material form is used to describe the propagation of electromagnetic fields inside matter. This set of equations is completed by describing the particular matter of the medium with the constitutive relations, $D=\epsilon E$ and $B=\mu H$. Here $\epsilon$ and $\mu$ are the permittivity and magnetic permeability, respectively. The wave equation can be derived by taking the curl of Ampere's law,
+\begin{equation}
+\begin{aligned}
+\nabla\times\frac{\partial\mathcal{B}}{\partial t} \quad  =& \quad -\nabla\times\nabla\times\mathcal{E} \\
+\frac{\partial\nabla\times\mathcal{B}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
+\frac{\partial\nabla\times\mathcal{\mu H}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
+\mu\frac{\partial^2 \mathcal{D}}{\partial t^2} \quad  =& \quad -\nabla^2\mathcal{E} \\
+\frac{\partial^2 \mathcal{E}}{\partial t^2} \quad  =& -(\mu \epsilon)^{-1} \nabla^2\mathcal{E}
+\end{aligned}
+\end{equation}
+
+
+Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
+
+
+When a star is imaged with a large ground based telescope the detector does not see a point source with all flux concentrated into one pixel, but instead the stellar flux is distributed across a finite area.%actually an infinite area because band-limited signals have an infinite support. There is no end to the Airy pattern.
+
+%
+This is due to the wave-like nature of electromagnetic radiation.
+
+
+% ENERGY PROPAGATION
+Energy is stored in both the electric and magnetic fields.
+% WAVE SOLUTIONS
+One solution to these equations are second-order differential wave equations, which describe a periodic change in the electric and magnetic field strength throughout a given volume.
+%
+In the absence of any free electrical charges, these show that, energy is propagated in a direction along their direction of motion. BLAH NOT TRUE FOR CALCITE...
+% ENERGY IN E FIELDS
+The majority of energy is stored in the electric field, and since the magnetic field strength follows the electric field strength we only talk about the time and space evolution of the electric field.
+
+The time-varying electric field strength of an electromagnetic plane wave at time $t$ is described by:
+
+$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
+
+where $\mathbf{r}$ is a point in three-dimensional space, $\mathbf{k}$ is a unit vector pointing in the direction of the wave propagation, and $\omega$ is the angular frequency of the wave.
+%
+The angular frequency and wavelength of the wave is related by $\omega = 2\pi c/\lambda$ where $c$ is the propagation speed in free space.
+%
+% PHASE only applies to a periodic wave!
+
+Waves are periodic functions, so we introduce the concept of phase: the distance (in space or time) from a reference point in the amplitude of wave, usually defined so that a phase of zero is the place/time where the amplitude of the field is the largest. UGH NOT QUITE RIGHT. 
+
+A wavefront is a surface with constant phase.
+%
+For an electromagnetic wave propagating through free space, it is a flat two dimensional plane.
+%
+This plane moves in the direction of propagation $k$.
+
+Optical elements bring separate spatial regions of the wave to the same spatial point.
+%
+Since the wave is coherent, the resultant electric field is a linear addition of the electric field propagated along the optical path length difference.
+% Maxwell's equations are linear and so superposition of different k vectors and different omegas are possible
+%
+% The wave propagation has k = E x B, so all three quantities are perpendicular to each other.
+
+There are two orthogonal solutions, corresponding to two independent polarizations for electromagnetic waves.
+
+Ultimately, if we know the electric field distribution at the telescope aperture then we can propagate the resultant electromagnetic waves through our telescope and instrument to subsequent focal and pupil planes.
+
+The coherent superposition of electric fields from different parts of the telescope aperture and the associated phase offset gives rise to \textbf{interference}, where the sum of all these electric amplitudes can give very different results from an incoherent addition of the fluxes.
+
+\section{Definition of quantities}
+
+\section{Diffraction of simple apertures}
+
+
+A square aperture with a side length of $D$ illuminated by light of wavelength $\lambda$ will produce the illumination seen in Figure XXXX.
+%
+The focal plane is divided by a rectilinear dark grid
+%
+The angular distance from the optical axis to the first dark minimum is $\lambda/D$ in units of radians.
+
+For a circular unobstructed telescope aperture, this pattern is referred to as the Airy function.
+
+\section{The Lyot Coronagraph}
+
+The first coronagraph to successfully image a debris disk was a Lyot coronagraph built by \citet{Vilas87} and it imaged the edge-on circumstellar disk around Beta Pictoris in 1984 \citep{Smith84}.
+%
+The optical layout of the Lyot coronagraph can be generalised in Figure XXXXX, with the letters A-F representing the images present at that location in the coronagraph light path.
+%
+The telescope pupil (A) is reimaged into a focal plane of the sky (B) where an opaque mask that has high absorptivity and low reflectivity, typically anodized aluminium or another material painted black, blocks the light from any on-axis source (C).
+%
+Optics then form an image of the resultant pupil (D) to an intermediate pupil plane, where a second opaque mask - the Lyot stop - is located.
+%
+This Lyot stop blocks the outer ring of light in the pupil (E).
+%
+A second optical relay system then reimages the resultant focal plane of the instrument onto a detector (F).
+%
+%When an object is placed behind the focal plane mask, the light from that object is blocked and does not go any further.
+%
+Any circumstellar objects outside the radius of the focal plane mask then pass through unimpeded through the coronagraph and are subsequently reimaged in the detector focal plane at F.
+
+For off axis sources, the light rays passes through the coronagraph optics to form an image at F with only minor modification: the reimaged pupil at D is superficially very similar to the telescope pupil A.
+%
+For an on-axis source, the removal of the Airy core plus attendant diffraction rings significantly modifies the wavefront passing through the coronagraph, resulting in a flux redistribution at D where the flux is concentrated in a ring whose peak brightness lies along the perimeter of the reimaged telescope pupil, extending both beyond the radius of the pupil and into the centre of the pupil.
+
+The purpose of the Lyot stop is to remove as much of this ring of light as possible, whilst maximising the throughput of the pupil image for off-axis sources.
+%
+Adjusting the diameter of the focal plane mask changes the full width half maximum of the ring of light at D, which requires a smaller Lyot stop to block - but then the throughput of the pupil for off-axis sources then decreases.
+%
+Decreasing the Lyot stop aperture has a second impact in that the reduced pupil diameter increases the FWHM of the images in the final focal plane F, spreading the flux from the off-axis sources over a larger area in the detector and degrading the angular resolution of the telescope and instrument.
+%
+The optimal diameters of the FPM and Lyot stop aperture are then driven by the science requirements - how close to the central star (measured in diffraction widths at the lower spatial resolution) should the coronagraph be able to transmit light from off-axis objects in the field of view.
+
+\section{Complex pupil and focal plane masks}
+
+The Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
+%
+These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
+%
+After the discovery of Gliese 229B (XXX CHECK WAS THIS A LYOT?) with the Palomar 5m PALM 5000 system, a series of coronagraphic designs appeared where researchers explored the different possibilities of placing complex amplitude apodizers at both the focal plane and pupil plane locations.
+%
+A wide range of coronagraph designs were explored, including XXXXX focal plane, pupil plane, telephone list of all different coronagraphs.
+%
+MENTION interferometer concepts.
+
+All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars.
+%
+
+
+
 
 \lipsum[2-4]
 
-\subsection{Motivating examples}
-\label{sec:sim_examples}
+\section{Parameters to optimize}
 \lipsum[2-4]
 
-
-\section{CONCLUSIONS}
-\label{sec:concl}
+\section{Two approaches: ground and ELT for M dwarf}
 \lipsum[2-4]
 
+\section{Space coronagraphs and HWO for G type stars}
 \lipsum[2-4]
 
+\section{Polarization effects} 
+\lipsum[2-4]
 
-\subsection{Future perspectives}
+\section{PIAA}
+\lipsum[2-4]
+
+\section{Coronagraphic wavefront sensing}
+\lipsum[2-4]
+
+\section{Focal plane wavefront sensing}
+\lipsum[2-4]
+
+\section{rejected light wavefront sensing} 
+\lipsum[2-4]
+
+\section{PAPLC}
+\lipsum[2-4]
+
+\section{Segmented mirrors}
+\lipsum[2-4]
+
+\section{Integrated optics}
+\lipsum[2-4]
+
+\section{Astrophotonics and QOD}
+\lipsum[2-4]
+
+\section{Quantum optimal detection}
+\lipsum[2-4]
+
+\section{Post-processing (its no longer a photon)}
 
 \lipsum[2-4]
 
