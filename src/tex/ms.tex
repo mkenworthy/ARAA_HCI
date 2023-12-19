@@ -109,6 +109,25 @@ This manuscript was prepared using the \project{showyourwork} package\footnote{\
 
 To see the specific version of the \project{Jupyter} notebook, that was executed to generate each figure, click on the icon next to the figure caption.
 
+\section{Science Goals}
+
+Initially developed to image the Sun's corona without the need for a Solar eclipse, one of the most significant science drivers for the latest coronagraphs is in the detection and characterisation of circumstellar material and planets around nearby stars.
+%
+Planetary systems that are closer to the Sun have two benefits: given two identical planetary systems, one that is twice as close as the other will have twice the angular separation between the star and planet, and from the inverse square law, four times more flux is received from the planet.
+
+For direct imaging, therefore, the closest stars to the Sun are the ones that are studied for the presence of directly imaged exoplanets.
+%
+In a volume limited (20 parsecs) sample of stars around the Sun \citep{2023arXiv231203639K}, there are XXXX solar (G2) type stars, and YYYY M-dwarf stars.
+%
+DI young Jupiters look are self-luminous in the NIR, but for terrestrial planets, looking for light reflected from the atmosphere/surface, so subject to inverse square law for planet separation from star.
+
+Two regimes: solar analogues at optical wavelengths lead to space based missions, ground based larger aperture telescopes study M dwarf stars that are on average closer to the Sun, and look in the NIR.
+
+Mention HABCAT for a catalogue of solar like stars.
+
+Bioactive molecules see reviews of \citet{2016AsBio..16..465S,2017ARA&A..55..433K,2018AsBio..18..663S}.
+
+
 \section{Brief history}
 
 
@@ -120,14 +139,30 @@ To see the specific version of the \project{Jupyter} notebook, that was executed
   \label{fig:simplepsf}
 \end{figure}
 
+
+
+\begin{figure}[ht]
+  \centering
+  \script{interactive_fresnel.ipynb}
+  \includegraphics[width=1.0\linewidth]{figures/test.pdf}
+  \caption{Figure run from a Jupyter notebook.}
+  \label{fig:fresnel}
+\end{figure}
+
+
+
 The scientific goal is to image an exoplanet (a planet orbiting a star other than our Sun) and to characterise its orbit and atmosphere.
 %
 For an Earth analogue with similar radius, albedo and effective temperature orbiting around a solar-type star 10 parsecs away, the typical amount of reflected light in the optical is $10^{-10}$ of the central star at a separation of 0.1 arcseconds at maximum elongation.
 %
-The technical challenge is in separating the  light of the parent star from the light of the planet.
+The technical challenge is in distinguishing the light of the parent star from the light of the planet.
 
 \subsubsection{From Maxwell's Equations to Wavefronts}
-The vast majority of energy from astrophysical objects arrives at our telescopes in the form of electromagnetic radiation. The electromagnetic waves propagate through space by exchanges between the electric and magnetic fields because a changing electric field induces a magnetic field and vice-versa. This time-dependent interaction is described by Maxwell's equations,
+The vast majority of energy from astrophysical objects arrives at our telescopes in the form of electromagnetic radiation.
+%
+The electromagnetic waves propagate through space by exchanges between the electric and magnetic fields because a changing electric field induces a magnetic field and vice-versa.
+%
+rThis time-dependent interaction is described by Maxwell's equations,
 
 \begin{equation}
 \begin{aligned}
@@ -137,64 +172,90 @@ The vast majority of energy from astrophysical objects arrives at our telescopes
 \nabla\cdot\mathcal{D}                 \quad & = \quad 0.                         & \quad \text{(Coulomb's law)}
 \end{aligned}
 \end{equation}
-This form of Maxwell's equations is in the material form without any charge and current sources. The material form is used to describe the propagation of electromagnetic fields inside matter. This set of equations is completed by describing the particular matter of the medium with the constitutive relations, $D=\epsilon E$ and $B=\mu H$. Here $\epsilon$ and $\mu$ are the permittivity and magnetic permeability, respectively. The wave equation can be derived by taking the curl of Ampere's law,
+This form of Maxwell's equations is in the material form without any charge and current sources. The material form is used to describe the propagation of electromagnetic fields inside matter. This set of equations is completed by describing the particular matter of the medium with the constitutive relations, $D=\epsilon E$ and $B=\mu H$. Here $\epsilon$ and $\mu$ are the permittivity and magnetic permeability, respectively. The wave equation for electromagnetic waves can be derived by taking the curl of Ampere's law. This gives us the classic wave equation if we assume that the EM wave propagates in isotropic and homogeneous materials,
 \begin{equation}
+\label{eq:wave_eq}
 \begin{aligned}
-\nabla\times\frac{\partial\mathcal{B}}{\partial t} \quad  =& \quad -\nabla\times\nabla\times\mathcal{E} \\
-\frac{\partial\nabla\times\mathcal{B}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
-\frac{\partial\nabla\times\mathcal{\mu H}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
-\mu\frac{\partial^2 \mathcal{D}}{\partial t^2} \quad  =& \quad -\nabla^2\mathcal{E} \\
-\frac{\partial^2 \mathcal{E}}{\partial t^2} \quad  =& -(\mu \epsilon)^{-1} \nabla^2\mathcal{E}
+%\nabla\times\frac{\partial\mathcal{B}}{\partial t} \quad  =& \quad -\nabla\times\nabla\times\mathcal{E} \\
+%\frac{\partial\nabla\times\mathcal{B}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
+%\frac{\partial\nabla\times\mathcal{\mu H}}{\partial t} \quad  =& \quad -\nabla^2\mathcal{E} \\
+%\mu\frac{\partial^2 \mathcal{D}}{\partial t^2} \quad  =& \quad -\nabla^2\mathcal{E} \\
+\mu \epsilon \frac{\partial^2 \mathcal{E}}{\partial t^2} - \nabla^2\mathcal{E} = 0 .
 \end{aligned}
 \end{equation}
+Let's now consider a purely monochromatic EM wave with frequency $\omega$. The wave function is then $\mathcal{E}=\psi(r) e^{iwt}$ with $\psi(r)$ describing the spatial distribution. Substituting this relation into Equation \ref{eq:wave_eq},
+\begin{equation}
+\nabla^2\mathcal{E} +\mu \epsilon \omega^2 \mathcal{E} = 0.
+\end{equation}
+The usual definition of the permittivity and permeability are $\epsilon=\epsilon_r \epsilon_0$ and $\mu=\mu_r \mu_0$ with $\epsilon_r$ and $\mu_r$ the relative permittivity and permeability compared to that of vacuum, $\epsilon_0$ and $\mu_0$. In optics most glasses and materials are defined by their refractive index $n$ which is related to permittivity as $\epsilon_r = n^2$ and many of these are also non-magnetic which means that $\mu_r=1$. Substituting this will give us the classic Helmholtz equation
+\begin{equation}
+\nabla^2\mathcal{E} + n^2k^2 \mathcal{E} = 0,
+\end{equation}
+We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number. The propagation through an optical system has a preferential direction that is usually defined along the z-axis. The z-axis evolution can be derived by separating the spatial components into the z component and the perpendicular components (x,y),
+\begin{equation}
+\frac{\partial^2\mathcal{E}}{\partial z^2} = -\nabla_{\perp}^2\mathcal{E}-n^2k^2 \mathcal{E},
+\end{equation}
+This differential equation can be solved by assuming a plane wave expansion $\mathcal{E}(x,y,z)=e^{i(k_x x + k_y y)}f(z)$ which results in
+\begin{equation}
+\frac{\partial^2\mathcal{E}}{\partial z^2} = -(n^2k^2 - k_{\perp}^2)\mathcal{E}.
+\end{equation}
+The solution to this equation is the Angular Spectrum Propagator that relates the electric field at any one plane to the electric field at any other,
+\begin{equation}
+\label{eq:angular_spectrum}
+\mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
+\end{equation}
+Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates. While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight. For many optical systems it is sufficient to analyze the paraxial performance. The paraxial approximation assumes that the plane waves make small angles with respect to the z-axis which means that the x and y wave vector components are $k_x,k_y<<1$. In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$
+\begin{equation}
+\label{eq:angular_spectrum2\textbf{r}}
+\mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
+\end{equation}
+%$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
+
+%Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
 
 
-Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
-
-
-When a star is imaged with a large ground based telescope the detector does not see a point source with all flux concentrated into one pixel, but instead the stellar flux is distributed across a finite area.%actually an infinite area because band-limited signals have an infinite support. There is no end to the Airy pattern.
+%When a star is imaged with a large ground based telescope the detector does not see a point source with all flux concentrated into one pixel, but instead the stellar flux is distributed across a finite area.%actually an infinite area because band-limited signals have an infinite support. There is no end to the Airy pattern.
 
 %
-This is due to the wave-like nature of electromagnetic radiation.
+%This is due to the wave-like nature of electromagnetic radiation.
 
 
 % ENERGY PROPAGATION
-Energy is stored in both the electric and magnetic fields.
+%Energy is stored in both the electric and magnetic fields.
 % WAVE SOLUTIONS
-One solution to these equations are second-order differential wave equations, which describe a periodic change in the electric and magnetic field strength throughout a given volume.
+%One solution to these equations are second-order differential wave equations, which describe a periodic change in the electric and magnetic field strength throughout a given volume.
 %
-In the absence of any free electrical charges, these show that, energy is propagated in a direction along their direction of motion. BLAH NOT TRUE FOR CALCITE...
+%In the absence of any free electrical charges, these show that, energy is propagated in a direction along their direction of motion. BLAH NOT TRUE FOR CALCITE...
 % ENERGY IN E FIELDS
-The majority of energy is stored in the electric field, and since the magnetic field strength follows the electric field strength we only talk about the time and space evolution of the electric field.
+%The majority of energy is stored in the electric field, and since the magnetic field strength follows the electric field strength we only talk about the time and space evolution of the electric field.
 
-The time-varying electric field strength of an electromagnetic plane wave at time $t$ is described by:
+%The time-varying electric field strength of an electromagnetic plane wave at time $t$ is described by:
 
-$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
-
-where $\mathbf{r}$ is a point in three-dimensional space, $\mathbf{k}$ is a unit vector pointing in the direction of the wave propagation, and $\omega$ is the angular frequency of the wave.
+%$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
+%where $\mathbf{r}$ is a point in three-dimensional space, $\mathbf{k}$ is a unit vector pointing in the direction of the wave propagation, and $\omega$ is the angular frequency of the wave.
 %
-The angular frequency and wavelength of the wave is related by $\omega = 2\pi c/\lambda$ where $c$ is the propagation speed in free space.
+%The angular frequency and wavelength of the wave is related by $\omega = 2\pi c/\lambda$ where $c$ is the propagation speed in free space.
 %
 % PHASE only applies to a periodic wave!
 
-Waves are periodic functions, so we introduce the concept of phase: the distance (in space or time) from a reference point in the amplitude of wave, usually defined so that a phase of zero is the place/time where the amplitude of the field is the largest. UGH NOT QUITE RIGHT. 
+%Waves are periodic functions, so we introduce the concept of phase: the distance (in space or time) from a reference point in the amplitude of wave, usually defined so that a phase of zero is the place/time where the amplitude of the field is the largest. UGH NOT QUITE RIGHT. 
 
-A wavefront is a surface with constant phase.
+%A wavefront is a surface with constant phase.
 %
-For an electromagnetic wave propagating through free space, it is a flat two dimensional plane.
+%For an electromagnetic wave propagating through free space, it is a flat two dimensional plane.
 %
-This plane moves in the direction of propagation $k$.
+%This plane moves in the direction of propagation $k$.
 
-Optical elements bring separate spatial regions of the wave to the same spatial point.
+%Optical elements bring separate spatial regions of the wave to the same spatial point.
 %
-Since the wave is coherent, the resultant electric field is a linear addition of the electric field propagated along the optical path length difference.
+%Since the wave is coherent, the resultant electric field is a linear addition of the electric field propagated along the optical path length difference.
 % Maxwell's equations are linear and so superposition of different k vectors and different omegas are possible
 %
 % The wave propagation has k = E x B, so all three quantities are perpendicular to each other.
 
-There are two orthogonal solutions, corresponding to two independent polarizations for electromagnetic waves.
+%There are two orthogonal solutions, corresponding to two independent polarizations for electromagnetic waves.
 
-Ultimately, if we know the electric field distribution at the telescope aperture then we can propagate the resultant electromagnetic waves through our telescope and instrument to subsequent focal and pupil planes.
+%Ultimately, if we know the electric field distribution at the telescope aperture then we can propagate the resultant electromagnetic waves through our telescope and instrument to subsequent focal and pupil planes.
 
 The coherent superposition of electric fields from different parts of the telescope aperture and the associated phase offset gives rise to \textbf{interference}, where the sum of all these electric amplitudes can give very different results from an incoherent addition of the fluxes.
 
