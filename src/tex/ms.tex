@@ -44,7 +44,7 @@
 \newcommand{\prl}{Physical Review Letters}
 \newcommand{\prd}{Physical Review D}
 \newcommand{\ssr}{Space Science Reviews}
-
+\newcommand{\araa}{Annual Review of Astronomy and Astrophysics}
 % Symbols
 \newcommand{\ydata}{\ensuremath{\boldsymbol{y}}}
 \newcommand{\hyperparams}{\ensuremath{\boldsymbol{\phi}}}
@@ -125,7 +125,7 @@ Two regimes: solar analogues at optical wavelengths lead to space based missions
 
 Mention HABCAT for a catalogue of solar like stars.
 
-Bioactive molecules see reviews of \citet{2016AsBio..16..465S,2017ARA&A..55..433K,2018AsBio..18..663S}.
+Bioactive molecules see reviews of \citet{2016AsBio..16..465S,2017ARAA..55..433K,2018AsBio..18..663S}.
 
 
 \section{Brief history}
@@ -141,13 +141,13 @@ Bioactive molecules see reviews of \citet{2016AsBio..16..465S,2017ARA&A..55..433
 
 
 
-\begin{figure}[ht]
-  \centering
-  \script{interactive_fresnel.ipynb}
-  \includegraphics[width=1.0\linewidth]{figures/test.pdf}
-  \caption{Figure run from a Jupyter notebook.}
-  \label{fig:fresnel}
-\end{figure}
+% \begin{figure}[ht]
+%   \centering
+%   \script{interactive_fresnel.ipynb}
+%   \includegraphics[width=1.0\linewidth]{figures/test.pdf}
+%   \caption{Figure run from a Jupyter notebook.}
+%   \label{fig:fresnel}
+% \end{figure}
 
 
 
@@ -162,7 +162,7 @@ The vast majority of energy from astrophysical objects arrives at our telescopes
 %
 The electromagnetic waves propagate through space by exchanges between the electric and magnetic fields because a changing electric field induces a magnetic field and vice-versa.
 %
-rThis time-dependent interaction is described by Maxwell's equations,
+This time-dependent interaction is described by Maxwell's equations,
 
 \begin{equation}
 \begin{aligned}
@@ -206,7 +206,7 @@ The solution to this equation is the Angular Spectrum Propagator that relates th
 \end{equation}
 Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates. While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight. For many optical systems it is sufficient to analyze the paraxial performance. The paraxial approximation assumes that the plane waves make small angles with respect to the z-axis which means that the x and y wave vector components are $k_x,k_y<<1$. In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$
 \begin{equation}
-\label{eq:angular_spectrum2\textbf{r}}
+\label{eq:angular_spectrum2}
 \mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
 \end{equation}
 %$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
@@ -397,3 +397,4 @@ This research has made use of NASA's Astrophysics Data System Bibliographic Serv
 % \section*{RELATED RESOURCES}
 
 \end{document}
+
