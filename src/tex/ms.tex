@@ -7,6 +7,8 @@
 \usepackage{color}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
+\usepackage{nomencl}
+\makenomenclature
 
 \usepackage{graphbox}
 \newcommand{\suz}[1]{\textcolor{magenta}{#1}}
@@ -44,6 +46,7 @@
 \newcommand{\prl}{Physical Review Letters}
 \newcommand{\prd}{Physical Review D}
 \newcommand{\ssr}{Space Science Reviews}
+\newcommand{\araa}{Annual Review of Astronomy and Astrophysics}
 
 % Symbols
 \newcommand{\ydata}{\ensuremath{\boldsymbol{y}}}
@@ -56,6 +59,13 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 
 \newcommand{\project}[1]{\textsf{#1}}
+
+% Comments:
+\newcommand{\commentehp}[1]{\textcolor{red}{[EHP: #1]}}
+\newcommand{\commentmak}[1]{\textcolor{red}{[MAK: #1]}}
+\newcommand{\commentsyh}[1]{\textcolor{red}{[SYH: #1]}}
+
+\newcommand{\notebooksuggestion}[1]{\textcolor{blue}{[Notebook: #1]}}
 
 % Document starts
 \begin{document}
@@ -109,6 +119,25 @@ This manuscript was prepared using the \project{showyourwork} package\footnote{\
 
 To see the specific version of the \project{Jupyter} notebook, that was executed to generate each figure, click on the icon next to the figure caption.
 
+\section{Science Goals}
+
+Initially developed to image the Sun's corona without the need for a Solar eclipse, one of the most significant science drivers for the latest coronagraphs is in the detection and characterisation of circumstellar material and planets around nearby stars.
+%
+Planetary systems that are closer to the Sun have two benefits: given two identical planetary systems, one that is twice as close as the other will have twice the angular separation between the star and planet, and from the inverse square law, four times more flux is received from the planet.
+
+For direct imaging, therefore, the closest stars to the Sun are the ones that are studied for the presence of directly imaged exoplanets.
+%
+In a volume limited (20 parsecs) sample of stars around the Sun \citep{2023arXiv231203639K}, there are XXXX solar (G2) type stars, and YYYY M-dwarf stars.
+%
+DI young Jupiters look are self-luminous in the NIR, but for terrestrial planets, looking for light reflected from the atmosphere/surface, so subject to inverse square law for planet separation from star.
+
+Two regimes: solar analogues at optical wavelengths lead to space based missions, ground based larger aperture telescopes study M dwarf stars that are on average closer to the Sun, and look in the NIR.
+
+Mention HABCAT for a catalogue of solar like stars.
+
+Bioactive molecules see reviews of \citet{2016AsBio..16..465S,2017ARAA..55..433K,2018AsBio..18..663S}.
+
+
 \section{Brief history}
 
 
@@ -122,13 +151,13 @@ To see the specific version of the \project{Jupyter} notebook, that was executed
 
 
 
-\begin{figure}[ht]
-  \centering
-  \script{interactive_fresnel.ipynb}
-  \includegraphics[width=1.0\linewidth]{figures/test.pdf}
-  \caption{Figure run from a Jupyter notebook.}
-  \label{fig:fresnel}
-\end{figure}
+% \begin{figure}[ht]
+%   \centering
+%   \script{interactive_fresnel.ipynb}
+%   \includegraphics[width=1.0\linewidth]{figures/test.pdf}
+%   \caption{Figure run from a Jupyter notebook.}
+%   \label{fig:fresnel}
+% \end{figure}
 
 
 
@@ -136,10 +165,14 @@ The scientific goal is to image an exoplanet (a planet orbiting a star other tha
 %
 For an Earth analogue with similar radius, albedo and effective temperature orbiting around a solar-type star 10 parsecs away, the typical amount of reflected light in the optical is $10^{-10}$ of the central star at a separation of 0.1 arcseconds at maximum elongation.
 %
-The technical challenge is in separating the  light of the parent star from the light of the planet.
+The technical challenge is in distinguishing the light of the parent star from the light of the planet.
 
 \subsubsection{From Maxwell's Equations to Wavefronts}
-The vast majority of energy from astrophysical objects arrives at our telescopes in the form of electromagnetic radiation. The electromagnetic waves propagate through space by exchanges between the electric and magnetic fields because a changing electric field induces a magnetic field and vice-versa. This time-dependent interaction is described by Maxwell's equations,
+The vast majority of energy from astrophysical objects arrives at our telescopes in the form of electromagnetic radiation.
+%
+The electromagnetic waves propagate through space by exchanges between the electric and magnetic fields because a changing electric field induces a magnetic field and vice-versa.
+%
+This time-dependent interaction is described by Maxwell's equations,
 
 \begin{equation}
 \begin{aligned}
@@ -181,7 +214,11 @@ The solution to this equation is the Angular Spectrum Propagator that relates th
 \label{eq:angular_spectrum}
 \mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
 \end{equation}
-Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates. While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight. For many optical systems the paraxial approximation is sufficient. The paraxial approximation means that the plane waves make small angles with respect to the z-axis, $k_x,k_y<<1$. 
+Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates. While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight. For many optical systems it is sufficient to analyze the paraxial performance. The paraxial approximation assumes that the plane waves make small angles with respect to the z-axis which means that the x and y wave vector components are $k_x,k_y<<1$. In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$
+\begin{equation}
+\label{eq:angular_spectrum2}
+\mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
+\end{equation}
 %$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
 
 %Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
@@ -234,8 +271,38 @@ The coherent superposition of electric fields from different parts of the telesc
 
 \section{Definition of quantities}
 
-\section{Diffraction of simple apertures}
+\nomenclature{$i$}{The imaginary unit}
 
+\nomenclature{$c$}{Speed of light in a vacuum}
+\nomenclature{$\vec{E}$}{Electric field}
+\nomenclature{$\vec{H}$}{Magnetic field}
+\nomenclature{$\mathcal{D}$}{Displacement field}
+\nomenclature{$\mathcal{B}$}{Magnetizing field}
+\nomenclature{$\epsilon$}{Electric permittivity}
+\nomenclature{$\epsilon_0$}{Electric permittivity of vacuum}
+\nomenclature{$\mu$}{Magnetic permittivity}
+\nomenclature{$\mu_0$}{Magnetic permittivity of vacuum}
+\nomenclature{$\omega$}{Wavenumber}
+\nomenclature{$\vec{k}$}{Wavevector}
+
+\nomenclature{$\lambda$}{Wavelength}
+\nomenclature{$\lambda_0$}{Center wavelength in the bandpass}
+%\nomenclature{$\delta\lambda$}{d}
+\nomenclature{$\Delta\lambda$}{The width of the bandpass}
+
+\nomenclature{$D$}{Diameter of the pupil}
+
+\nomenclature{$n$}{(Complex) refractive index of a macroscopic material}
+\nomenclature{$\mathcal{F}_{x,y}[\cdot]$}{Fourier transform operator}
+\nomenclature{$\mathcal{F}^{-1}_{x,y}[\cdot]$}{Inverse Fourier transform operator}
+\nomenclature{$C_\lambda[\cdot]$}{A general coronagraph propagation operator}
+
+\nomenclature{$\Psi_\lambda[\vec{k}]$}{Coronagraphic image}
+
+\printnomenclature
+
+\section{Diffraction of simple apertures}
+\notebooksuggestion{different apertures and geometries}
 
 A square aperture with a side length of $D$ illuminated by light of wavelength $\lambda$ will produce the illumination seen in Figure XXXX.
 %
@@ -246,6 +313,8 @@ The angular distance from the optical axis to the first dark minimum is $\lambda
 For a circular unobstructed telescope aperture, this pattern is referred to as the Airy function.
 
 \section{The Lyot Coronagraph}
+
+\notebooksuggestion{lyot fully adjustable}
 
 The first coronagraph to successfully image a debris disk was a Lyot coronagraph built by \citet{Vilas87} and it imaged the edge-on circumstellar disk around Beta Pictoris in 1984 \citep{Smith84}.
 %
@@ -279,6 +348,9 @@ The optimal diameters of the FPM and Lyot stop aperture are then driven by the s
 
 \section{Complex pupil and focal plane masks}
 
+\notebooksuggestion{general coronagraphs with vortex, app, apodizers....}
+
+
 The Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
 %
 These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
@@ -289,7 +361,7 @@ A wide range of coronagraph designs were explored, including XXXXX focal plane, 
 %
 MENTION interferometer concepts.
 
-All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars.
+All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars. \commentehp{In the visible, median stars for HWO are going to be $\lambda/10$, with some a little larger.}
 %
 
 
@@ -301,21 +373,29 @@ All stars have small but finite angular diameter on the sky, typically $\lambda/
 \lipsum[2-4]
 
 \section{Two approaches: ground and ELT for M dwarf}
+
+\notebooksuggestion{play with different contrasts and IWA to see yields}
+
 \lipsum[2-4]
 
 \section{Space coronagraphs and HWO for G type stars}
 \lipsum[2-4]
 
 \section{Polarization effects} 
+\notebooksuggestion{Polarimetric beam shift using Fresnel equation - Change angle of incidence and show differential beam shift.}
 \lipsum[2-4]
 
 \section{PIAA}
+\notebooksuggestion{How do you make a PIAA surface? And show improved performance w.r.t. standard lyot coronagraph.}
 \lipsum[2-4]
 
 \section{Coronagraphic wavefront sensing}
 \lipsum[2-4]
 
 \section{Focal plane wavefront sensing}
+
+\notebooksuggestion{Simple dark hole generation with predefined shapes - can use the new autodiff approach.}
+
 \lipsum[2-4]
 
 \section{rejected light wavefront sensing} 
@@ -337,6 +417,8 @@ All stars have small but finite angular diameter on the sky, typically $\lambda/
 \lipsum[2-4]
 
 \section{Post-processing (its no longer a photon)}
+
+\notebooksuggestion{KLIP with removing varying number of modes and annular rings.}
 
 \lipsum[2-4]
 
