@@ -7,6 +7,8 @@
 \usepackage{color}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
+\usepackage{nomencl}
+\makenomenclature
 
 \usepackage{graphbox}
 \newcommand{\suz}[1]{\textcolor{magenta}{#1}}
@@ -45,6 +47,7 @@
 \newcommand{\prd}{Physical Review D}
 \newcommand{\ssr}{Space Science Reviews}
 \newcommand{\araa}{Annual Review of Astronomy and Astrophysics}
+
 % Symbols
 \newcommand{\ydata}{\ensuremath{\boldsymbol{y}}}
 \newcommand{\hyperparams}{\ensuremath{\boldsymbol{\phi}}}
@@ -56,6 +59,13 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 
 \newcommand{\project}[1]{\textsf{#1}}
+
+% Comments:
+\newcommand{\commentehp}[1]{\textcolor{red}{[EHP: #1]}}
+\newcommand{\commentmak}[1]{\textcolor{red}{[MAK: #1]}}
+\newcommand{\commentsyh}[1]{\textcolor{red}{[SYH: #1]}}
+
+\newcommand{\notebooksuggestion}[1]{\textcolor{blue}{[Notebook: #1]}}
 
 % Document starts
 \begin{document}
@@ -261,8 +271,38 @@ The coherent superposition of electric fields from different parts of the telesc
 
 \section{Definition of quantities}
 
-\section{Diffraction of simple apertures}
+\nomenclature{$i$}{The imaginary unit}
 
+\nomenclature{$c$}{Speed of light in a vacuum}
+\nomenclature{$\vec{E}$}{Electric field}
+\nomenclature{$\vec{H}$}{Magnetic field}
+\nomenclature{$\mathcal{D}$}{Displacement field}
+\nomenclature{$\mathcal{B}$}{Magnetizing field}
+\nomenclature{$\epsilon$}{Electric permittivity}
+\nomenclature{$\epsilon_0$}{Electric permittivity of vacuum}
+\nomenclature{$\mu$}{Magnetic permittivity}
+\nomenclature{$\mu_0$}{Magnetic permittivity of vacuum}
+\nomenclature{$\omega$}{Wavenumber}
+\nomenclature{$\vec{k}$}{Wavevector}
+
+\nomenclature{$\lambda$}{Wavelength}
+\nomenclature{$\lambda_0$}{Center wavelength in the bandpass}
+%\nomenclature{$\delta\lambda$}{d}
+\nomenclature{$\Delta\lambda$}{The width of the bandpass}
+
+\nomenclature{$D$}{Diameter of the pupil}
+
+\nomenclature{$n$}{(Complex) refractive index of a macroscopic material}
+\nomenclature{$\mathcal{F}_{x,y}[\cdot]$}{Fourier transform operator}
+\nomenclature{$\mathcal{F}^{-1}_{x,y}[\cdot]$}{Inverse Fourier transform operator}
+\nomenclature{$C_\lambda[\cdot]$}{A general coronagraph propagation operator}
+
+\nomenclature{$\Psi_\lambda[\vec{k}]$}{Coronagraphic image}
+
+\printnomenclature
+
+\section{Diffraction of simple apertures}
+\notebooksuggestion{different apertures and geometries}
 
 A square aperture with a side length of $D$ illuminated by light of wavelength $\lambda$ will produce the illumination seen in Figure XXXX.
 %
@@ -273,6 +313,8 @@ The angular distance from the optical axis to the first dark minimum is $\lambda
 For a circular unobstructed telescope aperture, this pattern is referred to as the Airy function.
 
 \section{The Lyot Coronagraph}
+
+\notebooksuggestion{lyot fully adjustable}
 
 The first coronagraph to successfully image a debris disk was a Lyot coronagraph built by \citet{Vilas87} and it imaged the edge-on circumstellar disk around Beta Pictoris in 1984 \citep{Smith84}.
 %
@@ -306,6 +348,9 @@ The optimal diameters of the FPM and Lyot stop aperture are then driven by the s
 
 \section{Complex pupil and focal plane masks}
 
+\notebooksuggestion{general coronagraphs with vortex, app, apodizers....}
+
+
 The Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
 %
 These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
@@ -316,7 +361,7 @@ A wide range of coronagraph designs were explored, including XXXXX focal plane, 
 %
 MENTION interferometer concepts.
 
-All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars.
+All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars. \commentehp{In the visible, median stars for HWO are going to be $\lambda/10$, with some a little larger.}
 %
 
 
@@ -328,21 +373,29 @@ All stars have small but finite angular diameter on the sky, typically $\lambda/
 \lipsum[2-4]
 
 \section{Two approaches: ground and ELT for M dwarf}
+
+\notebooksuggestion{play with different contrasts and IWA to see yields}
+
 \lipsum[2-4]
 
 \section{Space coronagraphs and HWO for G type stars}
 \lipsum[2-4]
 
 \section{Polarization effects} 
+\notebooksuggestion{Polarimetric beam shift using Fresnel equation - Change angle of incidence and show differential beam shift.}
 \lipsum[2-4]
 
 \section{PIAA}
+\notebooksuggestion{How do you make a PIAA surface? And show improved performance w.r.t. standard lyot coronagraph.}
 \lipsum[2-4]
 
 \section{Coronagraphic wavefront sensing}
 \lipsum[2-4]
 
 \section{Focal plane wavefront sensing}
+
+\notebooksuggestion{Simple dark hole generation with predefined shapes - can use the new autodiff approach.}
+
 \lipsum[2-4]
 
 \section{rejected light wavefront sensing} 
@@ -364,6 +417,8 @@ All stars have small but finite angular diameter on the sky, typically $\lambda/
 \lipsum[2-4]
 
 \section{Post-processing (its no longer a photon)}
+
+\notebooksuggestion{KLIP with removing varying number of modes and annular rings.}
 
 \lipsum[2-4]
 
