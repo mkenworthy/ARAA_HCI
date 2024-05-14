@@ -209,7 +209,7 @@ This differential equation can be solved by assuming a plane wave expansion $\ma
 \begin{equation}
 \frac{\partial^2\mathcal{E}}{\partial z^2} = -(n^2k^2 - k_{\perp}^2)\mathcal{E}.
 \end{equation}
-The solution to this equation is the Angular Spectrum Propagator that relates the electric field at any one plane to the electric field at any other,
+The solution to this equation is the so called Angular Spectrum Propagator that relates the electric field at any one plane to the electric field at any other,
 \begin{equation}
 \label{eq:angular_spectrum}
 \mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
@@ -217,7 +217,7 @@ The solution to this equation is the Angular Spectrum Propagator that relates th
 Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates. While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight. For many optical systems it is sufficient to analyze the paraxial performance. The paraxial approximation assumes that the plane waves make small angles with respect to the z-axis which means that the x and y wave vector components are $k_x,k_y<<1$. In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$
 \begin{equation}
 \label{eq:angular_spectrum2}
-\mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
+\mathcal{E}(x, y, z') = e^{-ink(z'-z)} \mathcal{F}_{x,y}^{-1}\{\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
 \end{equation}
 %$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
 
@@ -315,6 +315,7 @@ For a circular unobstructed telescope aperture, this pattern is referred to as t
 \section{The Lyot Coronagraph}
 
 \notebooksuggestion{lyot fully adjustable}
+Stellar coronagraphs have now been in use for several decades. However, the first coronagraph was developed by Bernard Lyot to observe the corona of the Sun in the 1930s. It took over half a century before astronomers applied coronagraphs to image the faint cirumstellar environment by blocking starlight. 
 
 The first coronagraph to successfully image a debris disk was a Lyot coronagraph built by \citet{Vilas87} and it imaged the edge-on circumstellar disk around Beta Pictoris in 1984 \citep{Smith84}.
 %
@@ -349,11 +350,10 @@ The optimal diameters of the FPM and Lyot stop aperture are then driven by the s
 \section{Complex pupil and focal plane masks}
 
 \notebooksuggestion{general coronagraphs with vortex, app, apodizers....}
-
-
-The Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
+Lyot coronagraphs only block light that falls on the opaque focal plane masks. Any light that is off-axis will pass through the system. This holds not only for light that comes from off-axis sources but also for aberrations that causes light to end up outside of the mask. All ground-based telescopes need to image through Earth's atmosphere. The turbulent nature of the atmosphere causes aberrations that degrade the imaging qualities of the telescope. In such conditions, it is very difficult to optimally reject starlight because what electric field actually needs to be rejected? Is it the electric field that is measured now, or the differently aberrated electric field 20 milliseconds from now? The constantly changing electric field of the incoming light made it difficult to create more advanced coronagraphs. The classic Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
 %
 These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
+
 %
 After the discovery of Gliese 229B (XXX CHECK WAS THIS A LYOT?) with the Palomar 5m PALM 5000 system, a series of coronagraphic designs appeared where researchers explored the different possibilities of placing complex amplitude apodizers at both the focal plane and pupil plane locations.
 %
@@ -361,7 +361,7 @@ A wide range of coronagraph designs were explored, including XXXXX focal plane, 
 %
 MENTION interferometer concepts.
 
-All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars. \commentehp{In the visible, median stars for HWO are going to be $\lambda/10$, with some a little larger.}
+All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars. \commentehp{In the visible, median stars for HWO are going to be $\lambda/10$, with some a little larger.} \commentsyh{And for GMT and ELT some are even going to be bigger. Prox Cen is 1 mas which is 1/3 to 1/6 of lambda/D for ELT and GMT.}
 %
 
 
