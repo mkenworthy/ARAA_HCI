@@ -1,6 +1,7 @@
 from hcipy import *
 import numpy as np
 from matplotlib import pyplot as plt
+import paths
 
 if __name__ == "__main__":
 	# Making the grids
@@ -43,4 +44,5 @@ if __name__ == "__main__":
 	plt.text(np.pi, -1., 'phase (rad)', horizontalalignment='center')
 
 	fig.colorbar(im, cax=cbar_ax, orientation='horizontal')
-	plt.show()
+
+	plt.savefig(paths.figures / 'scale_invariant_masks.pdf')

@@ -299,6 +299,9 @@ The coherent superposition of electric fields from different parts of the telesc
 \nomenclature{$C_\lambda[\cdot]$}{A general coronagraph propagation operator}
 
 \nomenclature{$\Psi_\lambda[\vec{k}]$}{Coronagraphic image}
+\nomenclature{$\phi$}{The phase of the electric field}
+\nomenclature{$\alpha$}{The amplitude of the electric field}
+\nomenclature{$\Pi$}{The telescope pupil function.}
 
 \printnomenclature
 
@@ -322,53 +325,63 @@ The first coronagraph to successfully image a debris disk was a Lyot coronagraph
 %
 The optical layout of the Lyot coronagraph can be generalised in Figure XXXXX, with the letters A-F representing the images present at that location in the coronagraph light path.
 %
-The telescope pupil (A) is reimaged into a focal plane of the sky (B) where an opaque mask that has high absorptivity and low reflectivity, typically anodized aluminium or another material painted black, blocks the light from any on-axis source (C).
+The telescope pupil (A) is reimaged into a focal plane of the sky (B) where an opaque mask that has high absorptivity and low reflectivity blocks the light from any on-axis source (C).
 %
 Optics then form an image of the resultant pupil (D) to an intermediate pupil plane, where a second opaque mask - the Lyot stop - is located.
 %
-This Lyot stop blocks the outer ring of light in the pupil (E).
+This Lyot stop blocks the diffracted light of the star - now forming a ring of light along the outer edge of the telescope pupil (E).
 %
-A second optical relay system then reimages the resultant focal plane of the instrument onto a detector (F).
+A second optical system then reimages the resultant focal plane of the instrument onto a detector (F).
 %
 %When an object is placed behind the focal plane mask, the light from that object is blocked and does not go any further.
 %
 Any circumstellar objects outside the radius of the focal plane mask then pass through unimpeded through the coronagraph and are subsequently reimaged in the detector focal plane at F.
-
-For off axis sources, the light rays passes through the coronagraph optics to form an image at F with only minor modification: the reimaged pupil at D is superficially very similar to the telescope pupil A.
 %
+The light rays pass through the coronagraph optics to form an image at F with only minor modification: the reimaged pupil at D is superficially very similar to the telescope pupil A.
+
 For an on-axis source, the removal of the Airy core plus attendant diffraction rings significantly modifies the wavefront passing through the coronagraph, resulting in a flux redistribution at D where the flux is concentrated in a ring whose peak brightness lies along the perimeter of the reimaged telescope pupil, extending both beyond the radius of the pupil and into the centre of the pupil.
 
-The purpose of the Lyot stop is to remove as much of this ring of light as possible, whilst maximising the throughput of the pupil image for off-axis sources.
+The purpose of the Lyot stop is to remove as much of this ring of light as possible, whilst maximising the throughput of the pupil image D for off-axis sources.
 %
 Adjusting the diameter of the focal plane mask changes the full width half maximum of the ring of light at D, which requires a smaller Lyot stop to block - but then the throughput of the pupil for off-axis sources then decreases.
 %
-Decreasing the Lyot stop aperture has a second impact in that the reduced pupil diameter increases the FWHM of the images in the final focal plane F, spreading the flux from the off-axis sources over a larger area in the detector and degrading the angular resolution of the telescope and instrument.
+Decreasing the Lyot stop aperture has a second impact in that the reduced pupil diameter increases the Full Width Half Maximum (FWHM) of the images in the final focal plane F, spreading the flux from the off-axis sources over a larger area in the detector and degrading the angular resolution of the telescope and instrument.
 %
-The optimal diameters of the FPM and Lyot stop aperture are then driven by the science requirements - how close to the central star (measured in diffraction widths at the lower spatial resolution) should the coronagraph be able to transmit light from off-axis objects in the field of view.
+The optimal diameters of the Focal Plane Mask (FPM) and Lyot stop aperture are then driven by the science requirements - how close to the central star (measured in diffraction widths at the lower spatial resolution) should the coronagraph be able to transmit light from off-axis objects in the field of view.
 
 
 
-\section{Complex pupil and focal plane masks}
+\section{Focal plane phase mask coronagraphs}
+The Lyot coronagraph was designed at the time when it was still difficult to precisely manipulated the phase of light with optics. With the advent of more advanced manufacturing capabilities, very precise phase control became possible. This was a significant boost to the design toolbox for coronagraphs. The major downside of the classic Lyot coronagraph is that only the light that falls on the opaque focal plane masks gets blocked. Any light that is off-axis will pass through the system. This holds not only for light that comes from off-axis sources but also for aberrations that causes light to end up outside of the mask. A bigger mask will be able to block a larger fraction of the light and therefore achieve a deeper contrast. However, if the mask is made larger the inner-working angle also becomes bigger and that means fewer planets will be accessible. A smaller inner-working angle is crucial both for the extremely large ground-based telescopes and the space-based telescopes. 
 
-\notebooksuggestion{general coronagraphs with vortex, app, apodizers....}
-Lyot coronagraphs only block light that falls on the opaque focal plane masks. Any light that is off-axis will pass through the system. This holds not only for light that comes from off-axis sources but also for aberrations that causes light to end up outside of the mask. All ground-based telescopes need to image through Earth's atmosphere. The turbulent nature of the atmosphere causes aberrations that degrade the imaging qualities of the telescope. In such conditions, it is very difficult to optimally reject starlight because what electric field actually needs to be rejected? Is it the electric field that is measured now, or the differently aberrated electric field 20 milliseconds from now? The constantly changing electric field of the incoming light made it difficult to create more advanced coronagraphs. The classic Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
+Focal plane phase masks offer a solution. Phase masks don't enhance the contrast by blocking light but by phase shifting a part of the PSF (usually the core of the PSF). The phase shifted part then causes destructive interference at the Lyot plane. The Lyot stop blocks the areas where the light does not destructively interferes. The 50\% encircled energy radius is on the order of $\sim \lambda/D$ for almost all aperture shapes. This means that it is possible to achieve perfect destructive interference with a mask that has a size on the order of $\lambda/D$. This is the central idea that was used to design the Roddier and Roddier (RR) phase mask \cite{roddier1997stellar}. The RR mask covers the core of the Airy pattern that contains 50\% of the encircled energy and phase shifts the core by $\pi$ to cause destructive interference. The RR mask works well for monochromatic light. However, over broad spectral bandwidths it degrades in contrast. Diffraction causes wavelength scaling of the PSF that either makes the focal plane mask too big or too small compared to the PSF. Masks made out of multiple concentric rings, such as the dual-zone phase mask \cite{soummer2003achromatic}, were proposed to increase the spectral bandwidth.
+
+Further achromatization for larger spectral bandwidths is possible by designing inherent achromatic phase masks. Inherent achromatic masks are scale invariant, which means that they always look the same regardless of the size of the PSF. One of the most used phase mask coronagraphs is the vortex coronagraph (VC). The VC uses a phase mask with a vortex pattern where the phase changes with the azimutal angle: $\phi=q \cdot \theta$ with $q$ the charge, i.e. the number of times the phase wraps around, of the vortex and $\theta$ the azimuth angle. Two examples of scale invariant phase masks are shown in Figure \ref{fig:scale_invariant}.
+
+\begin{figure}[ht]
+  \centering
+  \script{plot_scale_invariant_masks.py}
+  \includegraphics[width=1.0\linewidth]{figures/scale_invariant_masks.pdf}
+  \caption{Figure run from a static Python script.}
+  \label{fig:scale_invariant}
+\end{figure}
+
+
+%All ground-based telescopes need to image through Earth's atmosphere. The turbulent nature of the atmosphere causes aberrations that degrade the imaging qualities of the telescope. In such conditions, it is very difficult to optimally reject starlight because what electric field actually needs to be rejected? Is it the electric field that is measured now, or the differently aberrated electric field 20 milliseconds from now? The constantly changing electric field of the incoming light made it difficult to create more advanced coronagraphs. The classic Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
 %
-These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
+%These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
 
 %
-After the discovery of Gliese 229B (XXX CHECK WAS THIS A LYOT?) with the Palomar 5m PALM 5000 system, a series of coronagraphic designs appeared where researchers explored the different possibilities of placing complex amplitude apodizers at both the focal plane and pupil plane locations.
+%After the discovery of Gliese 229B (XXX CHECK WAS THIS A LYOT?) with the Palomar 5m PALM 5000 system, a series of coronagraphic designs appeared where researchers explored the different possibilities of placing complex amplitude apodizers at both the focal plane and pupil plane locations.
 %
-A wide range of coronagraph designs were explored, including XXXXX focal plane, pupil plane, telephone list of all different coronagraphs.
+%A wide range of coronagraph designs were explored, including XXXXX focal plane, pupil plane, telephone list of all different coronagraphs.
 %
-MENTION interferometer concepts.
+%MENTION interferometer concepts.
 
-All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars. \commentehp{In the visible, median stars for HWO are going to be $\lambda/10$, with some a little larger.} \commentsyh{And for GMT and ELT some are even going to be bigger. Prox Cen is 1 mas which is 1/3 to 1/6 of lambda/D for ELT and GMT.}
+%All stars have small but finite angular diameter on the sky, typically $\lambda/100$ or less but $\lambda/10$ is possible for the closest stars. \commentehp{In the visible, median stars for HWO are going to be $\lambda/10$, with some a little larger.} \commentsyh{And for GMT and ELT some are even going to be bigger. Prox Cen is 1 mas which is 1/3 to 1/6 of lambda/D for ELT and GMT.}
 %
 
-
-
-
-\lipsum[2-4]
+%\lipsum[2-4]
 
 \section{Parameters to optimize}
 \lipsum[2-4]
