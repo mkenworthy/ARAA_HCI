@@ -29,13 +29,15 @@ def f(f):
 # three x postions, three angles
 fp1 = np.array([[0.1, 0.1, 0.1, 0.0, 0.0, 0.0,-0.1,-0.1,-0.1],[-0.1,0.0,0.1,-0.1,0.0,0.1, -0.1,0.0,0.1]])
 
-to_lens1 = np.matmul(s(5),fp1)
+dx = 5
 
-lens1 = np.matmul(f(5),to_lens1)
-to_pp1 = np.matmul(s(5),lens1)
-to_lens2 = np.matmul(s(5),to_pp1)
-lens2 = np.matmul(f(5),to_lens2)
-to_fp2 = np.matmul(s(5),lens2)
+to_lens1 = np.matmul(s(dx),fp1)
+
+lens1 = np.matmul(f(dx),to_lens1)
+to_pp1 = np.matmul(s(dx),lens1)
+to_lens2 = np.matmul(s(dx),to_pp1)
+lens2 = np.matmul(f(dx),to_lens2)
+to_fp2 = np.matmul(s(dx),lens2)
 
 print(fp1)
 print(to_lens1)
@@ -47,6 +49,11 @@ print(to_fp2.shape)
 rays = np.stack((fp1,to_lens1,to_pp1,to_lens2,to_fp2))
 
 print(rays.shape)
+
+# pull out the y positions of the rays at each optical element
+plt.plot(rays[:,0,:])
+
+plt.show()
 
 quit() 
 
