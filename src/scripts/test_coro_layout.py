@@ -26,32 +26,51 @@ def f(f):
     	[-1/f, 1]])
 
 
-# three x postions, three angles
-fp1 = np.array([[0.1, 0.1, 0.1, 0.0, 0.0, 0.0,-0.1,-0.1,-0.1],[-0.1,0.0,0.1,-0.1,0.0,0.1, -0.1,0.0,0.1]])
+def make_coro_rays(fp1, dx=5):
 
-dx = 5
+	to_lens1 = np.matmul(s(dx),fp1)
+	lens1 = np.matmul(f(dx),to_lens1)
+	to_pp1 = np.matmul(s(dx),lens1)
+	to_lens2 = np.matmul(s(dx),to_pp1)
+	lens2 = np.matmul(f(dx),to_lens2)
+	to_fp2 = np.matmul(s(dx),lens2)
 
-to_lens1 = np.matmul(s(dx),fp1)
+	rays = np.stack((fp1,to_lens1,to_pp1,to_lens2,to_fp2))
 
-lens1 = np.matmul(f(dx),to_lens1)
-to_pp1 = np.matmul(s(dx),lens1)
-to_lens2 = np.matmul(s(dx),to_pp1)
-lens2 = np.matmul(f(dx),to_lens2)
-to_fp2 = np.matmul(s(dx),lens2)
+	# pull out the y positions of the rays at each optical element
+	ray = rays[:,0,:]
 
-print(fp1)
-print(to_lens1)
-print(lens1)
-print(to_pp1)
+	return ray
 
-print(to_fp2.shape)
 
-rays = np.stack((fp1,to_lens1,to_pp1,to_lens2,to_fp2))
 
-print(rays.shape)
 
-# pull out the y positions of the rays at each optical element
-plt.plot(rays[:,0,:])
+
+# fan of rays from a single point
+thetas = np.linspace(-0.1,0.1,13)
+x = np.zeros_like(thetas)+0.1
+fp1 = np.vstack((x,thetas))
+
+# draw all the rays through the coronagraph
+ray = make_coro_rays(fp1)
+
+xpos = np.arange(ray.shape[0])
+
+plt.plot(xpos,ray,color='red',alpha=0.5)
+
+
+plt.plot(xpos[2:],ray[2:],color='red',alpha=0.5)
+
+pupmax = 0.4
+
+clipped = (np.abs(ray[2])<pupmax)
+
+print(ray[2:][:,clipped])
+t = ray[2:]
+
+
+
+plt.plot(xpos[2:],t[:,clipped], color='blue', alpha=0.5)
 
 plt.show()
 
