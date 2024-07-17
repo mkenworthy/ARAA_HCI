@@ -6,25 +6,37 @@
 \usepackage{amsmath}
 \usepackage{color}
 \usepackage{hyperref}
-\hypersetup{hidelinks}
+
+%\hypersetup{colorlinks=true,allcolors=[rgb]{0,0,0.8}}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be black
+  linkcolor=blue,% hyperlink borders will be red
+  anchorcolor=blue,
+  citecolor=blue,
+  menucolor=blue,
+  urlcolor=blue,
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+
+\newcommand{\kms}{km~s$^{-1}$}
+\newcommand{\mum}{$\mu$m}
+
 \usepackage{nomencl}
 \makenomenclature
 
 \usepackage{graphbox}
-\newcommand{\suz}[1]{\textcolor{magenta}{#1}}
-\newcommand{\dan}[1]{\textcolor{green}{#1}}
 
 \setcounter{secnumdepth}{4}
 \usepackage{url}
 
-
 \usepackage{lipsum}  
-
 
 % Metadata Information
 \jname{Annu. Rev. Astron. Astrophys.}
 \jvol{AA}
-\jyear{2024}
+\jyear{2025}
 \doi{10.1146/TBD}
 
 % autoref formatting
@@ -35,6 +47,8 @@
 % macros
 \newcommand{\apjl}{Astrophysical Journal Letters}
 \newcommand{\aj}{Astronomical Journal}
+\newcommand{\ao}{Applied Optics}
+\newcommand{\procspie}{SPIE Proceedings}
 \newcommand{\apj}{Astrophysical Journal}
 \newcommand{\apjs}{Astrophysical Journal Supplement}
 \newcommand{\pasp}{Publications of the Astronomical Society of the Pacific}
@@ -67,11 +81,22 @@
 
 \newcommand{\notebooksuggestion}[1]{\textcolor{blue}{[Notebook: #1]}}
 
+% message://%3cBYAPR04MB46634305E3091DE92934A5BA8225A@BYAPR04MB4663.namprd04.prod.outlook.com%3e
+
+% Manuscript due date:  September 15, 2024
+% Article allotment: 18,000 words, 200 references
+% (Estimate the sizes of small figures/tables at 300 words and large ones at 600 words; thus, for every figure/table submitted, please subtract the corresponding number of words from your total allotment. An article length estimator is available online at http://www.annualreviews.org/page/authors/general-information; to access it, select the name of your journal from the drop-down list under Article Preparation and Submission.)  
+
+% Your review article should present a critical appraisal of the significant, rather than the total, literature in the field. This overview may include your own work (even if unpublished). The article should be useful to specialists as well as teachers and scholars from other areas.  It should emphasize where research in a given area should go, as well as where it has been, such that it will influence the future course of knowledge. A list of topics and authors planned for Volume 63 will be sent to you approximately five months before the manuscript due date, and you may wish to correspond with authors whose subjects border on your own.
+
+
 % Document starts
 \begin{document}
 
 % Page header
 \markboth{Kenworthy \& others}{HCI}
+
+%TC:ignore
 
 % Title
 \title{High Contrast Imaging}
@@ -102,6 +127,7 @@ High Contrast Imaging will enable the direct detection of photons from rocky ter
 
 % High contrast imaging, Lyot corongraph, 2000's development
 
+%TC:endignore
 
 In this review, we provide interactive notebooks that enable the reader to build up their intuition on how coronagraphs work along with wavefront sensing both in the pupil and the focal planes, and how we will tackle the challenges in reaching the contrasts of $10^{-10}$ at angular separations of less than one arcsecond that are required.
 
@@ -352,21 +378,38 @@ The optimal diameters of the Focal Plane Mask (FPM) and Lyot stop aperture are t
 
 
 \section{Focal plane phase mask coronagraphs}
-The Lyot coronagraph was designed at the time when it was still difficult to precisely manipulated the phase of light with optics. With the advent of more advanced manufacturing capabilities, very precise phase control became possible. This was a significant boost to the design toolbox for coronagraphs. The major downside of the classic Lyot coronagraph is that only the light that falls on the opaque focal plane masks gets blocked. Any light that is off-axis will pass through the system. This holds not only for light that comes from off-axis sources but also for aberrations that causes light to end up outside of the mask. A bigger mask will be able to block a larger fraction of the light and therefore achieve a deeper contrast. However, if the mask is made larger the inner-working angle also becomes bigger and that means fewer planets will be accessible. A smaller inner-working angle is crucial both for the extremely large ground-based telescopes and the space-based telescopes. 
+The Lyot coronagraph was designed at the time when it was still difficult to precisely manipulated the phase of light with optics.
+%
+With the advent of more advanced manufacturing capabilities, very precise phase control became possible.
+%
+This was a significant boost to the design toolbox for coronagraphs.
+%
+The major downside of the classic Lyot coronagraph is that only the light that falls on the opaque focal plane masks gets blocked.
+%
+Any light that is off-axis will pass through the system.
+%
+This holds not only for light that comes from off-axis sources but also for aberrations that causes light to end up outside of the mask.
+%
+A bigger mask will be able to block a larger fraction of the light and therefore achieve a deeper contrast.
+%
+However, if the mask is made larger the inner-working angle also becomes bigger and that means fewer planets will be accessible.
+%
+A smaller inner-working angle is crucial both for the extremely large ground-based telescopes and the space-based telescopes. 
 
 Focal plane phase masks offer a solution. Phase masks don't enhance the contrast by blocking light but by phase shifting a part of the PSF (usually the core of the PSF). The phase shifted part then causes destructive interference at the Lyot plane. The Lyot stop blocks the areas where the light does not destructively interferes. The 50\% encircled energy radius is on the order of $\sim \lambda/D$ for almost all aperture shapes. This means that it is possible to achieve perfect destructive interference with a mask that has a size on the order of $\lambda/D$. This is the central idea that was used to design the Roddier and Roddier (RR) phase mask \cite{roddier1997stellar}. The RR mask covers the core of the Airy pattern that contains 50\% of the encircled energy and phase shifts the core by $\pi$ to cause destructive interference. The RR mask works well for monochromatic light. However, over broad spectral bandwidths it degrades in contrast. Diffraction causes wavelength scaling of the PSF that either makes the focal plane mask too big or too small compared to the PSF. Masks made out of multiple concentric rings, such as the dual-zone phase mask \cite{soummer2003achromatic}, were proposed to increase the spectral bandwidth.
 
-Further achromatization for larger spectral bandwidths is possible by designing inherent achromatic phase masks. Inherent achromatic masks are scale invariant, which means that they always look the same regardless of the size of the PSF. One of the most used phase mask coronagraphs is the vortex coronagraph (VC). The VC uses a phase mask with a vortex pattern where the phase changes with the azimutal angle: $\phi=q \cdot \theta$ with $q$ the charge, i.e. the number of times the phase wraps around, of the vortex and $\theta$ the azimuth angle. Two examples of scale invariant phase masks are shown in Figure \ref{fig:scale_invariant}.
+Further achromatization for larger spectral bandwidths is possible by designing inherent achromatic phase masks. Inherent achromatic masks are scale invariant, which means that they always look the same regardless of the size of the PSF. One of the most used phase mask coronagraphs is the vortex coronagraph (VC). The VC uses a phase mask with a vortex pattern where the phase changes with the azimutal angle: $\phi=q \cdot \theta$ with $q$ the charge, i.e. the number of times the phase wraps around, of the vortex and $\theta$ the azimuth angle. Another example is the Four Quadrant Phase Mask (FQPM). The FQPM splits the focal plane in four quadrants and applies a checkerboard phase pattern. The scale invariant phase masks of these two coronagraphs are shown in Figure \ref{fig:scale_invariant}.
 
 \begin{figure}[ht]
   \centering
   \script{plot_scale_invariant_masks.py}
-  \includegraphics[width=1.0\linewidth]{figures/scale_invariant_masks.pdf}
-  \caption{Figure run from a static Python script.}
+  \includegraphics[width=0.5\linewidth]{figures/scale_invariant_masks.pdf}
+  \caption{The focal plane phase functions of two scale invariant coronagraphs. The left figure shows the four quadrant phase mask and the right figure shows the optical vortex phase mask.}
   \label{fig:scale_invariant}
 \end{figure}
 
-
+Both phase masks that are shown in Figure \ref{fig:scale_invariant} completely null out all on-axis light from a clear aperture. This property is why both the FQPM and the OVC have been extensively studied over the past several decades. The inner-working angle of both coronagraph approaches 1 $\lambda/D$ which makes coronagraphy possible at the diffraction limit! The FQPM has been implemented on SPHERE [CITE SPHERE PAPER] and is currently the coronagraph on JWST with the smallest inner-working angle and has been recently used to characterize a planet at 1.8 $\lambda/D$ \cite{franson2024jwst}. 
+ 
 %All ground-based telescopes need to image through Earth's atmosphere. The turbulent nature of the atmosphere causes aberrations that degrade the imaging qualities of the telescope. In such conditions, it is very difficult to optimally reject starlight because what electric field actually needs to be rejected? Is it the electric field that is measured now, or the differently aberrated electric field 20 milliseconds from now? The constantly changing electric field of the incoming light made it difficult to create more advanced coronagraphs. The classic Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
 %
 %These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
@@ -383,56 +426,411 @@ Further achromatization for larger spectral bandwidths is possible by designing 
 
 %\lipsum[2-4]
 
-\section{Parameters to optimize}
-\lipsum[2-4]
+%FINISH 2 SENTENCES SH 
 
-\section{Two approaches: ground and ELT for M dwarf}
+\section{Parameters to optimize}
+As the previous section explained, clear apertures have solutions that perfectly remove any on-axis light. However, real systems are not ideal and generally don't have a clear aperture. Even more important, stars are not ideal point sources. Solutions that only work for point sources are already out of the question then. The current and future generation of coronagraphs are designed to take on non-ideal environments. This means that the coronagraph is optimized for a specific list of parameters during the design process.
+
+The first set of parameters are the inner-working angle (IWA) and the outer-working angle (OWA). The IWA is usually set to the angular separation where the throughput is 50\% of the peak off-axis throughput. The IWA and OWA set the smallest and largest angular separation of the dark hole region that the coronagraph will make. Some coronagraphs, such as the OVC or FQPM, don't have an OWA only an IWA. Figure \ref{fig:coronagraph_focal_plane_definitions} shows a coronagraphic dark hole with the definition of the IWA and OWA.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\linewidth]{figures/dark_hole_definition.png}
+  \caption{ADD caption \textcolor{red}{TODO: replace with our figure instead of Emiel's}}
+  \label{fig:coronagraph_focal_plane_definitions}
+\end{figure}
+
+The contrast and throughput are the next set of parameters that we need to optimize for. The contrast sets the amount of starlight that is left after the coronagraph. It is important to define the term contrast as this can mean many different things. \citeauthor{ruane2018review} provide a thorough overview of the different metrics and their definition. The contrast is defined as
+\begin{equation}
+C = \frac{\eta_*(\vec{r})}{\eta_p(\vec{r})}.
+\end{equation}
+Here $\eta_*(\vec{r})$ is the fractional throughput of the star at focal plane position $\vec{r}$ integrated over a photometric aperture. This is then divided by $\eta_p(\vec{r})$ the fractional throughput of the planet in the same photometric aperture. This normalizes the contrast w.r.t. the throughput of the planet, which is important because the planet throughput usually varies as function of angular separation. Both the contrast $C$ and $\eta_p(\vec{r})$ need to be included in the optimization process. The first to make sure that the starlight is nulled and the second to make sure that the planet light is maintained. This optimization has to be done over a certain spectral bandwidth $\Delta \lambda$.
+
+The corongraphs that are designed with only the previous set of optimization targets are not optimal in real environments. In real instrument environments there are wavefront aberrations and small instrumental drifts. These cause light to leak around the coronagraph and cause residual stellar speckles. The coronagraphs must be made robust against low-order wavefront errors and other instrumental drifts. Other more practical things to consider are the precision with which we can align an instrument. For example, how well can the Lyot Stop be aligned? The performance of a coronagraph might be extremely sensitive to the Lyot stop alignment, which means that theoretically the coronagraph delivers the contrast but practically it will never reach it. Therefore, alignment tolerancing must be included in the coronagraph design to make sure the target performance is achieved.
+
+In this way, there are many other nuisance parameters that can be included. However, the numerical optimization will take significantly longer if more parameters are included. A good coronagraph designer will therefore make a trade-off between which parameters are required, good to have and not significant.
+
+
+\section{Direct Imaging of Terrestrial Exoplanets}
+
+{\bf TODO MAK}
+
+
+The conceptual design of GMagAO-X by \citet{Males22}.
+
+Lives of speckles by \citet{Males21}.
+
+Jared's AO4 ELT paper was a good talk, but this is the argument to limit to 30 parsec.
+
+Fundamental sensitivity limite on apertures with PIAA-ZWFS on \citet{Haffert23}
+
+Haffert 2023 talk mentioned this ore we can talk about it below:
+
+Diffraction limit of telescope is almost fundamental limit. The HZ stays fixed in linear space, but the angular size shrinks with distance of star from Sun.
+
+Apparent magnitude of the stars goes down, AO performance goes down, halo fills in.
+
+Extreme Adaptive Optics ARAA in \citet{Guyon18}
+
+REFS seager, keltenegger, 2018 paper from seager student about false negatives for detecting life, we need multiple signatures. ??? is it this paper? "Molecular simulations for the spectroscopic detection of atmospheric gases" by \citet{Sousa-Silva19}.
+
+PIAA principle by \citet{Guyon03}
+
+
+Guoyn 2006, 2010, 2014 
+
+
+Guoyn 2005 fundamental WFS in \citet{Guyon05-1}
+
+Jared and Guyon 2018/19 on predictive control and speckle lifetime - \citep{Males18}
+
+
+Jared 2020 speckle lifetime \citep{Males21}
+
+self coherent camera (Pierre? Baudoz 2006 original \citep{Baudoz06}) refael Galicher paper from 2010 instead/as well Self-coherent camera as a focal plane wavefront sensor: simul \citep{Galicher10}.
+
+
+
+
+2022 on sky EFC axel potier \citep{Potier22} and the first paper in the series on VLT/SPHERE is \citep{Potier20} and on sky efc with FQPhase Mask to demo on-sky EFC is paper III and is \citet{Galicher24}.
+
+
+
+The search for life beyond the Earth has focused on the idea that water is an essential part of life cycles elsewhere in the Universe, as it is a polar solvent formed from two elements that are found in abundance throughout the Galaxy.
+%
+Places where water can exist in its liquid state form prime locations for these searches, notably Earth-like planets and water moons that have liquid water underneath an ice layer.
+%
+The region around a star where liquid water can exist on the surface of a terrestrial planet (with appropriate atmospheric pressure) is referred to as the Habitable Zone (HZ); for the Sun this is from 0.9-1.2 au.
+%
+THe HZ changes with stellar evolution as the luminosity of stars changes with time.
+%
+The angular size of the HZ in diffraction widths can be approximated by XXXXX. 
+
+This combined with the greater frequency of lower mass stars means that there are two regimes for imaging HZ terrestrial planets around nearby stars: M dwarfs and G-type stars.
+
+For solar type stars, the contrast required in the optical wavelengths is on the order of 10e-10 for terrestrial planets in the HZ of solar type stars, but for smaller mass stars with lower luminosities, the contrast is 1e-7 for M dwarfs since the similar sized planets subtend larger amounts of radiated flux.
+%
+\section{ELTs for M dwarf exoplanets}
+
+{\bf TODO MAK}
+
+Guyon has a nice figure... 2014 or 2016 SPIE proceeding. Maybe Emiel's phd thesis introduction on this.
+
+Cite papers about METIS \citep{Brandl21} has high contrast imaging modes \citep{Kenworthy16,Carlomagno20}.
+
+PCS roadmap paper \citep{Kasper21}
+
+GMagAOX from Jared Males 2022/2024 \citep{Males22}.
+
+TMT papers on the PSI \citet{Jensen-Clem22,Fitzgerald22}
+
+
+XXX put an approximate outer limit on the distance for direct imaging. HZ of solar star is 
+
+$DL_{HZ} = 1/$
 
 \notebooksuggestion{play with different contrasts and IWA to see yields}
 
-\lipsum[2-4]
+\lipsum[2]
 
 \section{Space coronagraphs and HWO for G type stars}
+
+Chris Stark Space telescope yield papers...\citep{Stark14,Stark24}.
+
 \lipsum[2-4]
+
+
 
 \section{Polarization effects} 
+%van Holstein 2023 paper \citep{vanHolstein23} and \citep{vanHolstein20}.
+%SPHERE in 202x on beam shifts zimpol \citep{Schmid18}.
+%polarization in the PSF: \citep{Breckinridge15}
+%Chipman 1989 Polarization analysis of optical systems. \citep{Chipman89}
+%Polarization aberrations in next-generation giant segmented mirror telescopes (GSMTs). I. Effect on the coronagraphic performance: \citet{Anche23}
+
 \notebooksuggestion{Polarimetric beam shift using Fresnel equation - Change angle of incidence and show differential beam shift.}
+
+The field of high-contrast imaging is always hammering away at one noise floor after another. It started with the common phase aberrations that dominate at low to moderate contrast. After that, amplitude aberrations started to limit the contrast. This was solved by using multiple deformable mirrors. Now, the contrasts that are achieved on-sky and on testbeds reveal another limit; polarization. Polarization is an often underappreciated property of light. The derivation shown in Section \ref{sec:maxwell} actually also ignores the effects of polarization which was done for mathematical clarity. However, light consists of two orthogonal polarizations states that do not interfere with each other. That means that there are, at any time, always two beams of light propagating through our coronagraph that might interact in a different way with the instrument. A more detailed treatment of polarization and physical optics propagation can be found in the literature \citep{McLeod14}.
+
+The Fresnel equations describe how light is either reflected off or transmitted through an interface. The equations also show that different polarization states have different Fresnel coefficients. This wouldn't be a problem if the Fresnel equations did not also depend on the angle of incidence. The definition of all variables for the incidence, reflected and transmitted wave are shown in Figure \ref{fig:fresnel_equations}.
+
+The Frensel equations for plane wave interfaces are,
+\begin{align}
+r_s = \frac{n_1\cos{\theta_i} - n_2\cos{\theta_t}}{n_1\cos{\theta_i} + n_2\cos{\theta_t}},\\
+t_s = \frac{2n_1 \cos{\theta_i}}{n_1\cos{\theta_i} + n_2\cos{\theta_t}},\\
+r_p = \frac{n_2\cos{\theta_i} - n_1\cos{\theta_t}}{n_2\cos{\theta_i} + n_1\cos{\theta_t}},\\
+t_p = \frac{2n_1 \cos{\theta_i}}{n_2\cos{\theta_i} + n_1\cos{\theta_t}}
+\end{align}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fresnel_equations_figure.pdf}
+  \caption{}
+  \label{fig:fresnel_equations}
+\end{figure}
+
+\section{PIAA}\label{sec:piaa}
+
+\notebooksuggestion{How do you make a PIAA surface? And show improved performance w.r.t. standard lyot coronagraph.}
+
+Phase Amplitude Induced Apodization (PIAA) remaps the telescope pupil such that a star on the optical axis forms a Gaussian PSF \citep{Guyon03,Guyon05,Guyon14}.
+%
+A focal plane mask that is apodized to match the Gaussian PSF then suppresses the on-axis starlight, while planets images off the central axis are minimally attenuated by the gaussian mask.
+%
+The reimaged off axis sources have strong aberrations that are radially field dependent, significantly decreasing the Strehl ratio of these sources.
+%
+A reimaging system that reverses the first PIAA optics then reforms a final focal plane image with all off axis sources forming diffraction limited images.
+
+Results from the laboratory demonstration of a PIAACMC coronagraph with a segmented aperture, \citep{Marx21}.
+
+integrated WFS and coro with PIAACMC \citep{Haffert23a}.
+
+Laboratory demonstration of high contrast with the PIAACMC coronagraph on an obstructed and segmented aperture \citep{Belikov22}.
+
+Figure: SH can PIAA simulations for ELT,TMT or GMT (quick!)
+
 \lipsum[2-4]
 
-\section{PIAA}
-\notebooksuggestion{How do you make a PIAA surface? And show improved performance w.r.t. standard lyot coronagraph.}
-\lipsum[2-4]
 
 \section{Coronagraphic wavefront sensing}
 \lipsum[2-4]
 
+coronagraphic phase diversity
+COFFEE jaen paul sauvage 2012 \citep{Sauvage12}.
+
+
+Perspectives on phase rertrieval and phase diversity in astronomy \citet{Gonsalves14} and the classic Gerchberg-Saxton algorithm \citep{Gerchberg72}.
+
+A review article on phase diversity and focal plane WFS. \citep{Fienup13}
+
+Gary Ruane 2023 integrated wfs and coronagraphs \citep{Ruane23}
+
+Emiel Por for PAPLC \citep{Por20}
+
+cite Por 2023 or 2021 SPIE Zernike WFS and PAPLC integrated. \citep{Pourcelot22,Pourcelot23}
+
+HiCAT dark zone demonstration \citep{Soummer22}.
+
+SCAR corongaraph using the fiber as a filter \citep{Haffert20}
+
+Direct imaging fiber nulling from \citet{Mawet17} and Eugene Serabyn's paper on fiber nulling from \citet{Serabyn06}.
+
+Using Fresnel zones to make a circular null around the star \citep{Angel86} first time you could detect a Jupiter around a sun-like star.
+
+Figure: Standard Lyot coronagraph layout
+
+Figure: SH: segments, and segment piston errors, impact on dark hole. increase RMS with a slider, then see the dark hole filled in.
+
+Figure: ground based coronagraphic images - real would be better, put in SH MagAOX 
+
 \section{Focal plane wavefront sensing}
 
-\notebooksuggestion{Simple dark hole generation with predefined shapes - can use the new autodiff approach.}
+A unified formalism for HCI algorithms was presented in \citet{Giveon09,Giveon10}
+
+???not sure what papers for this: traub 2022/2024 intensity nulling
+
+SPHERE papers:
+
+
+FIGURE: Potier 2022 see Figure~\ref{fig:fpwfsclean} but SH has done it, can do a QSS at 900nm. working to shorter wavelengths
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/potier2022.jpg}
+  \caption{}
+  \label{fig:fpwfsclean}
+\end{figure}
+
+\notebooksuggestion{SH: get this from HCIpy Simple dark hole generation with predefined shapes - can use the new autodiff approach.}
 
 \lipsum[2-4]
 
-\section{rejected light wavefront sensing} 
+\section{Rejected light wavefront sensing} 
+
+Visible extreme AO on ELTs for Prox b: \citep{Fowler23}
+
+PAPLC type WFS....
+
+Integrated WFS from Ruane \citep{Ruane20}.
+
+Talk about FAST SCC from Ben Gerard that used rejected light from coronagraph \citep{Gerard18}.
+
+
+Lyot low order WFS described in \citet{Guyon09} and explored in \citet{Singh14,Singh15}.
+
+%MagAOX paper.... Mcleod et al. 2023
+
 \lipsum[2-4]
 
 \section{PAPLC}
+
+\citet{Por20} 
+%Emiel came up with concept, 2019, has unpub paper and SPIE talk...
+
+Haffert 2023 paper
+
+SCOOB 2021 AZ space test bed \citep{Ashcraft22} using a knife edgs SPIE proceeding. PAPLC. \citep{vanGorkom22}.
+
+Figure: SH show unpublished on sky results with PAPLC.
+
 \lipsum[2-4]
 
 \section{Segmented mirrors}
 \lipsum[2-4]
 
+Larger telescopes are required to increase the spatial resolution of the imaging camera. The cost of a telescope goes as $D^{1.7-1.8}$ \citep{Stahl20} for both, and for space only there is \citet{Stahl10}.
+ 
+Monolithic mirror telescopes are ultimately limited by their transport from manufacturing point to the observatory location, and so segmented telescope designs are used for diameters greater than 8m on the ground.
+ %
+ Segmented mirror designs are necessary for space telescopes so that the primary mirror can be folded into the faring of rockets.
+
+These segmented mirror designs use active controls and mechanical adjustments to align the mirrors onto the ideal primary mirror surface.
+%
+This makes segmented mirror designs susceptible to temporal drifts in their alignment, leading to the generation of aberrations in the focal plane that are in the scientific region of interest.
+
+Wavefront sensing and subsequent correction of these aberrations is therefore an important part of high contrast imaging.
+%
+Algorithms such as COFFEE have been demonstratred for the JWST segmented primary pupil geometry \citep{Leboulleux20}.
+
+Lucie has two papers on redundant apodization for DI of exoplanets - paper I is \citep{Leboulleux22} and paper II is \citet{Leboulleux22a}.
+
+Wavefront tolerances of space-based segmented telescopes at very high contrast: Experimental validation by \citet{Laginja22}
+
+A discussion of the latest limits reached by laboratory coronagraphs is in \citet{Mennesson24}.
+
+
+
+HDFS on the GMT is described by \citet{Haffert22}.
+
+Hedglen 2022 Exp valid of piston control with pyramid WFS is in \citet{Bertrou-Cantou23} with the A and A paper detailing it in Confusion in differential piston measurement with the pyramid wavefront sensor \citep{Bertrou-Cantou22}.
+
+GMT: GMT segmented wavefront control Quiros-Pacheco SPIE phaseing for GMT \citep{Quiros-Pacheco22}
+
+% Kautz 2024 in prep. showing on-sky phasing. XX MAK: tried to find this, nothing more recent that 2023
+
+ELT: MELT test bed ZEUS experiment, APE experiment, both phasing experiments form ELT early/mid 2004-2006.
+
+The MELT testbed. MELT: an optomechanical emulation testbench for ELT wavefront control and phasing strategy \citep{Pfrommer18}
+
+ZEUS: a cophasing sensor based on the Zernike phase contrast method: \citep{Dohlen06}.
+
+On-sky Testing of the Active Phasing Experiment  \citet{Gonte09}.
+
+{\bf Keck telescope}
+
+Keck phasing: The original phasing algorithm for Keck mirror segments in \citet{Chanan98} and the second paper in \citet{Chanan00}.
+
+Keck mirror phasing with ZWFS in \citet{vanKooten22} and using a Vector ZWFS in \citet{Salama24}.
+
+On-sky verification of Fast and Furious focal-plane wavefront sensing: Moving forward toward controlling the island effect at Subaru/SCExAO with \citet{Bos20}.
+
+{\bf petal mode problem}
+
+MAK TODO:
+
+LOW WIND EFFECT on SPHERE \citep{Sauvage16} and discussions on mitigating it are described in \citet{Milli18}.
+
+You can use fast and furious to measure it \citep{Wilby18} which was verified at Subaru/SCExAO.
+
+Several mitigation strategies there with FPWFS for that \citep{Vievard19}.
+
+Petal mode problem for ELT: due to the spiders, they fragment the pupil into unsensed separate petals because the thickness of the secondary support is greater than r0.
+
+Even monolithic mirrors have this problem too with thick enough secondary support structures, known as the island effect \citep{Leboulleux22,Leboulleux22a}
+
 \section{Integrated optics}
+
+Optics change the complex amplitudes of wavefronts as they propagate through coronagraphs.
+%
+Macro optics, typically many thousands of times larger than the wavelength of light they shape, require precise and stable optomechanical components to accurately modify these wavefronts.
+%
+Integrated optics enable direct manipulation of the complex electric fields at the scale of the wavelengths used.
+%
+Miniaturisation of previously discrete macro optics and their manufacture within a single homogeneous substrate removes both the requirement for separate optomechanical alignment and temperature related effects.
+%
+Early examples include beam combiners for optical astronomical interferometers \citep[for example the IOTA/IONIC beam combiner ][]{Berger01} and photonic lanterns, see \citet{Leon-Saval10} and references therein.
+
+%https://pure.uhi.ac.uk/en/publications/an-integrated-optics-3-way-beam-combiner-for-iota (REF) 
+
+PIMMS: photonic integrated multimode microspectrograph from \citet{Bland-Hawthorn10}.
+
+Advances in micron scale manufacture enable the fabrication of optical waveguides and optical cavities enabling optical solutions in the full 3D propagation regime (UGH! NEED TO TIDY UP).
+
+Efficient injection from large telescopes into single-mode fibres: Enabling the era of ultra-precision astronomy \citep{Jovanovic17}
+
+Photonic optimised coronagraphs and Integrated photonic-based coronagraphic systems for future space telescopes
+ \citep{Desai23a}.
+
+%% Emiel - presented at SPIE 2024 on integrated coronagraphs and photonics - NOTE ONLINE YET.
+
+Bragg gratings to get modulate diffraction \citep{FaggingerAuer24}.
+
+Barnaby Norris photonic lanterns \citep{Norris22} and on-sky demo \citep{Norris20} and nature one \cite{Norris20a}, FPWFS with photonic lanterns \citep{Lin20} and their theory \citep{Lin22}.
+
+Nulling with a mode selective photonic lantern 2022 \citep{Xin22}.
+
+Phase-apodized-pupil Lyot Coronagraphs for Arbitrary Telescope Pupils \citep{Por20}
+SCAR paper I \citep{Por20a}
+
+
 \lipsum[2-4]
 
 \section{Astrophotonics and QOD}
+
+No idea here!
+
 \lipsum[2-4]
 
 \section{Quantum optimal detection}
+
+Quantum optical detection \citep{Lu18} enables the distinction between two incoherent point sources within the classical Rayleigh diffraction limit.
+%
+This can be done by a specific linear optic reformatting of the wavefront followed by a photon counting detector.
+%
+More specifically, for exoplanet detection where the separation is smaller than the diffraction limit and the flux ratio much smaller than one, for thermalised incoherent sources (e.g. a star and a planet) you test for photons not being distributed in a point symmetric way \citep[e.g. ][]{Huang21}.
+
+\citet{Desai23} on deriving this for Achieving Quantum Limits of Exoplanet Detection and Localization.
+
 \lipsum[2-4]
 
 \section{Post-processing (its no longer a photon)}
 
 \notebooksuggestion{KLIP with removing varying number of modes and annular rings.}
+
+Deviations from the ideal optical prescription of telescope and instrument optics result in wavefront errors which manifest themselves as intensity deviations from the theoretical PSF.
+%
+Hubble Space Telescope (HST) images of circumstellar material showed residual speckles that obscure the faint circumstellar environment, even after the subtraction of an image of a nearby star used as a reference PSF.
+
+The concept of ``roll subtraction''  \citep{Schneider98} was used to estimate and remove these residual speckles.
+%
+Two or more images of the science target were taken with the telescope set at different angles about the target axis, so that the astronomical field would be rotated with respect to the (almost static) speckle field.
+%
+This was demonstrated in \citet{Schneider99} with the image of the disk around HR~4796A.
+%
+Even with the HST, the roll observations were taken within 25 minutes of each other to minimise changes in the telescope's optical path resulting from the ``breathing'' of the telescope optical assembly as it passed from day to night in its low earth orbit \citep{Bely93}.
+
+With a ground based telescope, the speckle field changes on shorter timescales and with increased complexity because of (i) a continuously changing gravity vector on the telescope and instrument (ii) temperature and mechanical variations in the optomechanics within the instrument and (iii) changes in the performance of the adaptive optics system due to changing atmospheric conditions.
+
+For ground based observations, the concept of Angular Differential Imaging \citep[ADI; ][]{Marois06} was developed.
+
+% this is really spectral methanated differential imaging!
+The PSF of ground based time averaged images taken through atmospheric turbulence can be approximated as the telescope PSF with a smoothed Gaussian halo \citep{Marois00}.
+%
+Methanated camera is called TRIDENT \citep{Marois05}.
+
+Dual band imaging/mathane imaging Beth but also french guy before..., halpha imaging Laird C
+
+This was generalised into Spectral Differential Imaging with SINFONI - thatte 0?
+
+Demonstrated with the detection of winds in the atmosphere of HD~209458b \citep{Snellen10} and then molecule mapping in directly imaged exoplanets such as Beta~Pictoris~b \citep{Hoeijmakers18}
+High resolution SDI/molecule mapping, Snellen, really high
+
+Polarization differential Imaging:
+
+Coherence Differential Imaging: with MKIDS and Ben Mazin VAMPIRES, done it on SPHERE.
+Gladyz paper. Remove QSS. Codona, Codona and Kenworthy 2015 (hah!).
+
+Figure: show example of post processing. pick favourite image from a paper!
 
 \lipsum[2-4]
 
