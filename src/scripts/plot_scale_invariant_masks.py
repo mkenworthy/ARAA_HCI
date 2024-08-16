@@ -44,4 +44,4 @@ plt.text(np.pi, -1., 'phase (rad)', horizontalalignment='center')
 
 fig.colorbar(im, cax=cbar_ax, orientation='horizontal')
 
-plt.savefig(paths.figures / 'scale_invariant_masks.pdf')
+plt.savefig(str(paths.figures / 'scale_invariant_masks.pdf'))

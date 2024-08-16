@@ -143,7 +143,13 @@ To see the specific version of the \project{Jupyter} notebook, that was executed
 
 Initially developed to image the Sun's corona without the need for a Solar eclipse, one of the most significant science drivers for the latest coronagraphs is in the detection and characterisation of circumstellar material and planets around nearby stars.
 %
+Young self-luminous gas giant exoplanets have been discovered around young stars both in the nearby Galactic field (HR8799b,c,d) (Beta Pic b and c) and further away in young stellar OB associations ranging from 80 to 200 pc distance (REF REF), typically these exoplanets have luminosities of $10^{-4}-10^{-6}$ at angular separations of up to one or two arcseconds from their parent star. 
+%
+With polarization differential imaging, over a hundred circumstellar disks have been discovered, providing information on planet formation and evolution.
+
 %The scientific goal is to image an exoplanet (a planet orbiting a star other than our Sun) and to characterise its orbit and atmosphere.
+%
+Terrestrial exoplanets are not self-luminous but instead reflect the light of their parent star.
 %
 For an Earth analogue with similar radius, albedo and effective temperature orbiting around a solar-type star 10 parsecs away, the typical amount of reflected light in the optical is $10^{-10}$ of the central star at a separation of 0.1 arcseconds at maximum elongation.
 %
@@ -152,10 +158,18 @@ Planetary systems that are closer to the Sun have two benefits: given two identi
 %
 For direct imaging, therefore, the closest stars to the Sun are the ones that are studied for the presence of directly imaged exoplanets.
 %
-In a volume limited (20 parsecs) sample of stars around the Sun \citep{2023arXiv231203639K}, there are XXXX solar (G2) type stars, and YYYY M-dwarf stars.
+In a volume limited (20 parsecs) sample of stars around the Sun \citep{Kirkpatrick24}, there are XXXX solar (G2) type stars, and YYYY M-dwarf stars.
 %
 DI young Jupiters look are self-luminous in the NIR, but for terrestrial planets, looking for light reflected from the atmosphere/surface, so subject to inverse square law for planet separation from star.
 
+
+\begin{figure}[ht]
+  \centering
+  \script{plot_nearest_stars.py}
+  \includegraphics[width=0.5\linewidth]{figures/nearest_stars.pdf}
+  \caption{Nearest stars and spectral types.}
+  \label{fig:nstars}
+\end{figure}
 
 Two regimes: solar analogues at optical wavelengths lead to space based missions, ground based larger aperture telescopes study M dwarf stars that are on average closer to the Sun, and look in the NIR.
 
@@ -173,7 +187,7 @@ The HZ changes with stellar evolution as the luminosity of stars changes with ti
 %
 The angular size of the HZ in diffraction widths can be approximated by XXXXX. 
 
-The nearest stars are taken from the CNS5 \citep{Golovin23}.
+%The nearest stars are taken from the CNS5 \citep{Golovin23}.
 
 This combined with the greater frequency of lower mass stars means that there are two regimes for imaging HZ terrestrial planets around nearby stars: M dwarfs and G-type stars.
 
