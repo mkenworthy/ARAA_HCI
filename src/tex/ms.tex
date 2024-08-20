@@ -674,6 +674,10 @@ As a consequence, subsequent instrument designs have focused on differing  appro
     \item Predictive control and speckle lifetime \citep{Males18}.
     \item Developing methods for estimating the wavefront at the final science camera focal plane.
 \end{itemize}
+
+Estimating at the scicence camera focal plane removes the NCPA entirely, but it is dependent on the robustness and sensitivity of the estimation method.
+%
+By taking some of the coherent light from the Airy core of the star, this light can be sent off axis in the Lyot plane to form 
  
 {\bf TODO MAK}
 %Jared's AO4 ELT paper was a good talk, but this is the argument to limit to 30 parsec.
@@ -758,6 +762,8 @@ t_p = \frac{2n_1 \cos{\theta_i}}{n_2\cos{\theta_i} + n_1\cos{\theta_t}}
 
 \notebooksuggestion{How do you make a PIAA surface? And show improved performance w.r.t. standard lyot coronagraph.}
 
+\notebooksuggestion{Figure: SH can PIAA simulations for ELT,TMT or GMT (quick!)}
+
 Phase Induced Amplitude Apodization (PIAA) remaps the telescope pupil such that a star on the optical axis forms a PSF with no diffraction rings - typically a 2-D Gaussian profile \citep{Guyon03,Guyon05,Guyon14}.
 %
 The pupil remapping optics can be either transmissive or reflective, with reflecting optics more amenable to achromatization but more challenging to manufacture.
@@ -788,8 +794,6 @@ Results from the laboratory demonstration of a Phase-Induced Amplitude Apodizati
 Most recently, the laboratory demonstration of high contrast with the PIAACMC coronagraph on an obstructed and segmented aperture \citep{Belikov22} shows YYYY contrast achieved.
 
 Ultimately the rejected light can form the basis for a wavefront sensor to keep the PIAA pointed and aligned with the science target, and an integrated WFS and coronagraph with PIAACMC has been demonstrated \citep{Haffert23a}.
-
-\notebooksuggestion{Figure: SH can PIAA simulations for ELT,TMT or GMT (quick!)}
 
 \section{Coronagraphic wavefront sensing}
 
