@@ -5,15 +5,15 @@ import matplotlib as mpl
 mpl.use('MacOSX')
 
 figsize = (14,6)
-fig, ax = plt.subplots(1,1,figsize=figsize, facecolor='lightskyblue')
+#fig, ax = plt.subplots(1,1,figsize=figsize, facecolor='lightskyblue')
 
+fig = plt.figure(figsize=figsize, facecolor='lightskyblue')
 # for figure placement, I want to use the centre of the inserted figures as a coordinate, along with a width and height of the figure
 # where we ALSO make sure the axes are the same scale. For rectangular figures, this doesn't work, so we normalise to the height of the Figure so that the new coord system y-axis goes from -0.5 to 0.5 and the x axis is scaled so that it can go greater than unity.
 
+axall = fig.add_axes([0.1,0.1,0.8,0.8])
 
-
-
-
+axray = fig.add_axes([0.15,0.2,0.7,0.4])
 
 def s(d):
 	'FREE SPACE: d - distance'
@@ -42,12 +42,8 @@ def make_coro_rays(fp1, dx=5):
 
 	return ray
 
-
-
-
-
 # fan of rays from a single point
-thetas = np.linspace(-0.1,0.1,13)
+thetas = np.linspace(-0.1,0.1,17)
 x = np.zeros_like(thetas)+0.1
 fp1 = np.vstack((x,thetas))
 
@@ -56,19 +52,31 @@ ray = make_coro_rays(fp1)
 
 xpos = np.arange(ray.shape[0])
 
-plt.plot(xpos,ray,color='red',alpha=0.5)
+#axray.plot(xpos,ray, color='gray', alpha=0.5, zorder=1)
 
+axray.plot(xpos[0:3],ray[0:3], color='blue', zorder=5)
 
-plt.plot(xpos[2:],ray[2:],color='red',alpha=0.5)
+lens1 = mpl.patches.Ellipse((1.0, 0.0), 0.05, 1.4, color='gray',alpha=0.8)
+lens2 = mpl.patches.Ellipse((3.0, 0.0), 0.05, 1.4, color='gray',alpha=0.8)
 
-pupmax = 0.4
+# TODO add color blind friendly pallette
 
-clipped = (np.abs(ray[2])<pupmax)
+axray.add_artist(lens1)
+axray.add_artist(lens2)
+axray.set_ylim(-0.75,0.75)
 
-print(ray[2:][:,clipped])
+pupmax = 0.2
+rfps = 0.1
+
+# add the Lyot stop
+lyot1 = mpl.patches.Rectangle((2.0,pupmax),0.05,(0.7-pupmax),color='blue')
+lyot2 = mpl.patches.Rectangle((2.0,-pupmax),0.05,-(0.7-pupmax),color='blue')
+axray.add_artist(lyot1)
+axray.add_artist(lyot2)
+
+clipped = (np.abs(ray[2])<=pupmax)
+
 t = ray[2:]
-
-
 
 plt.plot(xpos[2:],t[:,clipped], color='blue', alpha=0.5)
 
