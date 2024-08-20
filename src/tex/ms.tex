@@ -6,20 +6,10 @@
 \usepackage{amsmath}
 \usepackage{color}
 \usepackage{hyperref}
+
 \usepackage{booktabs}% http://ctan.org/pkg/booktabs
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
-%\hypersetup{colorlinks=true,allcolors=[rgb]{0,0,0.8}}
-
-\hypersetup{%
-  colorlinks=true,% hyperlinks will be black
-  linkcolor=blue,% hyperlink borders will be red
-  anchorcolor=blue,
-  citecolor=blue,
-  menucolor=blue,
-  urlcolor=blue,
-  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
-}
-\usepackage{ circuitikz }
+\hypersetup{colorlinks=true,allcolors=[rgb]{0,0,0.8}}
 
 \newcommand{\kms}{km~s$^{-1}$}
 \newcommand{\mum}{$\mu$m}
@@ -55,6 +45,7 @@
 \newcommand{\pasp}{Publications of the Astronomical Society of the Pacific}
 \newcommand{\jgr}{Journal of Geophysical Research}
 \newcommand{\aap}{Astronomy and Astrophysics}
+\newcommand{\aapr}{Astronomy and Astrophysics Review}
 \newcommand{\mnras}{Monthly Notices of the Royal Astronomical Society}
 \newcommand{\actaa}{Acta Astronomica}
 \newcommand{\nat}{Nature}
@@ -76,7 +67,6 @@
 \newcommand{\project}[1]{\textsf{#1}}
 
 % Comments:
-\newcommand{\commentehp}[1]{\textcolor{red}{[EHP: #1]}}
 \newcommand{\commentmak}[1]{\textcolor{red}{[MAK: #1]}}
 \newcommand{\commentsyh}[1]{\textcolor{red}{[SYH: #1]}}
 
@@ -92,7 +82,6 @@
 
 % Your review article should present a critical appraisal of the significant, rather than the total, literature in the field. This overview may include your own work (even if unpublished). The article should be useful to specialists as well as teachers and scholars from other areas.  It should emphasize where research in a given area should go, as well as where it has been, such that it will influence the future course of knowledge. A list of topics and authors planned for Volume 63 will be sent to you approximately five months before the manuscript due date, and you may wish to correspond with authors whose subjects border on your own.
 
-
 % Document starts
 \begin{document}
 
@@ -105,10 +94,9 @@
 \title{High Contrast Imaging}
 
 %Authors, affiliations address.
-\author{Matthew Kenworthy,$^1$ Sebastiaan Haffert$^2$ and Emiel Por$^3$
+\author{Matthew Kenworthy and $^1$ Sebastiaan Haffert$^{1,2}$
   \affil{$^1$Leiden Observatory, Niels Bohrweg 2, Leiden 2300RA, The Netherlands; email: kenworthy@strw.leidenuniv.nl}
-  \affil{$^2$Steward Observatory; email: haffert@astronomy.arizona.edu}
-  \affil{$^3$STScI; email: epor@stsci.edu}}
+  \affil{$^2$Steward Observatory; email: haffert@astronomy.arizona.edu}}
 
 %Abstract
 \begin{abstract}
@@ -146,6 +134,14 @@ Initially developed to image the Sun's corona without the need for a Solar eclip
 Young self-luminous gas giant exoplanets have been discovered around young stars both in the nearby Galactic field (HR8799b,c,d) (Beta Pic b and c) and further away in young stellar OB associations ranging from 80 to 200 pc distance (REF REF), typically these exoplanets have luminosities of $10^{-4}-10^{-6}$ at angular separations of up to one or two arcseconds from their parent star. 
 %
 With polarization differential imaging, over a hundred circumstellar disks have been discovered, providing information on planet formation and evolution.
+
+\begin{armarginnote}[]
+  \entry{HCI}{High Contrast Imaging}
+  \entry{FP}{Focal Plane}
+  \entry{PP}{Pupil Plane}
+  \entry{FPWFS}{Focal Plane Wavefront Sensing}
+  \entry{WFS}{Wavefront Sensor}
+\end{armarginnote}
 
 %The scientific goal is to image an exoplanet (a planet orbiting a star other than our Sun) and to characterise its orbit and atmosphere.
 %
@@ -222,16 +218,7 @@ We focus on the technical challenges for imaging a rocky terrestrial planet arou
 % \end{figure}
 
 
-\begin{armarginnote}[]
-  \entry{HCI}{High Contrast Imaging}
-  \entry{FP}{Focal Plane}
-  \entry{PP}{Pupil Plane}
-  \entry{FPWFS}{Focal Plane Wavefront Sensing}
-  \entry{WFS}{Wavefront Sensor}
-\end{armarginnote}
-
-
-\section{From Maxwell's Equations to Wavefronts}
+\section{From Maxwell's Equations to Wavefronts}\label{sec:maxwell}
 The vast majority of energy from astrophysical objects arrives at our telescopes in the form of electromagnetic radiation.
 %
 %The electromagnetic waves propagate through space by exchanges between the electric and magnetic fields because a changing electric field induces a magnetic field and vice-versa.
@@ -611,6 +598,14 @@ The coronagraph designs assume that the incoming wavefronts from all the astroph
 %
 In reality, however, there are several factors that cause deviations of the wavefronts from this ideal: (i) optical manufacturing limitations, (ii) environmental conditions (both static and dynamic) within the instrument and the telescope, and in the case of ground based telescopes, (iii) the wavefront residuals from the Earth's turbulent atmosphere partially corrected with a high order adaptive optics system.
 
+\subsection{Adaptive Optics}
+
+Adaptive optics sense the turbulence introduced by the Earth's atmosphere $\phi_{TURB}$ using Wavefront Sensors which measure a wavefront $\phi_{WFS}$, reconstruct an estimate of this turbulence $\phi_{CALC}$, and use an electronically actuated deformable optical element - typically a Deformable Mirror (DM)\footnote{There are several other optomechanical devices that exploit other optically active principles to modify a wavefront.} - within the instrument to modify the incoming turbulent wavefront and flatten it.
+%
+With the DM upstream of the WFS, and an AO computer providing the calculation of wavefront measured by the WFS and applying this correction $\phi_{CALC}$ to the DM, this forms a {\bf closed loop}, where the response of the DM's correction is seen by the WFS in the instrument, see Figure~\ref{fig:aosystem}.
+%
+The fundamental limits in WFS are discussed in \citet{Guyon05-1}.
+%
 \begin{armarginnote}[]
   \entry{DM}{Deformable Mirror}
   \entry{FPM}{Focal Plane Mask}
@@ -618,12 +613,8 @@ In reality, however, there are several factors that cause deviations of the wave
   \entry{WFS}{Wavefront Sensor}
   \entry{AO}{Adaptive Optics}
 \end{armarginnote}
-
-\subsection{Adaptive Optics}
-
-Adaptive optics sense the turbulence introduced by the Earth's atmosphere using Wavefront Sensors, reconstruct an estimate of this turbulence, and use an electronically actuated deformable optical element - typically a Deformable Mirror (DM)\footnote{There are several other optomechanical devices that exploit other optically active principles to modify a wavefront.}) - within the instrument to modify the incoming turbulent wavefront and flatten it.
 %
-With the DM upstream of the WFS, and a control computer providing the calculation of wavefront measured by the WFS and applying this correction to the DM, this forms a {\bf closed loop}, where the response of the DM's correction is seen by the WFS in the instrument, see Figure~\ref{fig:aosystem}.
+Incoming light is split using a dichroic or grey beamsplitter, sending some of the light to the science camera and the rest to the wavefront sensor camera.
 %
 Many AO systems take advantage of the fact that the optical path difference (OPD) introduced by the Earth's atmosphere above ground based telescopes is achromatic, despite OPD amplitudes of several tens of microns across large telescope apertures.
 %
@@ -631,38 +622,14 @@ A consequence is that a wavefront measurement at a shorter wavelength (typically
 
 \begin{figure}[!ht]
 \centering
-\resizebox{1\textwidth}{!}{%
-\begin{circuitikz}
-\tikzstyle{every node}=[font=\large]
-\begin{scope}[rotate around={-90:(3.25,14)}]
-\draw[domain=3.25:5.75,samples=100,smooth] plot (\x,{0.2*sin(5.44*\x r -2.25 r ) +14});
-\end{scope}
-\begin{scope}[rotate around={-90:(3.5,14)}]
-\draw[domain=3.5:6,samples=100,smooth] plot (\x,{0.2*sin(5.44*\x r -2.5 r ) +14});
-\end{scope}
-\begin{scope}[rotate around={-90:(3.75,14)}]
-\draw[domain=3.75:6.25,samples=100,smooth] plot (\x,{0.2*sin(5.44*\x r -2.75 r ) +14});
-\end{scope}
-\draw [ rotate around={50:(7.375, 13.25)}] (7,14.75) rectangle (7.75,11.75);
-\draw [, rounded corners = 6.6, rotate around={50:(7.125, 9.25)}] (6.75,10.75) rectangle (7.5,7.75);
-\draw  (10.75,9.5) ellipse (0.25cm and 1.25cm);
-\draw [ fill={rgb,255:red,238; green,255; blue,149} , rotate around={-182:(13.375, 9.75)}] (13,11.25) rectangle (13.75,8.25);
-\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +11.5});
-\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +11});
-\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +11.25});
-\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +10.75});
-\node [font=\large] at (13.25,11.5) {Science Camera};
-\node [font=\large, rotate around={-44:(0,0)}] at (6.75,8.75) {Wavefront Sensor};
-\node [font=\large, rotate around={-38:(0,0)}] at (9.25,14) {Deformable Mirror};
-\end{circuitikz}
-}%
- \caption{AO system schematic \textcolor{red}{TODO: label up halos and run for longer}}
+\includegraphics[width=0.9\linewidth]{figures/ao_system.pdf}
+ \caption{AO system schematic. The incoming turbulent wavefronts are reflected off a Deformable Mirror, then a beamsplitter sends some of the light to a wavefront sensor, and the remaining light passes to the science camera. An AO computer takes the measurements from the WFS, reconstructs the measured wavefront, and sends a correcting signal to the DM to flatten the incoming wavefront.}
   \label{fig:aosystem}
 \end{figure}
 
 The Earth's atmosphere is highly dynamic and changes on a timescale of milliseconds, but the wavefront reconstruction and correction on the DM is not instantaneous, leading to a small but significant time lag between measurement and the application of the correction.
 %
-Adaptive optics is a complex and mature field in its own right, covering atmospheric turbulence, optomechanics, engineering control theory, wavefront sensing and information theory (each of these topics would be a review in their own right), but for now we refer the reader to XXX and YYY for reviews on these topics. 
+Adaptive optics is a complex and mature field in its own right, covering atmospheric turbulence, optomechanics, engineering control theory, wavefront sensing and information theory (each of these topics would be a review in their own right), but for now we refer the reader to \citet{Guyon18} for reviews on these topics. 
 %
 For our purpose, we assume that ground based instruments have a high order adaptive optics system providing high order wavefront correction, resulting in a time evolving screen of residual phase errors that change on a timescale of milliseconds and have $\lambda/20$ r.m.s.
 
@@ -689,15 +656,18 @@ Instantaneous speckles average out over time to an azimuthally symmetric halo, w
 
 Aberrations can be sensed and corrected to the point of the last wavefront sensor in the optical path in the high contrast instrument.
 %
-Aberrations between this WFS and the final science camera focal plane are referred to Non-Common Path Aberrations (NCPAs).
+Ideally the sensed wavefront $\phi_{WFS}$ is identical to the wavefront delivered to the science camera $\phi_{SCI}$, but since the wavefront is split at the beamsplitter, there is a difference in the WFS wavefront and the Science camera wavefront.
+%
+The differential aberrations between this WFS and the final science camera focal plane are referred to Non-Common Path Aberrations (NCPAs).
 %
 NCPAs are time varying over a wide range of timescales, with lab based measurements showing decorrelation timescales from seconds to minutes and hours \citep{Martinez12,Males21}.
 %
-First generation HC instruments provided little to no active NCPA measurement and mitigation strategies.
+First generation HC instruments provided little to no active NCPA measurement and in-situ mitigation strategies.
 %
 As the first generation of instruments showed that the presence of NCPAs were a significant impact on the sensitivity of these instruments at smaller IWAs, reducing the predicted contrast from their designs.
 %
-As a consequence, subsequent instrument designs have focused on differing mitigation strategies, which include:
+As a consequence, subsequent instrument designs have focused on differing  approaches, which include:
+
 \begin{itemize}
     \item Minimising the number of optics that can contribute to the NCPA (by making the optics optomechanically and thermally stable) (REF METIS Design Absil)
     \item Developing algorithms that provide estimates of the science camera PSFs at all times during the science camera exposure (REF review)
@@ -706,15 +676,7 @@ As a consequence, subsequent instrument designs have focused on differing mitiga
 \end{itemize}
  
 {\bf TODO MAK}
-
-
-The conceptual design of GMagAO-X by \citet{Males22}.
-
-%Lives of speckles by \citet{Males21}.
-
 %Jared's AO4 ELT paper was a good talk, but this is the argument to limit to 30 parsec.
-
-Fundamental sensitivity limited on apertures with PIAA-ZWFS on \citet{Haffert23}
 
 %Haffert 2023 talk mentioned this ore we can talk about it below:
 
@@ -722,12 +684,7 @@ Fundamental sensitivity limited on apertures with PIAA-ZWFS on \citet{Haffert23}
 
 %Apparent magnitude of the stars goes down, AO performance goes down, halo fills in.
 
-Extreme Adaptive Optics ARAA in \citet{Guyon18}
-
-Guoyn 2005 fundamental WFS in \citet{Guyon05-1}
-
 %Jared and Guyon 2018/19 on predictive control and speckle lifetime - \citep{Males18}
-
 
 %Jared 2020 speckle lifetime \citep{Males21}
 
@@ -778,7 +735,7 @@ Chris Stark Space telescope yield papers...\citep{Stark14,Stark24}.
 
 \notebooksuggestion{Polarimetric beam shift using Fresnel equation - Change angle of incidence and show differential beam shift.}
 
-The field of high-contrast imaging is always hammering away at one noise floor after another. It started with the common phase aberrations that dominate at low to moderate contrast. After that, amplitude aberrations started to limit the contrast. This was solved by using multiple deformable mirrors. Now, the contrasts that are achieved on-sky and on testbeds reveal another limit; polarization. Polarization is an often underappreciated property of light. The derivation shown in Section \ref{sec:maxwell} actually also ignores the effects of polarization which was done for mathematical clarity. However, light consists of two orthogonal polarizations states that do not interfere with each other. That means that there are, at any time, always two beams of light propagating through our coronagraph that might interact in a different way with the instrument. A more detailed treatment of polarization and physical optics propagation can be found in the literature \citep{McLeod14}.
+The field of high-contrast imaging is always hammering away at one noise floor after another. It started with the common phase aberrations that dominate at low to moderate contrast. After that, amplitude aberrations started to limit the contrast. This was solved by using multiple deformable mirrors. Now, the contrasts that are achieved on-sky and on testbeds reveal another limit; polarization. Polarization is an often underappreciated property of light. The derivation shown in Section~\ref{sec:maxwell} actually also ignores the effects of polarization which was done for mathematical clarity. However, light consists of two orthogonal polarizations states that do not interfere with each other. That means that there are, at any time, always two beams of light propagating through our coronagraph that might interact in a different way with the instrument. A more detailed treatment of polarization and physical optics propagation can be found in the literature \citep{McLeod14}.
 
 The Fresnel equations describe how light is either reflected off or transmitted through an interface. The equations also show that different polarization states have different Fresnel coefficients. This wouldn't be a problem if the Fresnel equations did not also depend on the angle of incidence. The definition of all variables for the incidence, reflected and transmitted wave are shown in Figure \ref{fig:fresnel_equations}.
 
@@ -815,7 +772,7 @@ The original design (PIAAC) uses a hard edged apodizer, but by allowing the desi
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.5\linewidth]{figures/PIAA_types.png}
+  \includegraphics[width=0.5\linewidth]{figures/piaas.pdf}
   \caption{Different types of PIAA coronagraph. Adapted from Guyon 2011 SPIE paper.}
   \label{fig:piaatypes}
 \end{figure}
@@ -835,7 +792,9 @@ Ultimately the rejected light can form the basis for a wavefront sensor to keep 
 \notebooksuggestion{Figure: SH can PIAA simulations for ELT,TMT or GMT (quick!)}
 
 \section{Coronagraphic wavefront sensing}
-\lipsum[2-4]
+
+
+Fundamental sensitivity limited on apertures with PIAA-ZWFS on \citet{Haffert23}
 
 coronagraphic phase diversity
 COFFEE jaen paul sauvage 2012 \citep{Sauvage12}.
@@ -881,7 +840,7 @@ In this method, an estimate of the pupil plane phase is made by inverse Fourier 
 %
 The resultant science camera PSF will be closer to the ideal PSF, and so this loop is repeated until it converges to a flat wavefront - this can be a time consuming process requiring many iterations to get to the required precision.
 %
-A more rapid optimisation can be made by making informed guesses on the applied phase aberrations\citep{Gonsalves02}, and one such method is the ``fast and furious'' algorithm \citep{Keller12} that has been verified in lab \citep{Wilby18} demonstrated on-sky \citep{Bos20} on ScEXAO. 
+A more rapid optimisation can be made by making informed guesses on the applied phase aberrations\citep{Gonsalves02}, and one such method is the ``fast and furious'' algorithm \citep{Keller12} that has been verified in lab \citep{Wilby18} demonstrated on-sky \citep{Bos20} on ScExAO. 
 
 In order to measure the complex amplitude of the PSF without an iterative process, a diversity has to be introduced into the focal plane image, either temporally or spatially.
 %
@@ -938,13 +897,14 @@ Lyot low order WFS described in \citet{Guyon09} and explored in \citet{Singh14,S
 \lipsum[2-4]
 
 \section{PAPLC}
-
-\citet{Por20} 
 %Emiel came up with concept, 2019, has unpub paper and SPIE talk...
+Phase-apodized-pupil Lyot Coronagraphs for Arbitrary Telescope Pupils \citep{Por20}
+
+SCAR paper I \citep{Por20a}
 
 Haffert 2023 paper
 
-SCOOB 2021 AZ space test bed \citep{Ashcraft22} using a knife edgs SPIE proceeding. PAPLC. \citep{vanGorkom22}.
+SCOOB 2021 AZ space test bed \citep{Ashcraft22} using a knife edge SPIE proceeding. PAPLC. \citep{vanGorkom22}.
 
 Figure: SH show unpublished on sky results with PAPLC.
 
@@ -1010,15 +970,15 @@ Petal mode problem for ELT: due to the spiders, they fragment the pupil into uns
 
 Even monolithic mirrors have this problem too with thick enough secondary support structures, known as the island effect \citep{Leboulleux22,Leboulleux22a}
 
-\section{Integrated optics}
+\section{Photonic versus bulk optics}
 
 Optics change the complex amplitudes of wavefronts as they propagate through coronagraphs.
 %
-Macro optics, typically many thousands of times larger than the wavelength of light they shape, require precise and stable optomechanical components to accurately modify these wavefronts.
+Classical optics (referred to as `bulk optics') are typically many thousands of times larger than the wavelength of light they shape and require precise and stable optomechanical components to accurately modify these wavefronts.
 %
-Integrated optics enable direct manipulation of the complex electric fields at the scale of the wavelengths used.
+Integrated (or `photonic') optics enable direct manipulation of the complex electric fields at the scale of the wavelengths used.
 %
-Miniaturisation of previously discrete macro optics and their manufacture within a single homogeneous substrate removes both the requirement for separate optomechanical alignment and temperature related effects.
+Miniaturisation of previously discrete macro optics and their manufacture within a single homogeneous substrate removes both the requirement for separate optomechanical alignment and temperature related misalignment that is associated with their mechanical mounts.
 %
 
 Beam combiners that are required for optical and NIR interferometers require temperature and vibration controlled optical tables with sub-wavelength stability tolerances and alignment for the beamsplitters and associated optics.
@@ -1027,33 +987,34 @@ Manufacture of waveguides within optical materials that perform the beam divisio
 %
 Early examples include beam combiners for optical astronomical interferometers \citep[for example the IOTA/IONIC beam combiner; ][]{Berger01} and photonic lanterns, see \citet{Leon-Saval10} and references therein.
 %
-Typical coupling efficiencies are on the order of 10\%, increasing to 90\% for more recent designs.
+Typical coupling efficiencies are on the order of 10\%, increasing to 90\% for more recent designs, for example the efficient injection from large telescopes into single-mode fibres \citep{Jovanovic17}.
+%
+Full electromagnetic propagation is required to design and evaluate these photonic systems, but their complexity also enables new optical designs which can be combined to form compact, robust instrumentation, see the reviews in \citet{Minardi21,Jovanovic23}.
+%
+Photonic devices that are relevant for high contrast imaging applications include:
 
-Advances in industry and the requirement for increasingly complex and denser signal transmission lines from the telecommunications industries have made more complex designs realisable for astronomical optics.
+{\bf Photonic Lanterns: } Coupling multi-mode light into monomode photonics is done using photonic lanterns, a multimode input converted into the areal equivalent of a number of single mode optical channels, \citep{Norris22} and see the on-sky demonstration with \citep{Norris20}, and nature one \cite{Norris20a},
+
+{\bf Closed Ring Resonators: } A device equivalent to Fabry-Perot etalons can be constructed by etching an elongated loop with one half of the loop parallel to the waveguide - frustrated transmission between the waveguide and the closed loop is modulated as a function of the number of integer wavelengths around the closed loop (REF REF REF).
+
+{\bf Bragg gratings: } than enable modulation of diffraction \citep{FaggingerAuer24}.
+
+All these photonic concepts are being considered for the design of coronagraphs for next generation space telescopes in order to image and characterise exoplanets, exploring concepts of different combinations of photonic and bulk optics \citep{Desai23a}.
+
+%Photonic devices that combine several aspects of these modules include PIMMS: a photonic integrated multimode microspectrograph from \citet{Bland-Hawthorn10}.
 %
-The optical designs are considerably more challenging, since geometrical optic limits are not a valid approximation.
+%Focal Plane Wavefront Sensing with Photonic Lanterns are demonstrated in \citep{Lin20} and their theory \citep{Lin22}, nulling with a mode selective photonic lantern \citep{Xin22}.
+
+
+%Advances in industry and the requirement for increasingly complex and denser signal transmission lines from the telecommunications industries have made more complex designs realisable for astronomical optics.
 %
-Full electromagnetic propogation is required to design and evalute these microoptic systems, but their complexity also enables new types of optical interactions; devices equivalent to Fabry-Perot etalons can be constructed by etching an elongated loop with one half of the loop parallel to the waveguide - frustrated transmission between the waveguide and the closed loop is modulated as a function of the number of integer wavelengths around the closed loop (REF REF REF).
+%The optical designs are considerably more challenging, since geometrical optic limits are not a valid approximation.
+%
+ 
 %https://pure.uhi.ac.uk/en/publications/an-integrated-optics-3-way-beam-combiner-for-iota (REF) 
-
-PIMMS: photonic integrated multimode microspectrograph from \citet{Bland-Hawthorn10}.
-
-Barnaby Norris photonic lanterns \citep{Norris22} and on-sky demo \citep{Norris20} and nature one \cite{Norris20a}, FPWFS with photonic lanterns \citep{Lin20} and their theory \citep{Lin22}.
-
-Nulling with a mode selective photonic lantern 2022 \citep{Xin22}.
-
-Efficient injection from large telescopes into single-mode fibres: Enabling the era of ultra-precision astronomy \citep{Jovanovic17}
-
-Photonic optimised coronagraphs and Integrated photonic-based coronagraphic systems for future space telescopes
- \citep{Desai23a}.
 
 %% Emiel - presented at SPIE 2024 on integrated coronagraphs and photonics - NOTE ONLINE YET.
 
-Bragg gratings to get modulate diffraction \citep{FaggingerAuer24}.
-
-Phase-apodized-pupil Lyot Coronagraphs for Arbitrary Telescope Pupils \citep{Por20}
-
-SCAR paper I \citep{Por20a}
 
 \section{Quantum optimal detection}
 
