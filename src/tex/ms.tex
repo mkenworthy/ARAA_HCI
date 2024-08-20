@@ -19,7 +19,7 @@
   urlcolor=blue,
   pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
 }
-
+\usepackage{ circuitikz }
 
 \newcommand{\kms}{km~s$^{-1}$}
 \newcommand{\mum}{$\mu$m}
@@ -623,7 +623,42 @@ In reality, however, there are several factors that cause deviations of the wave
 
 Adaptive optics sense the turbulence introduced by the Earth's atmosphere using Wavefront Sensors, reconstruct an estimate of this turbulence, and use an electronically actuated deformable optical element - typically a Deformable Mirror (DM)\footnote{There are several other optomechanical devices that exploit other optically active principles to modify a wavefront.}) - within the instrument to modify the incoming turbulent wavefront and flatten it.
 %
-With the DM upstream of the WFS, and a control computer providing the calculation of wavefront measured by the WFS and applying this correction to the DM, this forms a {\bf closed loop}, where the response of the DM's correction is seen by the WFS in the instrument.
+With the DM upstream of the WFS, and a control computer providing the calculation of wavefront measured by the WFS and applying this correction to the DM, this forms a {\bf closed loop}, where the response of the DM's correction is seen by the WFS in the instrument, see Figure~\ref{fig:aosystem}.
+%
+Many AO systems take advantage of the fact that the optical path difference (OPD) introduced by the Earth's atmosphere above ground based telescopes is achromatic, despite OPD amplitudes of several tens of microns across large telescope apertures.
+%
+A consequence is that a wavefront measurement at a shorter wavelength (typically at optical or NIR wavelengths) will provide correction for all longer (science) wavelengths.
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+\begin{scope}[rotate around={-90:(3.25,14)}]
+\draw[domain=3.25:5.75,samples=100,smooth] plot (\x,{0.2*sin(5.44*\x r -2.25 r ) +14});
+\end{scope}
+\begin{scope}[rotate around={-90:(3.5,14)}]
+\draw[domain=3.5:6,samples=100,smooth] plot (\x,{0.2*sin(5.44*\x r -2.5 r ) +14});
+\end{scope}
+\begin{scope}[rotate around={-90:(3.75,14)}]
+\draw[domain=3.75:6.25,samples=100,smooth] plot (\x,{0.2*sin(5.44*\x r -2.75 r ) +14});
+\end{scope}
+\draw [ rotate around={50:(7.375, 13.25)}] (7,14.75) rectangle (7.75,11.75);
+\draw [, rounded corners = 6.6, rotate around={50:(7.125, 9.25)}] (6.75,10.75) rectangle (7.5,7.75);
+\draw  (10.75,9.5) ellipse (0.25cm and 1.25cm);
+\draw [ fill={rgb,255:red,238; green,255; blue,149} , rotate around={-182:(13.375, 9.75)}] (13,11.25) rectangle (13.75,8.25);
+\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +11.5});
+\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +11});
+\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +11.25});
+\draw[domain=6:8.25,samples=100,smooth] plot (\x,{0.1*sin(3.01*\x r -5 r ) +10.75});
+\node [font=\large] at (13.25,11.5) {Science Camera};
+\node [font=\large, rotate around={-44:(0,0)}] at (6.75,8.75) {Wavefront Sensor};
+\node [font=\large, rotate around={-38:(0,0)}] at (9.25,14) {Deformable Mirror};
+\end{circuitikz}
+}%
+ \caption{AO system schematic \textcolor{red}{TODO: label up halos and run for longer}}
+  \label{fig:aosystem}
+\end{figure}
 
 The Earth's atmosphere is highly dynamic and changes on a timescale of milliseconds, but the wavefront reconstruction and correction on the DM is not instantaneous, leading to a small but significant time lag between measurement and the application of the correction.
 %
@@ -631,47 +666,77 @@ Adaptive optics is a complex and mature field in its own right, covering atmosph
 %
 For our purpose, we assume that ground based instruments have a high order adaptive optics system providing high order wavefront correction, resulting in a time evolving screen of residual phase errors that change on a timescale of milliseconds and have $\lambda/20$ r.m.s.
 
-\subsection{Non-common path aberrations}
-
-Aberrations can be sensed and corrected to the point of the last wavefront sensor in the optical path other high contrast instrument.
+We simulate a typical 8m telescope high order AO system feeding a high contrast instrument that contains an ideal coronagraph: the DM has 40 actuators across its diameter, resulting in a control halo 20 diffraction widths in diameter. 
 %
-Many AO systems take advantage of the fact that the optical path difference (OPD) introduced by the Earth's atmopshere above groud based telescopes is achromatic, despite this OPD
+The closed loop speed of the AO system is 1kHz, with wavefront sensor observing at 0.5 microns and the science camera wavelength of 1.65 microns.
+%
+A single layer of turbulent atmosphere with $r_0$ of $2m$ at 2.2 microns and speed 10 m/s is simulated to show the presence of the wind-driven halo.
+%
+In Figure~\ref{fig:ao}, a plume of speckles is seen around the central image, a result of the unsensed atmosphere entering the telescope pupil before it is corrected by the AO system. 
+%
+Instantaneous speckles average out over time to an azimuthally symmetric halo, with an extended wind-driven plume that can be time varying in orientation and even asymmetric in the presence of strong turbulence (REF Emiel's paper on wind driven turbulence).
+
+% https://docs.hcipy.org/dev/tutorials/ShackHartmannWFS/ShackHartmannWFS.html
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ao.png}
+  \caption{Closed loop of an AO system showing features from the loop \textcolor{red}{TODO: label up halos and run for longer}}
+  \label{fig:ao}
+\end{figure}
+
+\subsection{Non-Common Path Aberrations}
+
+Aberrations can be sensed and corrected to the point of the last wavefront sensor in the optical path in the high contrast instrument.
+%
+Aberrations between this WFS and the final science camera focal plane are referred to Non-Common Path Aberrations (NCPAs).
+%
+NCPAs are time varying over a wide range of timescales, with lab based measurements showing decorrelation timescales from seconds to minutes and hours \citep{Martinez12,Males21}.
+%
+First generation HC instruments provided little to no active NCPA measurement and mitigation strategies.
+%
+As the first generation of instruments showed that the presence of NCPAs were a significant impact on the sensitivity of these instruments at smaller IWAs, reducing the predicted contrast from their designs.
+%
+As a consequence, subsequent instrument designs have focused on differing mitigation strategies, which include:
+\begin{itemize}
+    \item Minimising the number of optics that can contribute to the NCPA (by making the optics optomechanically and thermally stable) (REF METIS Design Absil)
+    \item Developing algorithms that provide estimates of the science camera PSFs at all times during the science camera exposure (REF review)
+    \item Predictive control and speckle lifetime \citep{Males18}.
+    \item Developing methods for estimating the wavefront at the final science camera focal plane.
+\end{itemize}
  
 {\bf TODO MAK}
 
 
 The conceptual design of GMagAO-X by \citet{Males22}.
 
-Lives of speckles by \citet{Males21}.
+%Lives of speckles by \citet{Males21}.
 
 %Jared's AO4 ELT paper was a good talk, but this is the argument to limit to 30 parsec.
 
-Fundamental sensitivity limite on apertures with PIAA-ZWFS on \citet{Haffert23}
+Fundamental sensitivity limited on apertures with PIAA-ZWFS on \citet{Haffert23}
 
-Haffert 2023 talk mentioned this ore we can talk about it below:
+%Haffert 2023 talk mentioned this ore we can talk about it below:
 
 %Diffraction limit of telescope is almost fundamental limit. The HZ stays fixed in linear space, but the angular size shrinks with distance of star from Sun.
 
-Apparent magnitude of the stars goes down, AO performance goes down, halo fills in.
+%Apparent magnitude of the stars goes down, AO performance goes down, halo fills in.
 
 Extreme Adaptive Optics ARAA in \citet{Guyon18}
 
 Guoyn 2005 fundamental WFS in \citet{Guyon05-1}
 
-Jared and Guyon 2018/19 on predictive control and speckle lifetime - \citep{Males18}
+%Jared and Guyon 2018/19 on predictive control and speckle lifetime - \citep{Males18}
 
 
-Jared 2020 speckle lifetime \citep{Males21}
+%Jared 2020 speckle lifetime \citep{Males21}
 
-self coherent camera (Pierre? Baudoz 2006 original \citep{Baudoz06}) refael Galicher paper from 2010 instead/as well Self-coherent camera as a focal plane wavefront sensor: simul \citep{Galicher10}.
+Self coherent camera (Pierre? Baudoz 2006 original \citep{Baudoz06}) refael Galicher paper from 2010 instead/as well Self-coherent camera as a focal plane wavefront sensor: simul \citep{Galicher10}.
 
 
 
 
 2022 on sky EFC axel potier \citep{Potier22} and the first paper in the series on VLT/SPHERE is \citep{Potier20} and on sky efc with FQPhase Mask to demo on-sky EFC is paper III and is \citet{Galicher24}.
-
-
-
 
 \section{ELTs for M dwarf exoplanets}
 
