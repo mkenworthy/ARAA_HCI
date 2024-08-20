@@ -4,8 +4,8 @@ import paths
 from astropy.io import ascii
 import astropy
 
-import matplotlib as mpl
-mpl.use('MacOSX')
+#import matplotlib as mpl
+#mpl.use('MacOSX')
 
 
 t = ascii.read(str(paths.data/'J_ApJS_271_55/table4.dat'), # weird str() used because PosixPaths() error.. bug in ascii.read
