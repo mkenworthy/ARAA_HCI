@@ -675,9 +675,15 @@ As a consequence, subsequent instrument designs have focused on differing  appro
     \item Developing methods for estimating the wavefront at the final science camera focal plane.
 \end{itemize}
 
-Estimating at the scicence camera focal plane removes the NCPA entirely, but it is dependent on the robustness and sensitivity of the estimation method.
+Estimating at the science camera focal plane removes the NCPA entirely, but it is dependent on the robustness and sensitivity of the estimation method.
 %
-By taking some of the coherent light from the Airy core of the star, this light can be sent off axis in the Lyot plane to form 
+The Self-Coherent Camera \citep[SCC; ][]{Baudoz06} principle takes light from the telescope, splits it into two beams, filter one beam through a pinhole and recombine the two beams in a Fizeau configuration in the science camera focal plane.
+%
+All the speckles in the focal plane are subsequently modulated by a set of cosine fringes, the relative position of the fringes encoding the complex amplitude of the electric field of the PSF.
+%
+Any exoplanets or other point sources emit photons that are incoherent with the speckles, and so fringes do not appear at the location of the planet.
+%
+Simulations demonstrate \citep{Galicher10} bandwidths of up to 5\% and contrasts possible down to 1e-10.
  
 {\bf TODO MAK}
 %Jared's AO4 ELT paper was a good talk, but this is the argument to limit to 30 parsec.
@@ -692,12 +698,16 @@ By taking some of the coherent light from the Airy core of the star, this light 
 
 %Jared 2020 speckle lifetime \citep{Males21}
 
-Self coherent camera (Pierre? Baudoz 2006 original \citep{Baudoz06}) refael Galicher paper from 2010 instead/as well Self-coherent camera as a focal plane wavefront sensor: simul \citep{Galicher10}.
+%Self coherent camera (Pierre? Baudoz 2006 original \citep{Baudoz06}) refael Galicher paper from 2010 instead/as well Self-coherent camera as a focal plane wavefront sensor: simul .
+
+Electric Field Conjugation has been tested on the internal sources of SPHERE (a contrast of $5^{-7}$ at 150 mas from the optical axis in a few minutes using the SPHERE instrument).
+%
+This was then demonstrated on-sky with the APLC coronagraph and SPHERE, using an iterative scheme to get a dark hole cleared out on one side of the science camera PSF.
+
+%2022 on sky EFC axel potier \citep{Potier22} and the first paper in the series on VLT/SPHERE is \citep{Potier20} and 
 
 
-
-
-2022 on sky EFC axel potier \citep{Potier22} and the first paper in the series on VLT/SPHERE is \citep{Potier20} and on sky efc with FQPhase Mask to demo on-sky EFC is paper III and is \citet{Galicher24}.
+XXXX on sky efc with FQPhase Mask to demo on-sky EFC is paper III and is \citet{Galicher24}.
 
 \section{ELTs for M dwarf exoplanets}
 
