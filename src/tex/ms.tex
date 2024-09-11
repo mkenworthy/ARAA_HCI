@@ -42,8 +42,8 @@
 \usepackage[nolist,nohyperlinks]{acronym}
 
 \begin{acronym}
-\acro{aplc}[APLC] {Apodized Phase Lyot Coronagraph}
-\acro{paplc}[PAPLC] {Phase Apodized Phase Lyot Coronagraph}
+    \acro{aplc}[APLC]   {Apodized Phase Lyot Coronagraph}
+    \acro{paplc}[PAPLC] {Phase Apodized Phase Lyot Coronagraph}
     \acro  {psf}[PSF]   {Point Spread Function}
     \acro  {iwa}[IWA]   {Inner Working Angle}
     \acro  {owa}[OWA]   {Outer Working Angle}
@@ -475,7 +475,7 @@ We show the \acp{psf} (defined as the square of the Fourier transform of the tel
 
 \begin{figure}[ht]
   \centering
-  %\script{plot_simple_apertures.py}
+  \script{plot_simple_apertures.py}
   \includegraphics[width=1.0\linewidth]{figures/simple_apertures.pdf}
   \caption{Telescope pupils and their \acp{psf}. 
   % 
@@ -855,7 +855,7 @@ and a perfect null is achieved when $(t-1)\gamma = -1$. The normal pupil illumin
 
 \begin{figure}[ht]
   \centering
-  \script{plot_scale_invariant_masks.py}
+  \script{plot_fpm_eigenfunction.py}
   \includegraphics[width=\linewidth]{figures/fpm_eigenfunction.pdf}
   \caption{The pupil amplitude distribution that are eigen functions of certain \ac{fpm} sizes. The top row is the unapodized pupil function, which is the pupil eigenfunction for an infinite \ac{fpm} size. The middle and bottom rows show the eigenfunctions for a 1 and 2 \ld{} \ac{fpm} diameter, respectively. Each column represents a different telescope with from left to right; a clear aperture, the VLT, the \ac{gmt} and finally the ELT.}
   \label{fig:fpm_eigenfunctions}
@@ -1091,7 +1091,7 @@ For the ELT, all three first light instruments have HCI modes: METIS \citep{Bran
 
 \begin{figure}[ht]
   \centering
-%  \script{plot_telescope_psfs.py}
+  \script{plot_telescope_psfs.py}
   \includegraphics[width=1.0\linewidth]{figures/telescope_psfs.pdf}
   \caption{Telescope pupils and their \acp{psf} for several ground and space based telescopes.}
   \label{fig:telpsfs}
