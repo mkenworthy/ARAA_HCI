@@ -475,12 +475,12 @@ We show the \acp{psf} (defined as the square of the Fourier transform of the tel
 
 \begin{figure}[ht]
   \centering
-  \script{plot_simple_apertures.py}
-  \includegraphics[width=1.0\linewidth]{figures/simple_apertures.pdf}
-  \caption{Telescope pupils and their \acp{psf}. 
+  \script{plot_telescope_psfs.py}
+  \includegraphics[width=1.0\linewidth]{figures/telescope_psfs.pdf}
+  \caption{Telescope pupils and their \acp{psf} for several ground and space based telescopes.
   % 
   \acp{psf} have been normalised to the peak of the \ac{psf} and are on a logarithmic scale from 0 to -6.}
-  \label{fig:simple_apertures}
+  \label{fig:telpsfs}
 \end{figure}
 
 
@@ -1088,14 +1088,6 @@ The large apertures mean that the \ac{iwa} are on the order of 10mas for H band 
 For the ELT, all three first light instruments have HCI modes: METIS \citep{Brandl21,Kenworthy16,Carlomagno20}, MICADO (REF REF) and HARMONI (REF REF) that include coronagraphs mentioned earlier in this review.
 %
 
-
-\begin{figure}[ht]
-  \centering
-  \script{plot_telescope_psfs.py}
-  \includegraphics[width=1.0\linewidth]{figures/telescope_psfs.pdf}
-  \caption{Telescope pupils and their \acp{psf} for several ground and space based telescopes.}
-  \label{fig:telpsfs}
-\end{figure}
 
 %
 The challenges of atmospheric correction due to the wind driven halo, atmospheric dispersion, and the water vapour content of the Earth's atmosphere mean that ground based telescopes will search for HZ planets around nearby M dwarfs.
