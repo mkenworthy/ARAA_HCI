@@ -1,7 +1,6 @@
 from hcipy import *
 import numpy as np
 from matplotlib import pyplot as plt
-import paths
 
 def find_eigenmode(aperture, mask_diameter, tolerance=1e-8):
 	grid = aperture.grid
@@ -32,36 +31,35 @@ def find_eigenmode(aperture, mask_diameter, tolerance=1e-8):
 
 	return amplitude
 
-Dtel = 1
-grid = make_pupil_grid(512, 1.1)
+if __name__ == "__main__":
+	Dtel = 1
+	grid = make_pupil_grid(512, 1.1)
+	
+	plt.figure(figsize=(12,3))
 
-aperture_functions = [make_circular_aperture(Dtel), make_vlt_aperture(normalized=True), make_gmt_aperture(normalized=True), make_elt_aperture(normalized=True)]
-
-labels = []
-plt.figure(figsize=(12,9))
-for ai, aperture_function in enumerate(aperture_functions):
+	aperture_function = make_gmt_aperture(normalized=True)
 	aperture = evaluate_supersampled(aperture_function, grid, 4)
 	weak_apodized_aperture = find_eigenmode(aperture, 1)
 	strong_apodized_aperture = find_eigenmode(aperture, 2)
 
-	plt.subplot(3, 4, 1 + ai)
-	imshow_field(aperture, cmap='gray')
+	plt.subplot(1, 3, 1)
+	imshow_field(aperture / aperture.max(), vmin=0, vmax=1, cmap='gray')
+	plt.colorbar()
 	plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
-	if ai == 0:
-		plt.ylabel('No apodization', fontsize=18)
+	plt.title('No apodization', fontsize=18)
 
-	plt.subplot(3, 4, 5 + ai)
-	imshow_field(weak_apodized_aperture, cmap='gray')
+	plt.subplot(1, 3, 2)
+	imshow_field(weak_apodized_aperture / weak_apodized_aperture.max(), vmin=0, vmax=1, cmap='gray')
+	plt.colorbar()
 	plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
-	if ai == 0:
-		plt.ylabel('FPM diameter = 1 $\lambda / D$', fontsize=18)
+	plt.title('FPM diameter = 1 $\lambda / D$', fontsize=18)
 	
-	plt.subplot(3, 4, 9 + ai)
-	imshow_field(strong_apodized_aperture, cmap='gray')
+	plt.subplot(1, 3, 3)
+	imshow_field(strong_apodized_aperture / strong_apodized_aperture.max(), vmin=0, vmax=1, cmap='gray')
+	plt.colorbar()
 	plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
-	if ai == 0:
-		plt.ylabel('FPM diameter = 2 $\lambda / D$', fontsize=18)
-
-plt.tight_layout()
-plt.savefig(paths.figures/'fpm_eigenfunction.pdf')
-#plt.show()
+	plt.title('FPM diameter = 2 $\lambda / D$', fontsize=18)
+	
+	plt.tight_layout()
+	plt.savefig('./fpm_eigenfunction.pdf')
+	plt.show()
