@@ -790,6 +790,18 @@ Optimizations are also generalised so that they can be designed for arbitrary te
 %
 Along with their achromatic performance, this makes pupil apodization  suitable for \ac{elt} telescope pupils and enables dynamic coronagraphs using micromachine mirrors \citep{Leboulleux22b,Carlotti23} to account for a dynamically changing pupil (e.g. missing and swapped mirror segments).
 
+
+\begin{figure}[ht]
+  \centering
+  \script{plot_spp.py}
+  \includegraphics[width=\linewidth]{figures/spp.pdf}
+  \caption{The SPP}
+  \label{fig:coro_spp}
+\end{figure}
+
+
+
+
 Another approach is to apodize in phase only, with the pupil set by the geometry of the telescope pupil \citep{Codona04}; this was realised and subsequently demonstrated on-sky with the Apodizing Phase Plate \citep[APP; ][]{Kenworthy07} which used variations in the thickness of a piece of diamond turned Zinc Selenide to impart a phase shift across the pupil with a central wavelength of 4 microns.
 %
 An APP built and installed in NAOS/Conica VLT camera \citep{Kenworthy10} led to the first coronagraphic image of Beta~Pictoris~b \citep{Quanz10} and the direct imaging discovery of the exoplanet HD~100546~b \citep{Quanz13}.
@@ -907,6 +919,15 @@ Mention that this is the baseline for GMAGAOX (find 2024 SPIE Males paper).
 
 They have been implemented in the lab - SCOOB 2021 AZ space test bed \citep{Ashcraft22} using a knife edge SPIE proceeding. \ac{aplc}. \citep{vanGorkom22}.
 
+
+\begin{figure}[ht]
+  \centering
+  \script{plot_paplc.py}
+  \includegraphics[width=\linewidth]{figures/paplc.pdf}
+  \caption{The PAPLC.}
+  \label{fig:coro_paplc}
+\end{figure}
+
 \subsection{The Hybrid Lyot Coronagraph (HLC)}
 
 Mention the Roman design.
@@ -947,6 +968,13 @@ Most recently, the laboratory demonstration of high contrast with the PIAACMC co
 
 Ultimately the rejected light can form the basis for a \ac{wfs} to keep the PIAA pointed and aligned with the science target, and an integrated \ac{wfs} and coronagraph with PIAACMC has been demonstrated \citep{Haffert23a}.
 
+\begin{figure}[ht]
+  \centering
+  \script{plot_piaacmc.py}
+  \includegraphics[width=\linewidth]{figures/piaacmc.pdf}
+  \caption{The PIAACMC}
+  \label{fig:coro_piaacmc}
+\end{figure}
 
 \section{Spatial mode demultiplexing}
 
