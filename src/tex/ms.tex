@@ -798,6 +798,17 @@ The original algorithms found solutions with $180^o$ dark `D' shaped regions nex
 %
 The first APP optics were chromatic: the OPD was a function of the refractive index of the transmissive material, with the suppression decreasing with increasing bandwidth.
 
+
+\begin{figure}[ht]
+  \centering
+  \script{plot_app.py}
+  \includegraphics[width=0.8\linewidth]{figures/app.pdf}
+  \caption{The APP.}
+  \label{fig:coro_app}
+\end{figure}
+
+
+
 Achromatic phase shifts can be implemented using the principle of geometric phase: the vector-APP \citep[vAPP; ][]{Snik12} replaces the classical phase pattern ($\phi_{\textrm{c}}[u,v] =
 n(\lambda) \Delta d[u,v]$) with the ``geometric phase'' \citep[known as the Pancharatnam-Berry phase; ][]{Pancharatnam,Berry}.
 %
@@ -864,7 +875,24 @@ and a perfect null is achieved when $(t-1)\gamma = -1$. The normal pupil illumin
 The incoming pupil amplitude must therefore be apodized. This insight led to the development of various coronagraphs with different combinations of phase/amplitude pupil apodization and opaque/phase shifting \acp{fpm}.
 
 \subsection{The Apodized Pupil Lyot Coronagraph (APLC)}
-The first modification of the Lyot coronagraph that people experimented with was the \ac{aplc}. The \ac{aplc} uses achromatic grey-scale pupil apodizers to better match the entrance amplitude distribution to the \ac{fpm}. These coronagraphs are quite robust and in use in many different high-contrast imaging instruments such as \ac{sphere} \citep{beuzit2019sphere}. Currently, there is still active research in the optimization strategies for the \ac{aplc} such as for future segmented space telescopes \citep{zimmerman2016lyot} and for upgrades of ground-based instruments \citep{nickson2022aplc}. The major downside of the \ac{aplc} is the lower transmission due to absorption in the apodizer.
+
+The first modification of the Lyot coronagraph that people experimented with was the \ac{aplc}.
+%
+The \ac{aplc} uses achromatic grey-scale pupil apodizers to better match the entrance amplitude distribution to the \ac{fpm} (see Figure~\ref{fig:coro_aplc}).
+%
+These coronagraphs are quite robust and in use in many different high-contrast imaging instruments such as \ac{sphere} \citep{beuzit2019sphere}.
+%
+Currently, there is still active research in the optimization strategies for the \ac{aplc} such as for future segmented space telescopes \citep{zimmerman2016lyot} and for upgrades of ground-based instruments \citep{nickson2022aplc}.
+%
+The major downside of the \ac{aplc} is the lower transmission due to absorption in the apodizer.
+
+\begin{figure}[ht]
+  \centering
+  \script{plot_aplc.py}
+  \includegraphics[width=0.8\linewidth]{figures/aplc.pdf}
+  \caption{The APLC.}
+  \label{fig:coro_aplc}
+\end{figure}
 
 
 \subsection{The Phase Apodized Pupil Lyot Coronagraph (PAPLC)}
