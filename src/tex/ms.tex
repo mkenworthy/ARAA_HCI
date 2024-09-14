@@ -637,7 +637,7 @@ C = \frac{\eta_*(\vec{r})}{\eta_p(\vec{r})}.
 \end{equation}
 Here $\eta_*(\vec{r})$ is the fractional throughput of the star at focal plane position $\vec{r}$ integrated over a photometric aperture.
 %
-This is then divided by $\eta_p(\vec{r})$ the fractional throughput of the planet in the same photometric aperture.
+This is then divided by $\eta_p(\vec{r})$ the fractional throughput of the planet in the same photometric aperture (see~Figure~\ref{fig:planet_throughput}).
 %
 This normalizes the contrast w.r.t. the throughput of the planet, which is important because the planet throughput usually varies as function of angular separation.
 %
@@ -646,6 +646,19 @@ Both the contrast $C$ and $\eta_p(\vec{r})$ need to be included in the optimizat
 The first to make sure that the starlight is nulled and the second to make sure that the planet light is maintained.
 %
 This optimization has to be done over a certain spectral bandwidth $\Delta \lambda$.
+
+
+
+\begin{figure}[ht]
+  \script{plot_planet_throughput.py}
+  \centering
+  \includegraphics[width=1.0\linewidth]{figures/planet_throughput.pdf}
+  \caption{Definition of planet throughput, showing the integrated flux over an aperture with increasing distance from the star.}
+  \label{fig:planet_throughput}
+\end{figure}
+
+
+
 
 The corongraphs that are designed with only the previous set of optimization targets are not optimal in real environments.
 %
@@ -740,12 +753,26 @@ The grating manufacture limits the \ac{agpm} to a charge 2 vortex, but higher ch
 %
 A more general challenge is that the \ac{ovc} diffracts all the light out of the \ac{pp} only if the telescope pupil is unobstructed.
 %
-Secondary support structures and a centrally obscured pupil scatter significant amounts of light back into the \ac{pp}.
+Secondary support structures and a centrally obscured pupil scatter significant amounts of light back into the \ac{pp} (see Figure~\ref{fig:ravc}).
 %
 A suitable Lyot stop can block this stellar leakage, but at a cost of planet throughput.
 %
 The impact of the central obscuration can be mitigated with the use of a telescope pupil grey apodizer to make a \acl{ravc} \citep[\acs{ravc}; ][]{Mawet13a}.
 %
+
+
+
+\begin{figure}[ht]
+  \script{plot_ring_apodized_vortex.py}
+  \centering
+  \includegraphics[width=1.0\linewidth]{figures/ring_apodized_vortex.pdf}
+  \caption{The Ring Apodized Vortex Coronagraph. The top row shows the ideal case of the \ac{ovc} with an unobstructed aperture, and the effect of the secondary obscuration, and the bottom row is the RAVC with the apodized pupil aperture.}
+  \label{fig:ravc}
+\end{figure}
+
+
+
+
 The scale invariant phase masks of these two coronagraphs are shown in Figure \ref{fig:scale_invariant}.
 
 \begin{figure}[ht]
@@ -1305,6 +1332,14 @@ A and A paper detailing it in Confusion in differential piston measurement with 
 
 Experimental valid of piston control with pyramid \ac{wfs} is in \citet{Bertrou-Cantou23}. 
 
+
+\begin{figure}[ht]
+  \script{segment_phasing_errors.py}
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/phasing_errors.pdf}
+  \caption{Imapct of piston errors on the coronagraphic image from the ELT.}
+  \label{fig:pistonerror}
+\end{figure}
 
 \todo{Figure: SH: segments, and segment piston errors, impact on dark hole. increase RMS with a slider, then see the dark hole filled in.}
 
