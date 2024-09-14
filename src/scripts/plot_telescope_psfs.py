@@ -70,7 +70,7 @@ for i in range(len(aperture_list)):
   imshow_psf(psf, vmax=1, vmin=1e-6,ax=aaa[2*i+1],colorbar=False)
   aaa[2*i+1].text(-14,10,label,color='white',fontsize=8)
 
-
+plt.tight_layout()
 plt.draw()
 #plt.show()
 plt.savefig(paths.figures/'telescope_psfs.pdf')
