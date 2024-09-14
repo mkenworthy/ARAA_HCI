@@ -301,11 +301,11 @@ The region around a star where liquid water can exist on the surface of a terres
 
 The markers for biosignatures also set the parameters (such as wavelength and bandwidth) that form part of the design decision.
 %
-Spectra of Earthshine (light reflected from the Earth by the non-Sun lit portion of the Moon) shows \ce{O2}, \ce{O3}, \ce{CH4} and \ce{H2O} \citep{Turnbull06}, and there are many discussions about the possible biomarker molecules that should be searched for and characterised as evidence for biosignatures \citep[see the reviews of ][]{2016AsBio..16..465S,2017ARAA..55..433K,2018AsBio..18..663S}.
+Spectra of Earthshine (light reflected from the Earth by the non-Sun lit portion of the Moon) from 0.5 to 2.4 microns show \ce{O2}, \ce{O3}, \ce{CO2}, \ce{CH4} and \ce{H2O} \citep{Turnbull06}, and there are many discussions about the possible biomarker molecules that should be searched for and characterised as evidence for biosignatures \citep[see the reviews of ][]{2016AsBio..16..465S,2017ARAA..55..433K,2018AsBio..18..663S}.
 %
 %REFS seager, keltenegger, 2018 paper from seager student about false negatives for detecting life, we need multiple signatures. ??? is it this paper? "Molecular simulations for the spectroscopic detection of atmospheric gases" by \citet{Sousa-Silva19}.
 %
-It is clear that the unambiguous detection of life will require not one singular detection of a molecule, but will be the combination of several different pieces of evidence.
+It is clear that the unambiguous detection of life will require not one singular detection of a molecule, but will be the combination of several different lines of evidence.
 %
 We focus on the technical challenges for imaging a rocky terrestrial planet around a nearby star in our Galaxy.
 
@@ -381,7 +381,17 @@ This time-dependent interaction is described by Maxwell's equations,
 \nabla\cdot\mathcal{D}                 \quad & = \quad 0.                         & \quad \text{(Coulomb's law)}
 \end{aligned}
 \end{equation}
-This form of Maxwell's equations is in the material form without any charge and current sources. The material form is used to describe the propagation of electromagnetic fields inside matter. This set of equations is completed by describing the particular matter of the medium with the constitutive relations, $D=\epsilon E$ and $B=\mu H$. Here $\epsilon$ and $\mu$ are the permittivity and magnetic permeability, respectively. The wave equation for electromagnetic waves can be derived by taking the curl of Ampere's law. This gives us the classic wave equation if we assume that the EM wave propagates in isotropic and homogeneous materials,
+This form of Maxwell's equations is in the material form without any charge and current sources.
+%
+The material form is used to describe the propagation of electromagnetic fields inside matter.
+%
+This set of equations is completed by describing the particular matter of the medium with the constitutive relations, $D=\epsilon E$ and $B=\mu H$. 
+%
+Here $\epsilon$ and $\mu$ are the permittivity and magnetic permeability, respectively.
+%
+The wave equation for electromagnetic waves can be derived by taking the curl of Ampere's law.
+%
+This gives us the classic wave equation if we assume that the EM wave propagates in isotropic and homogeneous materials,
 \begin{equation}
 \label{eq:wave_eq}
 \begin{aligned}
@@ -392,15 +402,27 @@ This form of Maxwell's equations is in the material form without any charge and 
 \mu \epsilon \frac{\partial^2 \mathcal{E}}{\partial t^2} - \nabla^2\mathcal{E} = 0 .
 \end{aligned}
 \end{equation}
-Let's now consider a purely monochromatic EM wave with frequency $\omega$. The wave function is then $\mathcal{E}=\psi(r) e^{iwt}$ with $\psi(r)$ describing the spatial distribution. Substituting this relation into Equation \ref{eq:wave_eq},
+We consider a purely monochromatic EM wave with frequency $\omega$.
+%
+The wave function is then $\mathcal{E}=\psi(r) e^{iwt}$ with $\psi(r)$ describing the spatial distribution.
+%
+Substituting this relation into Equation \ref{eq:wave_eq},
 \begin{equation}
 \nabla^2\mathcal{E} +\mu \epsilon \omega^2 \mathcal{E} = 0.
 \end{equation}
-The usual definition of the permittivity and permeability are $\epsilon=\epsilon_r \epsilon_0$ and $\mu=\mu_r \mu_0$ with $\epsilon_r$ and $\mu_r$ the relative permittivity and permeability compared to that of vacuum, $\epsilon_0$ and $\mu_0$. In optics most glasses and materials are defined by their refractive index $n$ which is related to permittivity as $\epsilon_r = n^2$ and many of these are also non-magnetic which means that $\mu_r=1$. Substituting this will give us the classic Helmholtz equation
+The usual definition of the permittivity and permeability are $\epsilon=\epsilon_r \epsilon_0$ and $\mu=\mu_r \mu_0$ with $\epsilon_r$ and $\mu_r$ the relative permittivity and permeability compared to that of vacuum, $\epsilon_0$ and $\mu_0$.
+%
+In optics most glasses and materials are defined by their refractive index $n$ which is related to permittivity as $\epsilon_r = n^2$ and many of these are also non-magnetic which means that $\mu_r=1$.
+%
+Substituting this will give us the classic Helmholtz equation
 \begin{equation}
 \nabla^2\mathcal{E} + n^2k^2 \mathcal{E} = 0,
 \end{equation}
-We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number. The propagation through an optical system has a preferential direction that is usually defined along the z-axis. The z-axis evolution can be derived by separating the spatial components into the z component and the perpendicular components (x,y),
+We made use of the fact that the speed of light is $c = \frac{1}{\sqrt{\epsilon_0\mu_0}}$ and that $k = c\omega$ is the wave number.
+%
+The propagation through an optical system has a preferential direction that is usually defined along the z-axis.
+%
+The z-axis evolution can be derived by separating the spatial components into the z component and the perpendicular components (x,y),
 \begin{equation}
 \frac{\partial^2\mathcal{E}}{\partial z^2} = -\nabla_{\perp}^2\mathcal{E}-n^2k^2 \mathcal{E},
 \end{equation}
@@ -414,7 +436,15 @@ The solution to this equation is the so called Angular Spectrum Propagator that 
 \mathcal{E}(x, y, z') = \mathcal{F}_{x,y}^{-1}\{e^{-ik_z(z'-z)}\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
 \end{equation}
 
-Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates. While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight. For many optical systems it is sufficient to analyze the paraxial performance. The paraxial approximation assumes that the plane waves make small angles with respect to the z-axis which means that the x and y wave vector components are $k_x,k_y<<1$. In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$
+Here the z component of the wave vector is defined as $k_z=\sqrt{n^2k^2 - k_{\perp}^2}$ and $\mathcal{F}_{x,y}^{(-1)}$ is defined as the (inverse) Fourier transform over the x and y coordinates.
+%
+While Equation \ref{eq:angular_spectrum} describes the full propagation from one plane to another, it is quite unwieldy to use and does not provide much physical insight.
+%
+For many optical systems it is sufficient to analyze the paraxial performance.
+%
+The paraxial approximation assumes that the plane waves make small angles with respect to the z-axis which means that the x and y wave vector components are $k_x,k_y<<1$.
+%
+In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$
 \begin{equation}
 \label{eq:angular_spectrum2}
 \mathcal{E}(x, y, z') = e^{-ink(z'-z)} \mathcal{F}_{x,y}^{-1}\{\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
@@ -565,11 +595,12 @@ The \ac{iwa} and \ac{owa} set the smallest and largest angular separation of the
 %
 Some coronagraphs, such as the OVC or \ac{fqpm}, don't have an \ac{owa} only an \ac{iwa}.
 %
-Figure~\ref{fig:coronagraph_focal_plane_definitions} shows a coronagraphic dark hole with the definition of the \ac{iwa} and \ac{owa}.
+Figure~\ref{fig:coronagraph_focal_plane_definitions} shows the different types of coronagraphic dark hole gemetries commonly used with the definition of the \ac{iwa} and \ac{owa}.
 
 \begin{figure}[ht]
+  \script{plot_dark_hole_geometries.py}
   \centering
-  \includegraphics[width=0.5\linewidth]{figures/dark_hole_definition.png}
+  \includegraphics[width=1.0\linewidth]{figures/dark_hole_geometries.pdf}
   \caption{ADD caption \textcolor{red}{TODO: redraw}}
   \label{fig:coronagraph_focal_plane_definitions}
 \end{figure}
@@ -645,7 +676,7 @@ We note that the coronagraphic designs in subsequent sections are not optimised 
 
 \subsection{Focal plane phase mask coronagraphs}
 
-Focal plane phase masks offer a solution by phase shifting a part of the \ac{psf} (usually the core of the \ac{psf}) which then causes destructive interference at the Lyot plane.
+Focal plane phase masks offer a solution by phase shifting a part of the \ac{psf} (usually the core of the \ac{psf}) which then leads to destructive interference at the Lyot plane.
 %
 The Lyot stop blocks the areas where the light does not destructively interfere.
 %
@@ -714,13 +745,7 @@ Both phase masks that are shown in Figure~\ref{fig:scale_invariant} completely n
 This property is why both the \ac{fqpm} and the \ac{ovc} have been extensively studied over the past several decades.
 %
 The inner-working angle of both coronagraph approaches 1 \ld{} which makes coronagraphy possible at the diffraction limit!
-%
 
-%All ground-based telescopes need to image through Earth's atmosphere. The turbulent nature of the atmosphere causes aberrations that degrade the imaging qualities of the telescope. In such conditions, it is very difficult to optimally reject starlight because what electric field actually needs to be rejected? Is it the electric field that is measured now, or the differently aberrated electric field 20 milliseconds from now? The constantly changing electric field of the incoming light made it difficult to create more advanced coronagraphs. The classic Lyot coronagraph design was not improved upon until the advent of large aperture telescopes with adaptive optics systems that had a high enough performance to deliver diffraction-limited images.
-%
-%These telescopes made the imaging of low mass substellar companions (brown dwarfs and young self-luminous planets) feasible for the first time.
-
-%
 %After the discovery of Gliese 229B (XXX CHECK WAS THIS A LYOT?) with the Palomar 5m PALM 5000 system, a series of coronagraphic designs appeared where researchers explored the different possibilities of placing complex amplitude apodizers at both the focal plane and \ac{pp} locations.
 %
 %A wide range of coronagraph designs were explored, including XXXXX focal plane, \ac{pp}, telephone list of all different coronagraphs.
