@@ -1,6 +1,7 @@
 from hcipy import *
 import numpy as np
 from matplotlib import pyplot as plt
+import paths
 
 def find_eigenmode(aperture, mask_diameter, tolerance=1e-8):
 	grid = aperture.grid
@@ -31,35 +32,33 @@ def find_eigenmode(aperture, mask_diameter, tolerance=1e-8):
 
 	return amplitude
 
-if __name__ == "__main__":
-	Dtel = 1
-	grid = make_pupil_grid(512, 1.1)
-	
-	plt.figure(figsize=(12,3))
+Dtel = 1
+grid = make_pupil_grid(512, 1.1)
 
-	aperture_function = make_gmt_aperture(normalized=True)
-	aperture = evaluate_supersampled(aperture_function, grid, 4)
-	weak_apodized_aperture = find_eigenmode(aperture, 1)
-	strong_apodized_aperture = find_eigenmode(aperture, 2)
+plt.figure(figsize=(12,3))
 
-	plt.subplot(1, 3, 1)
-	imshow_field(aperture / aperture.max(), vmin=0, vmax=1, cmap='gray')
-	plt.colorbar()
-	plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
-	plt.title('No apodization', fontsize=18)
+aperture_function = make_gmt_aperture(normalized=True)
+aperture = evaluate_supersampled(aperture_function, grid, 4)
+weak_apodized_aperture = find_eigenmode(aperture, 1)
+strong_apodized_aperture = find_eigenmode(aperture, 2)
 
-	plt.subplot(1, 3, 2)
-	imshow_field(weak_apodized_aperture / weak_apodized_aperture.max(), vmin=0, vmax=1, cmap='gray')
-	plt.colorbar()
-	plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
-	plt.title('FPM diameter = 1 $\lambda / D$', fontsize=18)
-	
-	plt.subplot(1, 3, 3)
-	imshow_field(strong_apodized_aperture / strong_apodized_aperture.max(), vmin=0, vmax=1, cmap='gray')
-	plt.colorbar()
-	plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
-	plt.title('FPM diameter = 2 $\lambda / D$', fontsize=18)
-	
-	plt.tight_layout()
-	plt.savefig('./fpm_eigenfunction.pdf')
-	plt.show()
+plt.subplot(1, 3, 1)
+imshow_field(aperture / aperture.max(), vmin=0, vmax=1, cmap='gray')
+plt.colorbar()
+plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
+plt.title('No apodization', fontsize=18)
+
+plt.subplot(1, 3, 2)
+imshow_field(weak_apodized_aperture / weak_apodized_aperture.max(), vmin=0, vmax=1, cmap='gray')
+plt.colorbar()
+plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
+plt.title('FPM diameter = 1 $\lambda / D$', fontsize=18)
+
+plt.subplot(1, 3, 3)
+imshow_field(strong_apodized_aperture / strong_apodized_aperture.max(), vmin=0, vmax=1, cmap='gray')
+plt.colorbar()
+plt.tick_params(axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labelleft=False)
+plt.title('FPM diameter = 2 $\lambda / D$', fontsize=18)
+
+plt.tight_layout()
+plt.savefig(paths.figures / 'fpm_eigenfunction.pdf')
