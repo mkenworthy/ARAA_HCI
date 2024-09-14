@@ -5,7 +5,7 @@
 
 # High Contrast Coronagraphy
 
-*Kenworthy, Haffert and Por*
+*Kenworthy and Haffert* 
 
 Annual Review of Astronomy and Astrophysics article, 2025.
 
