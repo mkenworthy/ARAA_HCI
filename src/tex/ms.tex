@@ -462,11 +462,23 @@ For many optical systems it is sufficient to analyze the paraxial performance.
 %
 The paraxial approximation assumes that the plane waves make small angles with respect to the z-axis which means that the x and y wave vector components are $k_x,k_y<<1$.
 %
-In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$
+In this regime the propagation factor $k_z=\sqrt{n^2k^2 - k_{\perp}^2}\approx nk - \frac{k_{\perp}^2}{2nk}$ and the Fresnel propagation equation becomes
 \begin{equation}
 \label{eq:angular_spectrum2}
-\mathcal{E}(x, y, z') = e^{-ink(z'-z)} \mathcal{F}_{x,y}^{-1}\{\mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
+\mathcal{E}(x, y, z') = e^{-ink(z'-z)} \mathcal{F}_{x,y}^{-1}\{ e^{-i\frac{k_{\perp}^2}{2nk}} \mathcal{F}_{x,y}\{\mathcal{E}(x,y,z)\}\}.
 \end{equation}
+The real space solution that is derived from the propagation equation is the classical Fresnel diffraction equation,
+\begin{equation}
+\label{eq:fresnel_diffraction}
+\mathcal{E}(x, y, z') = \frac{e^{-ink(z'-z)}}{\lambda z} \iint_{-\infty}^{\infty} \mathcal{E}(u, v, z) e^{\frac{ik\left[(x - u)^2 + (y - v)^2\right]}{2 (z' - z)}} \mathrm{d}u \mathrm{d}v.
+\end{equation}
+The far-field approximation ($z gg x, y$) and the substitution $\theta_x = \frac{x}{\lambda z}$, $\theta_y = \frac{y}{\lambda z}$ results in the Fraunhofer diffraction integral,
+\begin{equation}
+\label{eq:fraunhofer_diffraction}
+\mathcal{E}(\theta_x, 
+\theta_y) \propto \iint_{-\infty}^{\infty} \mathcal{E}(u, v) e^{-i2\pi(\theta_x u + \theta_y v)} \mathrm{d}u \mathrm{d}v.
+\end{equation}
+The Fraunhofer diffraction equation is recognized as a Fourier transform. The far-field distribution of an electromagnetic wave is it's Fourier transform. A perfectly conjugated lens, or the mirrors of a telescope, peforms a far-field transform. The distribution of the electric field in it's output focal plane is the Fourier transform of the electric field in it's input focal plane.
 %$$E(\mathbf{r},t)=E_0(\mathbf{r})e^{i(\mathbf{k}.\mathbf{r}-\omega t)}$$
 
 %Maxwell's equations describe the time-dependent interaction between static and moving electric charges, electric fields and magnetic fields.
@@ -653,7 +665,17 @@ This optimization has to be done over a certain spectral bandwidth $\Delta \lamb
   \script{plot_planet_throughput.py}
   \centering
   \includegraphics[width=1.0\linewidth]{figures/planet_throughput.pdf}
-  \caption{Definition of planet throughput, showing the integrated flux over an aperture with increasing distance from the star.}
+  \caption{Definition of planet throughput, showing the integrated flux over a two \ld{} aperture with increasing distance from the star.
+  %
+  The dotted line is the maximum throughput at an infinite off-axis angle.
+  %
+  The vertical dashed line and dot show the IWA angle at 50\% throughput of the maximum throughput.
+  %
+  The inset of the four post-coronagraphic images correspond to the four orange points on the throughput curve.
+  %
+  The planet's post-coronagraphic image is strongly warped at/close to the edge of the focal plane mask.
+  %
+  The presented simulations here correspond to the Apodized Lyot Coronagraph that is shown in Section~\ref{sec:nulled_lyot}.}
   \label{fig:planet_throughput}
 \end{figure}
 
@@ -950,7 +972,7 @@ and a perfect null is achieved when $(t-1)\gamma = -1$. The normal pupil illumin
   \centering
   \script{plot_fpm_eigenfunction.py}
   \includegraphics[width=\linewidth]{figures/fpm_eigenfunction.pdf}
-  \caption{The pupil amplitude distribution that are eigen functions of certain \ac{fpm} sizes. The top row is the unapodized pupil function, which is the pupil eigenfunction for an infinite \ac{fpm} size. The middle and bottom rows show the eigenfunctions for a 1 and 2 \ld{} \ac{fpm} diameter, respectively. Each column represents a different telescope with from left to right; a clear aperture, the VLT, the \ac{gmt} and finally the ELT.}
+  \caption{The pupil amplitude distribution that are eigen functions of certain \ac{fpm} sizes for the \ac{elt}.}
   \label{fig:fpm_eigenfunctions}
 \end{figure}
 
@@ -984,27 +1006,15 @@ Phase apodization instead of amplitude apodization is twice as effective in impr
 %
 This comes from the range of allowed apodization values.
 %
-Instead of being limited between $[0, 1]$, it is possible to use phase offsets to increase the range to $[-1, 1]$.
-%
-And, it also allows for complex value apodization.
+Instead of being limited between $[0, 1]$, it is possible to use phase offsets to increase the range to $[-1, 1]$ and allows for complex value apodization.
 %
 The solutions for circular dark holes are found to be discretized; the phase is either 0 or $\pi$ \citep{Por20}.
 %
 This is reminiscent of the solutions found for optimal APPs \citep{Por17} and binary shaped pupils \citep{Carlotti11}.
 %
-Full circular dark holes are not very efficient since they require strong phase patterns to create the dark holes which causes significant Strehl loss \citep{Por17}.
-%
-One-sided dark holes are much more efficient in terms of Strehl. 
+Full circular dark holes are not very efficient since they require strong phase patterns to create the dark holes which causes significant Strehl loss \citep{Por17}: one-sided dark holes are much more efficient in terms of Strehl. 
 
-XXXXX
-
-Talk about the stark paper \citep{Stark24} full end to end yield simulations.
-
-Mention that this is the baseline for GMAGAOX (find 2024 SPIE Males paper).
-%Haffert 2023 paper
-
-They have been implemented in the lab - SCOOB 2021 AZ space test bed \citep{Ashcraft22} using a knife edge SPIE proceeding. \ac{aplc}. \citep{vanGorkom22}.
-
+The PAPLC is the baseline for the GMagAO-X \citep{Males24}, and has been implemented in the Space Coronagraph Optical Bench \citep[SCOoB; ][]{Ashcraft22,vanGorkom22} at Arizona.
 
 \begin{figure}[ht]
   \centering
@@ -1078,7 +1088,7 @@ Any planet that is sitting in an adjacent transmissive region of the fringe patt
 
 This principle is used to minimise the contribution of speckles in the focal plane at the location of the planet, where the Airy core of the planet is injected into a single mode fibre \citep{Mawet17}.
 %
-High coupling efficiency is possible (with a theoretical maximum of 81\% for an Airy core into the Gaussian HE$_{11}$ mode \citep{shaklan1988coupling}) and reflected light around the fibre used to sense and minimise speckles whilst the incoherent light of the planet remains constant and injected into the fibre. 
+High coupling efficiency is possible \citep[with a theoretical maximum of 81\% for an Airy core into the Gaussian HE$_{11}$ mode; ][]{shaklan1988coupling} and reflected light around the fibre used to sense and minimise speckles whilst the incoherent light of the planet remains constant and injected into the fibre. 
 
 The \ac{ovc} has a planet throughput of 0.7 at 1 \ld{} of the on-axis null \citep{Mawet05b}, and placing an optimally matched single mode fibre at the location of the null provides suppression of the star much greater than the transmission loss of the coronagraph for a planet at 0.5 to 1\ld{} from the star, resulting in a peak transmission of 0.2 at 0.9 \ld{}.
 %
@@ -1104,7 +1114,7 @@ The effect can be made to work across a significantly wider bandwidth by having 
 %
 An \ac{app} with modest apodization can be made to squeeze two null crossings closer to each other, and using a hexagonal lenslet array matched to the circular single mode fibres enables a high efficiency transmission of planet flux \citep{haffert2021fundamental} through to the spectrograph, but with a large bandwidth called \acl{scar} \citep[\acs{scar}; ][]{Por20a,Haffert20}.
 %
-This principle has been demonstrated in laboratory experiments with 360 degree and 180 degree  dark regions from 0.8–2.4 \ld{} around the star \citep{Haffert20}.
+This principle has been demonstrated in laboratory experiments with 360$^\circ$ and 180$^\circ$ dark regions from 0.8–2.4 \ld{} around the star \citep{Haffert20}.
 %
 In these experiments, the 360 SCAR was designed for an unobscured telescope pupil and created a measured stellar null of $2-3 \times 10^{-4}$, and a 180 SCAR was designed for a telescope aperture with central obscuration and spiders and reached a null of $1\times 10^{-4}$. 
 
@@ -1172,9 +1182,10 @@ Instantaneous speckles average out over time to an azimuthally symmetric halo, w
 % https://docs.hcipy.org/dev/tutorials/ShackHartmannWFS/ShackHartmannWFS.html
 
 \begin{figure}[ht]
+\script{plot_ao_residuals.py}
   \centering
-  \includegraphics[width=0.9\linewidth]{figures/ao.png}
-  \caption{Closed loop of an \ac{ao} system showing features from the loop \textcolor{red}{TODO: label up halos and run for longer}}
+  \includegraphics[width=1.0\linewidth]{figures/postao_psf_and_coronagraph_image.pdf}
+  \caption{Closed loop of an \ac{ao} system showing features from the loop}
   \label{fig:ao}
 \end{figure}
 
@@ -1241,8 +1252,6 @@ The large apertures mean that the \ac{iwa} are on the order of 10mas for H band 
 For the ELT, all three first light instruments have HCI modes: METIS \citep{Brandl21,Kenworthy16,Carlomagno20}, MICADO (REF REF) and HARMONI (REF REF) that include coronagraphs mentioned earlier in this review.
 %
 
-
-%
 The challenges of atmospheric correction due to the wind driven halo, atmospheric dispersion, and the water vapour content of the Earth's atmosphere mean that ground based telescopes will search for HZ planets around nearby M dwarfs.
 
 {\bf Missing/tilted segments:} Segmented mirror telescopes provide a challenge in that they require periodic cleaning, resulting in a varying transmission across the telescope pupil, and occasionally segments that are removed entirely for realuminization.
@@ -1251,7 +1260,7 @@ For the ELT, a baseline of 3 to 8 segments will be not available in the telescop
 
 {\bf Atmospheric dispersion (ground based only):} The wavelength-dependent differential refraction introduced by the Earth's atmosphere is called atmospheric dispersion increases $\propto \sec(z)$ where $z$ is the zenith distance to an astronomical target.
 %
-In units of diffraction widths, the atmospheric dispersion gets larger for larger diameter telescopes, making it a challenge for \acp{elt} to observe science targets far from the zenith \citep{Kendrew08,Skemer09}.
+In units of diffraction widths, the atmospheric dispersion gets larger for larger diameter telescopes, making it a challenge for \acp{elt} to observe science targets far from the zenith \citep{Kendrew08,Skemer09,van2020quantification}.
 %
 High order atmospheric dispersion correctors are required to produce diffraction limited imaging over wide bandwidths \citep{Kopon13}.
 %
@@ -1285,13 +1294,9 @@ Circular mirrors are arranged in a hexagonal pattern, and the large gaps between
 %
 A phase plate is placed in a \ac{pp} of the instrument, which produces radially dispersed fringes that encode the relative phase between pairs of \ac{gmt} mirrors.
 %
-The sensor has a dynamic range of 30 microns and can measure relative piston difference of 10nm r.m.s.
+The sensor has a dynamic range of 30 microns and can measure relative piston difference of 10 nm r.m.s.
 
-
-XXXX
-
-
-Larger telescopes are required to increase the spatial resolution of the imaging camera. The cost of a telescope goes as $D^{1.7-1.8}$ \citep{Stahl20} for both, and for space only there is \citet{Stahl10}.
+%Larger telescopes are required to increase the spatial resolution of the imaging camera. The cost of a telescope goes as $D^{1.7-1.8}$ \citep{Stahl20} for both, and for space only there is \citet{Stahl10}.
  
 Monolithic mirror telescopes are ultimately limited by their transport from manufacturing point to the observatory location, and so segmented telescope designs are used for diameters greater than 8m on the ground.
  %
@@ -1317,7 +1322,7 @@ Wavefront tolerances of space-based segmented telescopes at very high contrast: 
 
 A discussion of the latest limits reached by laboratory coronagraphs is in \citet{Mennesson24}.
 
-ELT: MELT test bed ZEUS experiment, APE experiment, both phasing experiments form \ac{elt}early/mid 2004-2006.
+ELT: MELT test bed ZEUS experiment, APE experiment
 
 The MELT testbed. MELT: an optomechanical emulation testbench for ELT wavefront control and phasing strategy \citep{Pfrommer18}
 
@@ -1337,15 +1342,11 @@ Experimental valid of piston control with pyramid \ac{wfs} is in \citet{Bertrou-
   \script{segment_phasing_errors.py}
   \centering
   \includegraphics[width=0.9\linewidth]{figures/phasing_errors.pdf}
-  \caption{Imapct of piston errors on the coronagraphic image from the ELT.}
+  \caption{Impact of piston errors on the coronagraphic image from the ELT.}
   \label{fig:pistonerror}
 \end{figure}
 
-\todo{Figure: SH: segments, and segment piston errors, impact on dark hole. increase RMS with a slider, then see the dark hole filled in.}
-
 % \citep{Kautz23} is MagAO testbed Kautz 2024 in prep. showing on-sky phasing. XX MAK: tried to find this, nothing more recent that 2023
-
-\notebooksuggestion{play with different contrasts and \ac{iwa} to see yields}
 
 \section{Challenges for space telescopes}
 
@@ -1433,26 +1434,45 @@ The result is that an intensity image of the \ac{psf} cannot be uniquely inverte
 %
 Odd functions produce \acp{psf} with point symmetry (e.g. tip/tilt, coma) but even functions produce the same \ac{psf} with the same amplitude but opposite sign - consider a wavefront with focus, which has $\psi(r) = a\sqrt{3}(2r^2-1)$, and both $a$ and $-a$ will result in the same intensity distribution in the focal plane.
 %
-One of the earliest methods for phase retrieval is therefore an iterative method, the Gerchberg-Saxton algorithm \citep{Gerchberg72}.
+Phase retrieval directly from the \ac{psf} is therefore an under constrained inverse problem. One of the earliest methods for phase retrieval is an iterative method, the Gerchberg-Saxton algorithm (GS) \citep{Gerchberg72}. The GS algorithm starts by picking a random phase for each pixel in the pupil and then it iterates between the focal plane and pupil plane where it replaces the amplitude either with the square root of the measured \ac{psf} or the known  pupil function. By constantly iterating it solves the non-linear phase retrieval problem. However, the GS algorithm can not fundamentally solve the sign degeneracy problem of even modes. What happens during the iterations is that it uses the non-linear cross-talk from various modes to estimate the sign of the even modes. Therefore, GS will not be able to measure the sign of defocus for example if there is only a defocus wavefront error.
+
+% DIVERSITY AND EFC METHODS
+In order to measure the complex amplitude of the \ac{psf}, a diversity must be introduced into the focal plane image, either temporally or spatially \citep[see ][ for a review of these]{Fienup13,Gonsalves14}. A natural diversity is the introduction of a focus offset. This can be easily implemented either by mounting a camera on a controllable stage or by using a deformable mirror \citep{VanGorkom21DMs}. The classic phase diversity algorithm only works with normal \acp{psf} imaging. The COronagraphic Focal-plane wave-Front Estimation for Exoplanets \citep[COFFEE ;][]{Sauvage12,Paul13} algorithm lifts this requirement by estimating the aberrations in a coronagraphic instrument. Other types of diversity are also possible to implement. Such as direct modifications of the pupil by adding obstructions \citep{martinache2013asymmetric, brooks2016polarization, bos2019focal}. % and chooses optimally chosen diversities that are introduced into the AO system to minimise speckles in the dark areas of the \ac{scfp}.
 %
-In this method, an estimate of the \ac{pp} phase is made by inverse Fourier transforming the \ac{psf} and applying the (incorrect) recovered phase in the \ac{pp} via a \ac{dm} or some other active optic.
+Algorithms like phase diversity or COFFEE try to solve the full non-linear inverse problem. However, this is a time consuming problem and during actual observations the wavefront errors might evolve faster than the required computing time. Many variations of phase diversity are in development to work at real-time frame rates. 
+
+%
+One such method is the ``fast and furious'' (F\&F) algorithm \citep{Keller12} that has been verified in lab \citep{Wilby18} demonstrated on-sky \citep{Bos20} on the SCExAO system. The F\&F algorithm is a modified GS algorithm that uses the previous measurement and control command. This allows F\&F to solve the degeneracies while it's in closed-loop operation.
+
+%
+Other methods try to linearize phase diversity in either imaging mode or coronagraphy mode. There is the Linearized focal plane technique  \citep[LIFT; ][]{meimon2010lift}, or the linearized Analytical Phase Diversity \citep[LAPD; ][]{vievard2020cophasing}.
+%
+These methods are also extended to coronagraphic imaging such as Linearized Dark Field Control (LDFC) which has been demonstrated on-sky \citep{miller2017spatial,miller2019spatial,ahn2023combining}.
+
+
+\subsection{Dark hole digging}
+
+
+
+%In this method, an estimate of the \ac{pp} phase is made by inverse Fourier transforming the \ac{psf} and applying the (incorrect) recovered phase in the \ac{pp} via a \ac{dm} or some other active optic.
+The sign degeneracy can be solved if a known diversity is introduced into the system.
 %
 The resultant science camera \ac{psf} will be closer to the ideal \ac{psf}, and so this loop is repeated until it converges to a flat wavefront - this can be a time consuming process requiring many iterations to get to the required precision.
 %
-A more rapid optimisation can be made by making informed guesses on the applied phase aberrations \citep{Gonsalves02}, and one such method is the ``fast and furious'' algorithm \citep{Keller12} that has been verified in lab \citep{Wilby18} demonstrated on-sky \citep{Bos20} on the SCExAO system. 
 
-% DIVERSITY AND EFC METHODS
-In order to measure the complex amplitude of the \ac{psf} without an iterative process, a diversity has to be introduced into the focal plane image, either temporally or spatially \citep[see ][ for a review of these]{Fienup13,Gonsalves14}.
-%
-For a single point source, all the light in the focal plane is coherent with respect to the core of the \ac{psf}.
+
 %
 A deformable element within the instrument can then introduce phase shifts into the pupil image that then change the resultant complex amplitude for each location in the focal plane of the science camera.
+
+%
+For a single point source, all the light in the focal plane is coherent with respect to the core of the \ac{psf}.
+
 %
 Each pixel in the focal plane then becomes an intensity interferometer, and if four phase shifts that reasonably sample between $0$ and $2\pi$ radians are introduced into the instrument, then the four recorded \ac{psf} intensity images can be fit to give an estimate of the complex amplitude at each location in the focal plane.
 
 Calculating the appropriate phases that will result in an optimal sampling and estimate of the complex amplitude for HCI algorithms was presented with a unified formalism by \citet{Giveon09,Giveon10}, called Electric Field Conjugation (EFC).
 %
-In these papers it was shown that two pairs of complementary \ac{dm}actuations can provide enough phase diversity to measure the complex amplitude across the focal plane out to the spatial sampling of the mirror actuators.
+In these papers it was shown that two pairs of complementary \ac{dm} actuations can provide enough phase diversity to measure the complex amplitude across the focal plane out to the spatial sampling of the mirror actuators.
 
 %Methods include using separate regions of the focal plane to act as proxies for the behaviour of aberrations within the scientifically relevant field of view.
 %
@@ -1507,21 +1527,19 @@ This was successfully demonstrated as a post-processing technique at thermal inf
 
 Electric Field Conjugation has been tested on the internal sources of \ac{sphere} (a contrast of $5\times 10^{-7}$ at 150 mas from the optical axis in a few minutes using the \ac{sphere} instrument).
 %
-This was demonstrated on-sky with the \ac{aplc} coronagraph and \ac{sphere} \citep{Potier20,Potier22}, using an iterative scheme to clear a dark hole on one side of the science camera \ac{psf}, and with the \ac{fqpm} coronagraph in \ac{sphere} \citep{Galicher24}.
+This was demonstrated on-sky with the \ac{aplc} coronagraph and \ac{sphere} \citep{Potier20,Potier22}, using an iterative scheme to clear a dark hole on one side of the science camera \ac{psf} down to an intensity of $10^{-6}$ an improvement of a factor of a few from 250 to 500 mas separations, and with the \ac{fqpm} coronagraph in \ac{sphere} \citep{Galicher24}.
 
-XXXX
 
-coronagraphic phase diversity
-COFFEE jean-francois sauvage 2012 \citep{Sauvage12}.
+These algorithms can now clear out dark holes in coronagraphic images, limited by the wind driven halo from the AO system which can be filtered out using a low pass filter or post-processing algorithms.
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.6\linewidth]{figures/potier2022.jpg}
-  \caption{}
-  \label{fig:fpwfsclean}
-\end{figure}
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width=0.6\linewidth]{figures/potier2022.jpg}
+%   \caption{}
+%   \label{fig:fpwfsclean}
+% \end{figure}
 
-\notebooksuggestion{SH: get this from HCIpy Simple dark hole generation with predefined shapes - can use the new autodiff approach.}
+%\notebooksuggestion{SH: get this from HCIpy Simple dark hole generation with predefined shapes - can use the new autodiff approach.}
 
 %\lipsum[2-4]
 
@@ -1553,7 +1571,6 @@ Both these methods deliberately introduce defocus into the rejected light image,
 The resultant pupil image intensity distribution encodes the phase of the wavefront.
 %
 The segmented geometry of the space telescope HabEx and LUVOIR concepts require picometer measurements that are fed into the control loop for the \ac{dm} in the coronagraph - this was demonstrated for low and mid spatial frequencies with a \ac{zwfs} up to the \ac{dm} control radius in \citet{Ruane20}.
-
 
 A modification of the Hybrid Lyot Coronagraph (HLC) uses a Dual Purpose Mask for the \ac{fpm}, making a Dual Purpose Lyot coronagraph (DPLC).
 %
@@ -1710,9 +1727,10 @@ Stochastic Speckle Discriminaton \citep[SSD; ][]{Gladysz09} is possible using sh
 %
 Photon counting devices enable this detection method to work - this was demonstrated using an MKIDS detector and has led to the discovery of a substellar companion using this technique \citep{Steiger21} and also on extended sources such as circumstellar disks \citep{Steiger22}.
 
+Each diversity improves sensitivity from a factor of a few to ten or more.
+%
+Combining different diversities together results in an even greater culumative effect.
 %Coherence Differential Imaging: with MKIDS and Ben Mazin VAMPIRES, done it on SPHERE.
-
-\todo{Figure: show example of post processing. pick favourite image from a paper!}
 
 \section{Conclusions}
 
