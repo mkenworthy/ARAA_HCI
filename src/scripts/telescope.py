@@ -16,7 +16,8 @@ class Telescope():
 
 	def otf(self):
 		# TODO: figure out normalization but for now this works.
-		if self._grid.x.ptp() / self._telescope_diameter < 2:
+#		if self._grid.x.ptp() / self._telescope_diameter < 2:
+		if np.ptp(self._grid.x) / self._telescope_diameter < 2:
 			psf = self.psf(q=2)
 		else:
 			psf = self.psf()
@@ -26,7 +27,8 @@ class Telescope():
 	
 	def psf(self, q=None):
 		if q is not None:
-			current_sampling = (self._grid.x.ptp() / self._telescope_diameter)
+#			current_sampling = (self._grid.x.ptp() / self._telescope_diameter)
+			current_sampling = (np.ptp(self._grid.x) / self._telescope_diameter)
 			oversampling = q / current_sampling
 			if oversampling > 1:
 				self._fft = hcipy.FastFourierTransform(self._grid, q=oversampling)

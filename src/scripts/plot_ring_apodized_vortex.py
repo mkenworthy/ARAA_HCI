@@ -4,6 +4,11 @@ from matplotlib import pyplot as plt
 from matplotlib import gridspec
 import paths
 
+
+# import matplotlib as mpl
+# mpl.use('MacOSX')
+
+
 # Make the grids
 grid = make_pupil_grid(512, 1.1)
 focal_grid = make_focal_grid(q=5, num_airy=15)
@@ -50,25 +55,36 @@ wf_foc = prop(lyot_stop(wf_ravc_lyot))
 
 ravc_corim = wf_foc.power / norm
 
-images = [[clear_aperture, grid.ones(), wf_lyot.power, clear_lyot_stop.apodization, clear_corim],
-[obscured_aperture, grid.ones(), wf_obs_lyot.power, obscured_lyot_stop.apodization, obstructed_corim],
+images = [[clear_aperture, clear_aperture, wf_lyot.power, clear_lyot_stop.apodization, clear_corim],
+[obscured_aperture, clear_aperture, wf_obs_lyot.power, obscured_lyot_stop.apodization, obstructed_corim],
 [obscured_aperture, ring_apodizer.apodization, wf_ravc_lyot.power, lyot_stop.apodization, ravc_corim]]
 
+fig, axes = plt.subplots(3,5,figsize=(8,4))
+
+plt.setp(axes, xticks=[], yticks=[]) # gets rid of all tick marks and labels
+
 for k in range(3):
-	plt.subplot(3, 5, 5 * k + 1)
-	imshow_field(images[k][0])
+	imshow_field(images[k][0],ax=axes[k][0])
 
-	plt.subplot(3, 5, 5 * k + 2)
-	imshow_field(images[k][1], vmin=0, vmax=1, cmap='gray')
+	axes[k][1].set_facecolor('black')
+	imshow_field(images[k][1], vmin=0, vmax=1, cmap='gray', ax=axes[k][1])
 	
-	plt.subplot(3, 5, 5 * k + 3)
-	imshow_field(images[k][2])
+	imshow_field(images[k][2], ax=axes[k][2])
 
-	plt.subplot(3, 5, 5 * k + 4)
-	imshow_field(images[k][3])
+	imshow_field(images[k][3], ax=axes[k][3])
 
-	plt.subplot(3, 5, 5 * k + 5)
-	imshow_psf(images[k][4], vmax=1, vmin=1e-8)
+	imshow_psf(images[k][4], vmax=1e-2, vmin=1e-8, colorbar=False, ax=axes[k][4])
+
+fs = 10
+axes[0][0].set_title("Telescope Pupil",fontsize=fs)
+axes[0][1].set_title("Pupil Apodizer", fontsize=fs)
+axes[0][2].set_title("Pupil Plane", fontsize=fs)
+axes[0][3].set_title("PPM", fontsize=fs)
+axes[0][4].set_title("Coronagraphic PSF", fontsize=fs)
+axes[0][0].set_ylabel("OVC",fontsize=16)
+axes[1][0].set_ylabel("OVC+\ncentral obs.",fontsize=16)
+axes[2][0].set_ylabel("RAVC",fontsize=16)
 
 plt.draw()
+#plt.show()
 plt.savefig(paths.figures/'ring_apodized_vortex.pdf')
