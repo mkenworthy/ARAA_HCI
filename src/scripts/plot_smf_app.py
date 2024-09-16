@@ -3,8 +3,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import paths
 
-import matplotlib as mpl
-mpl.use('MacOSX')
+#import matplotlib as mpl
+#mpl.use('MacOSX')
 
 # Set up the grids
 grid = make_pupil_grid(256, 1.1)
@@ -93,4 +93,4 @@ ax[3].set_title('Power',fontsize=14)
 
 plt.subplots_adjust(left=0.05, right=0.95, bottom=0.2, top=0.9)
 plt.savefig(paths.figures/'smf_app.pdf')
-plt.show()
+#plt.show()
