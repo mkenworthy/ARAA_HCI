@@ -12,7 +12,7 @@ if __name__ == "__main__":
 	lyot_stop = Apodizer(lyot_mask)
 
 	# focal plane parameters
-	iwa = 3.5
+	iwa = 2.5
 	owa = 10.
 	target_contrast = 1e-8
 
