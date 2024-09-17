@@ -51,7 +51,7 @@ corim = prop( coronagraph( phasing_errors(abb(wf) ) ) ).power / norm
 psf = prop( phasing_errors(abb(wf) ) ).power / norm
 
 imshow_field(phasing_errors.phase, vmin=-np.pi/2, vmax=np.pi/2,cmap='bwr',ax=ax[0])
-ax[0].set_title(f'Phase error r.m.s.={rms_i:4.2f}$\pi$ radians')
+ax[0].set_title(f'Phase error r.m.s.={rms_i:4.2f} rad')
 plt.colorbar()
 imshow_psf(psf, vmax=1, vmin=1e-5,ax=ax[1])
 ax[1].set_title('ELT PSF')

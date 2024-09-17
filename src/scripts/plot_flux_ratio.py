@@ -223,9 +223,9 @@ if cfg['NIRCAM'] is True:
     a_JWST = ascii.read(fname)
     ax1.plot(a_JWST['Rho(as)'], a_JWST['356W_contrast'], color=c_k, linewidth=lw1*1.5, label='')
     xy = [0.95*cfg['x1'], 0.7*a_JWST['356W_contrast'][-1]]
-    ax1.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-10, fontsize=ccfs, \
+    ax1.text(xy[0],xy[1]+0.000002, 'JWST NIRCam', color=c_k, rotation=-8, fontsize=ccfs, \
         verticalalignment='top', horizontalalignment='right')
-    ax1.plot([0.9*xy[0], 0.95*xy[0]], [0.7*xy[1], xy[1]], 'k', linewidth=0.5)
+ #   ax1.plot([0.9*xy[0], 0.95*xy[0]], [0.7*xy[1], xy[1]], 'k', linewidth=0.5)
 
     caption += extract_short_caption(fname)
 
@@ -306,7 +306,7 @@ if cfg['MagAO'] is True and cfg['generic ground-based'] is False:
     a_MagAO_ys['Ys_Contrast'] = a_MagAO_ys['Ys_contr_60min']
     ax1.plot(a_MagAO_ys['Rho(as)'], a_MagAO_ys['Ys_Contrast'], \
         color=c_yjh,linewidth=lw1,label='')
-    ax1.text(1.7, 3E-7,'Magellan VisAO',color=c_yjh, horizontalalignment='left', \
+    ax1.text(1.7, 3E-7+0.00000005,'Magellan VisAO',color=c_yjh, horizontalalignment='left', \
         verticalalignment='bottom',rotation=-12,fontsize=ccfs)
 
 
@@ -871,7 +871,7 @@ ax1.scatter(tt['HZseparcsec'][~m],tt['HZcontrast'][~m],
     c='gray', alpha=0.4)
 
 plt.tight_layout()
-
+#plt.show()
 with open(paths.data / 'auto_caption.txt','w') as f:
     f.write(caption)
 
